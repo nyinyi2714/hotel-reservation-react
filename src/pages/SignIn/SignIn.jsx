@@ -4,52 +4,77 @@ import "boxicons/css/boxicons.min.css";
 import "./SignIn.css";
 
 export default function SignIn() {
-  const [email, setemail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [showPassword, setShowPassword] = useState(false);
-  const [isSigningIn, setIsSigningIn] = useState(false);
+// State for storing email input
+const [email, setEmail] = useState("");
+// State for storing password input
+const [password, setPassword] = useState("");
+// State for password validation
+const [isPasswordValid, setIsPasswordValid] = useState(true);
+// State for email validation
+const [isEmailValid, setIsEmailValid] = useState(true);
+// State for toggling password visibility
+const [showPassword, setShowPassword] = useState(false);
+// State for indicating if signing in is in progress
+const [isSigningIn, setIsSigningIn] = useState(false);
 
+
+  // Update email state on input change
   const handleEmail = (e) => {
-    setemail(e.target.value);
+    setEmail(e.target.value); 
   };
 
+  // Update password state on input change
+  const handlePassword = (e) => {
+    setPassword(e.target.value); 
+  };
+
+  // Toggle the visibility of the password input
+  const togglePasswordHide = () => {
+    setShowPassword(!showPassword); 
+  };
+
+  // Password is invalid if it's empty
   const validatePassword = () => {
-    if (password.length < 1) setIsPasswordValid(false);
-    else setIsPasswordValid(true);
+    if (password.length < 1) {
+      setIsPasswordValid(false);
+      return false;
+    } else {
+      setIsPasswordValid(true);
+      return true;
+    }
   };
 
+  // Email is invalid if it doesn't end with "csun.edu"
   const validateEmail = () => {
-    // TODO: Change to just any email
-    if (!email.endsWith("csun.edu")) setIsEmailValid(false);
-    else setIsEmailValid(true);
+    // TODO: Change to validate against any email pattern
+    if (!email.endsWith("csun.edu")) {
+      setIsEmailValid(false); 
+      return false;
+    } else {
+      setIsEmailValid(true);
+      return true;
+    }
   };
 
+  // Run password validation on password change
   useEffect(() => {
     if (!isPasswordValid) validatePassword();
   }, [password]);
 
+  // Run email validation on email change
   useEffect(() => {
-    if (!isEmailValid) validateEmail();
+    if (!isEmailValid) validateEmail(); 
   }, [email]);
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const togglePasswordHide = () => {
-    setShowPassword(!showPassword);
-  };
-
-  // Stop the form from submitting.
-  // TODO: Change after backend inplemented signin url
   const handleSubmit = (e) => {
-    e.preventDefault();
-    validateEmail()
-    validatePassword()
+    // Prevent default form submission action
+    e.preventDefault(); 
+
+    // If email and password are invalid, stop form submission
+    if (validateEmail() && validatePassword()) return;
+    
     setIsSigningIn(true);
-    // Sign In to Backend
+    // TODO: Implement sign in to backend
     setIsSigningIn(false);
   };
 
@@ -101,6 +126,7 @@ export default function SignIn() {
               type="button"
               className="signin__icon clickable"
               onClick={togglePasswordHide}
+              data-testid="toggle-password-button"
             >
               <i className={showPassword ? "bx bx-hide" : "bx bx-show"} />
             </button>
@@ -116,7 +142,11 @@ export default function SignIn() {
             </span>
           </div>
 
-          <input className="clickable" type="submit" value={isSigningIn ? "Signing In" : "Sign In"} />
+          <input
+            className="clickable"
+            type="submit"
+            value={isSigningIn ? "Signing In" : "Sign In"}
+          />
           <Link to="/resetpassword" className="signin__forgot-password">
             Forgot Password?
           </Link>
