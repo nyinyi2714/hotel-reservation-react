@@ -71,7 +71,7 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     e.preventDefault(); 
 
     // If email and password are invalid, stop form submission
-    if (validateEmail() && validatePassword()) return;
+    if (!validateEmail() || !validatePassword()) return;
     
     setIsSigningIn(true);
     // TODO: Implement sign in to backend

@@ -1,9 +1,23 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
 import { BrowserRouter } from 'react-router-dom';
-
 import SignIn from "./SignIn";
 
+test('inputs for email, password, and submit button exist', () => {
+	render(
+	  <BrowserRouter>
+		<SignIn />
+	  </BrowserRouter>
+	);
+  
+	const emailInput = screen.getByPlaceholderText('Email');
+	const passwordInput = screen.getByPlaceholderText('Password');
+	const submitButton = screen.getByText('Sign In');
+  
+	expect(emailInput).toBeInTheDocument();
+	expect(passwordInput).toBeInTheDocument();
+	expect(submitButton).toBeInTheDocument();
+});
 
 test("handles email input correctly", () => {
 	render(
@@ -78,6 +92,6 @@ test("displays error messages for invalid email and password", () => {
 // 	fireEvent.change(passwordInput, { target: { value: "testPassword$1" } });
 // 	fireEvent.click(submitButton);
 	
-//   expect(submitButton.value.toBe("Signing In"));
+//   	expect(submitButton.value).toBe("Signing In");
 // });
 
