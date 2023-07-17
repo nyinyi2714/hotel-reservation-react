@@ -44,10 +44,11 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     }
   };
 
-  // Email is invalid if it doesn't end with "csun.edu"
+  // Email is valid if it's in this format: <local-part>@<domain>.<top-level-domain>
   const validateEmail = () => {
-    // TODO: Change to validate against any email pattern
-    if (!email.endsWith("csun.edu")) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const isValid = emailRegex.test(email);
+    if (!isValid) {
       setIsEmailValid(false); 
       return false;
     } else {

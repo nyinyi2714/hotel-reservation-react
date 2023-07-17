@@ -69,7 +69,7 @@ test("displays error messages for invalid email and password", () => {
 	const passwordInput = screen.getByPlaceholderText("Password");
 	const submitButton = screen.getByText("Sign In");
 	
-	fireEvent.change(emailInput, { target: { value: "invalidEmail@" } });
+	fireEvent.change(emailInput, { target: { value: " invalidEmail@" } });
 	fireEvent.change(passwordInput, { target: { value: "" } });
 	fireEvent.click(submitButton);
 	
