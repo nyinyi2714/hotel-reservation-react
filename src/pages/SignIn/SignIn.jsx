@@ -71,6 +71,9 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     // Prevent default form submission action
     e.preventDefault(); 
 
+    // If sign-in process has already started, stop from submitting again
+    if(isSigningIn) return;
+
     // If email and password are invalid, stop form submission
     if (!validateEmail() || !validatePassword()) return;
     
