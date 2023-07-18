@@ -19,6 +19,19 @@ test('inputs for email, password, and submit button exist', () => {
 	expect(submitButton).toBeInTheDocument();
 });
 
+test("displays a link for the sign-up page", () => {
+  render(
+    <BrowserRouter>
+      <SignIn />
+    </BrowserRouter>
+  );
+
+  const signUpLink = screen.getByRole("link", { name: "Sign Up" });
+
+  expect(signUpLink).toBeInTheDocument();
+});
+
+
 test("handles email input correctly", () => {
 	render(
 		<BrowserRouter>
