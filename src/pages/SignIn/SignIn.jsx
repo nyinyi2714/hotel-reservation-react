@@ -4,13 +4,9 @@ import "boxicons/css/boxicons.min.css";
 import "./SignIn.css";
 
 export default function SignIn() {
-// State for storing email input
 const [email, setEmail] = useState("");
-// State for storing password input
 const [password, setPassword] = useState("");
-// State for password validation
 const [isPasswordValid, setIsPasswordValid] = useState(true);
-// State for email validation
 const [isEmailValid, setIsEmailValid] = useState(true);
 // State for toggling password visibility
 const [showPassword, setShowPassword] = useState(false);
