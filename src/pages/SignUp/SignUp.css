@@ -6,6 +6,7 @@
   right: 0;
   display: grid;
   place-items: center;
+  overflow: auto;
 }
 
 .signup {
@@ -23,6 +24,7 @@
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   place-items: center;
+  margin: 16px;
 }
 
 .signup__form input:focus-visible {
@@ -61,10 +63,10 @@
   height: 100%;
 
   opacity: .8;
-  background-image: url("/public/images/hotel-room.jpg");
+  background-image: url("/public/images/hotel-room-2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 60% 50%;
+  background-position: 50% 50%;
   z-index: 1;
 }
 
@@ -73,7 +75,7 @@
 }
 
 .signup__signin-invite p {
-  margin: 15px 0;
+  margin: 15px 10px;
   letter-spacing: .2px;
   line-height: 23px;
 }

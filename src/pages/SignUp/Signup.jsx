@@ -136,6 +136,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     )
   };
 
+  // Handle the sign up form submission
   const handleSubmit = (e) => {
     // Prevent default form submission action
     e.preventDefault(); 
@@ -156,10 +157,10 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     <div className="signup-wrapper">
       <div className="signup box-shadow-equal">
         <div className="signup__signin-invite">
-          <h3>Already Have An Account?</h3>
+          <h3>Already a Member?</h3>
           <p>
-            Sign up today to enjoy hassle-free booking and convenient
-            reservation management.
+            Sign in to access your reservations and 
+            conveniently manage your stays.
           </p>
           <Link to="/signin" className="signup__signin-btn">
             Sign In

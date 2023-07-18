@@ -6,6 +6,7 @@
   right: 0;
   display: grid;
   place-items: center;
+  overflow: auto;
 }
 
 .signin {
@@ -23,6 +24,7 @@
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   place-items: center;
+  margin: 16px;
 }
 
 .signin__hotel-logo {
