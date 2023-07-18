@@ -1,0 +1,200 @@
+.signup-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+}
+
+.signup {
+  --signup-form-bg-color: #ffffff;
+  --signup-form-text-color: #1e2124;
+  --signup-input-field-bg-color: #f1f5ff;
+  --signup-form-submit-btn-color: #fff;
+  --signup-form-submit-btn-bg-color: #1e2124;
+  --signup-error-message: red;
+
+  width: 100%;
+  max-width: 700px;
+  height: min-content;
+  /* TODO: Replace 60px with css variable for header height */
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  place-items: center;
+  margin: 16px;
+}
+
+.signup__form input:focus-visible {
+  outline: none;
+}
+
+.signup__hotel-logo {
+  font-style: italic;
+  text-align: center;
+  font-size: var(--font-xl);
+  margin-bottom: 16px;
+}
+
+.signup__signin-invite {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+  color: #fff;
+  background-color: black;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup__signin-invite::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  opacity: .8;
+  background-image: url("/public/images/hotel-room-2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  z-index: 1;
+}
+
+.signup__signin-invite > * {
+  z-index: 2;
+}
+
+.signup__signin-invite p {
+  margin: 15px 10px;
+  letter-spacing: .2px;
+  line-height: 23px;
+}
+
+.signup__signin-btn {
+  color: #fff;
+  text-decoration: none;
+  font-size: var(--font-sm);
+  border: 2px solid #fff;
+  border-radius: 30px;
+  padding: 5px 20px;
+  transition: 150ms ease-in-out;
+}
+
+.signup__signin-btn:hover {
+  color: black;
+  border: 2px solid #fff;
+  background-color: #fff;
+}
+
+.signup__form {
+  color: var(--signup-form-text-color);
+  background-color: var(--signup-form-bg-color);
+  width: 100%;
+  max-width: 300px;
+  padding: 50px 20px;
+  border-radius: 5px;
+}
+
+.signup__form h2 {
+  font-size: var(--font-md);
+  text-align: center;
+}
+
+.signup__form input[type="text"],
+.signup__form input[type="password"],
+.signup__form input[type="submit"] {
+  position: relative;
+  width: 100%;
+  padding: 10px;
+  margin-top: 25px;
+  background-color: var(--signup-input-field-bg-color);
+  border: none;
+  border-radius: 3px;
+}
+
+.signup__password-requirements {
+  position: relative;
+  left: 15px;
+  font-size: var(--font-xs);
+  margin: 5px 5px -7px;
+  color: red;
+}
+
+.signup__password-requirements > li.check {
+  color: green;
+}
+
+.signup__password-requirements > li {
+  margin: 2px 0 0;
+}
+
+.signup__form input[type="submit"] {
+  background-color: var(--signup-form-submit-btn-bg-color);
+  color: var(--signup-form-submit-btn-color);
+  font-size: var(--font-sm);
+  border-radius: 30px;
+}
+
+.signup__invalid-field {
+  display: block;
+  text-align: left;
+  position: absolute;
+  left: 0;
+  bottom: -20px;
+  font-size: var(--font-xs);
+  color: var(--signup-error-message);
+  opacity: 0;
+  transition: 200ms ease-in-out;
+}
+
+.signup__invalid-field.show {
+  opacity: 1;
+  bottom: -15px;
+
+}
+
+.signup__err {
+  position: relative;
+  top: 2px;
+}
+
+.signup__icon {
+  position: absolute;
+  top: 18px;
+  right: 5px;
+  padding: 0;
+  margin: 0;
+
+  background-color: transparent;
+  border: none;
+
+  font-size: var(--font-xl);
+  opacity: 0.6;
+}
+
+.signup__icon:hover {
+  opacity: .8;
+}
+
+.signup__icon:focus-visible {
+  outline: none;
+}
+
+.signup__form p {
+  font-size: var(--font-xs);
+  margin: 13px 0px 5px;
+}
+
+.signup__link:visited {
+  color: initial;
+}

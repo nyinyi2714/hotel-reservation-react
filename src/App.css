@@ -1,36 +1,40 @@
 :root {
-    --font-xxs: 10px;
-    --font-xs: 12px;
-    --font-sm: 14px;
-    --font-md: 16px;
-    --font-lg: 18px;
-    --font-xl: 24px;
-    --font-xxl: 36px;
+  --font-xxs: 10px;
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-md: 16px;
+  --font-lg: 18px;
+  --font-xl: 24px;
+  --font-xxl: 36px;
 
-    --header-height: 60px;
-    
-    --light-grey-text: rgb(87, 87, 87);
+  --header-height: 60px;
+  
+  --light-grey-text: rgb(87, 87, 87);
 }
   
 * {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
 }
 
 button, .clickable {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 button:hover {
-    outline: none;
+  outline: none;
+}
+
+.relative-position {
+  position: relative;
 }
 
 .box-shadow {
-    box-shadow: 2px 2px 10px rgba(30, 33, 36, 0.3);
+  box-shadow: 2px 2px 10px rgba(30, 33, 36, 0.3);
 }
 
 .box-shadow-equal {
-    box-shadow: 0px 0px 10px rgba(30, 33, 36, 0.3);
+  box-shadow: 0px 0px 10px rgba(30, 33, 36, 0.3);
 }
