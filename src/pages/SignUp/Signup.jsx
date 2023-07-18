@@ -54,10 +54,10 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     setEmail(e.target.value); 
   };
 
-   /**
-   * Email is valid if it's in this format: 
-   * <local-part>@<domain>.<top-level-domain>
-   */
+  /**
+  * Email is valid if it's in this format: 
+  * <local-part>@<domain>.<top-level-domain>
+  */
    const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(email);
@@ -88,9 +88,9 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
 
   /**
-   * Password is valid if it's b/w 8 and 32 characters, and
-   * has 1 lowercase letter, 1 uppercase letter, 1 number
-   */
+  * Password is valid if it's b/w 8 and 32 characters, and
+  * has 1 lowercase letter, 1 uppercase letter, 1 number
+  */
   const validatePassword = (password) => {
     const passwordRegex = {
       lengthRegex: /^.{8,32}$/,
@@ -232,16 +232,16 @@ const [isSigningUp, setIsSigningUp] = useState(false);
             />
 
             <ul className="signup__password-requirements">
-              <li className={passLengthTest ? "check" : ""}>
+              <li data-testid="password-req-1" className={passLengthTest ? "check" : ""}>
                 Must be between 8 and 32 characters
               </li>
-              <li className={passLowercaseTest ? "check" : ""}>
+              <li data-testid="password-req-2" className={passLowercaseTest ? "check" : ""}>
                 Contain one lowercase letter
               </li>
-              <li className={passUppercaseTest ? "check" : ""}>
+              <li data-testid="password-req-3" className={passUppercaseTest ? "check" : ""}>
                 Contain one uppercase letter
               </li>
-              <li className={passNumberTest ? "check" : ""}>
+              <li data-testid="password-req-4" className={passNumberTest ? "check" : ""}>
                 One number (0-9)
               </li>
             </ul>
