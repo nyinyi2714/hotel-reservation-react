@@ -90,6 +90,19 @@ test("displays error messages for invalid email and password", () => {
 	expect(screen.getByText("Please enter a password")).toBeVisible();
 });
 
+test("don't display any error messages initially", () => {
+  render(
+    <BrowserRouter>
+      <SignIn />
+    </BrowserRouter>
+  );
+
+  const emailErrorMessage = screen.getByText("Please enter a valid email address");
+  const passwordErrorMessage = screen.getByText("Please enter a password");
+  expect(emailErrorMessage).not.toHaveClass("show");
+  expect(passwordErrorMessage).not.toHaveClass("show");
+});
+
 // TODO: Complete the test after implementing fetch function when form is submitted
 // test("displays Signing In when form is submitted correctly", () => {
 // 	render(

@@ -98,7 +98,7 @@ describe("Handle input fields correctly", () => {
     fireEvent.change(confirmPasswordInput, { target: { value: "StrongPassword123" } });
     expect(confirmPasswordInput.value).toBe("StrongPassword123");
   });
-})
+});
 
 /**
   * field validation tests are sequential, and 
@@ -169,7 +169,24 @@ describe("displays error message for invalid fields", () => {
     const passwordMatchErrorMessage = screen.getByText("Passwords do not match");
     expect(passwordMatchErrorMessage).toBeVisible();
   });
-})
+});
+
+test("don't display any error messages initially", () => {
+  render(
+    <BrowserRouter>
+      <SignUp />
+    </BrowserRouter>
+  );
+
+  const firstNameErrorMessage = screen.getByText("Please enter your First Name");
+  const lastNameErrorMessage = screen.getByText("Please enter your Last Name");
+  const emailErrorMessage = screen.getByText("Please enter a valid email address");
+  const passwordMatchErrorMessage = screen.getByText("Passwords do not match");
+  expect(lastNameErrorMessage).not.toHaveClass("show");
+  expect(firstNameErrorMessage).not.toHaveClass("show");
+  expect(emailErrorMessage).not.toHaveClass("show");
+  expect(passwordMatchErrorMessage).not.toHaveClass("show");
+});
 
 describe("displays password requirements in correct colors", () => {
   test("displays password requirements in red color initially", () => {
@@ -244,7 +261,7 @@ describe("displays password requirements in correct colors", () => {
     expect(passwordNumberRequirement).toHaveClass("check");
   });
   
-})
+});
 
 // TODO: Complete the test after implementing Signing In process
 test("handles form submission correctly", () => {
