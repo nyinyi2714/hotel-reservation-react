@@ -1,0 +1,61 @@
+.rooms-page {
+  margin-top: var(--header-height);
+  --light-blue: rgb(36, 85, 145);
+  --light-grey: var(--light-grey-text);
+}
+
+.rooms-page__stay-form {
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rooms-page__stay-form {
+  display: flex;
+  gap: 10px;
+}
+
+.rooms-page__stay-form input[type="date"] {
+  border: none;
+  background-color: #f2f2f2;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  outline: none;
+}
+
+.rooms-page__stay-form input[type="date"]::-webkit-calendar-picker-indicator {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.rooms-page__stay-form input {
+  margin-left: 5px; 
+}
+
+.rooms-page__guests-num {
+  padding: 7px;
+  outline: 1px solid black;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.rooms-page__guests-num > button {
+  background-color: #fff;
+  border-radius: 50px;
+  padding: 3px 3px 0px;
+  color: var(--light-blue);
+  border: 1.5px solid;
+  margin: 0 10px;
+  font-size: var(--font-lg);
+}
+
+.rooms-page__guests-num > button.disabled {
+  color: var(--light-grey);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
