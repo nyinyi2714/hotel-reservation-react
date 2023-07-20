@@ -1,23 +1,64 @@
 import React, { useState, useEffect, useRef } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import "./RoomsPage.css";
 
 export default function RoomsPage() {
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
   const [guestNum, setGuestNum] = useState(1);
   const startDatePicker = useRef();
+  const endDatePicker = useRef();
+  const daysOfWeek = useRef([
+    "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+  ]);
+  const monthsOfYear = useRef([
+    "Jan", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+  ]);
 
-  const handleStartDate = (e) => {
-    setStartDate(e.target.value);
+  const handleStartDate = (date) => {
+    setStartDate(date);
+    date.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
+
+    if(date.getTime() >= endDate.getTime()) {
+      const currDay = new Date(date);
+      const nextDay = new Date(currDay);
+      nextDay.setDate(currDay.getDate() + 1);
+      setEndDate(nextDay);
+    }
   };
 
-  const handleEndDate = (e) => {
-    setEndDate(e.target.value);
+  const handleEndDate = (date) => {
+    setEndDate(date);
   };
 
-  const openDatePicker = () => {
-    
-  }
+  const openStartDatePicker = () => {
+    startDatePicker.current.setOpen(true);
+  };
+
+  const openEndDatePicker = () => {
+    endDatePicker.current.setOpen(true);
+  };
+
+  const getDate = (d) => {
+    const date = d.getDate();
+    return date < 9 ? "0" + date : date;
+  } 
+
+  const getDay = (date) => {
+    return daysOfWeek.current[date.getDay()];
+  };
+
+  const getMonth = (date) => {
+    return monthsOfYear.current[date.getMonth()];
+  };
+
+  const getTomorrow = (date) => {
+    const currDate = new Date(date);
+    const nextDate = new Date(currDate);
+    return nextDate.setDate(currDate.getDate() + 1);
+  };
 
   // Update DatePickers with today and tomorrow date
   useEffect(() => {
@@ -35,82 +76,55 @@ export default function RoomsPage() {
     setGuestNum(state => state + 1);
   }; 
 
-  const getDayOfWeek = (dateString) => {
-    const daysOfWeek = [
-      "Monday", 
-      "Tuesday", 
-      "Wednesday", 
-      "Thursday", 
-      "Friday", 
-      "Saturday", 
-      "Sunday",
-    ];
-    const date = new Date(dateString);
-    // Get the day of the week as an integer (0-6)
-    const dayOfWeekIndex = date.getDay(); 
-  
-    // Get the corresponding day name from the array
-    return daysOfWeek[dayOfWeekIndex]; 
-  };
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
 
-  // Function to get tomorrow's date
-  const getTomorrowDate = () => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
+  const oneYearFromToday = new Date(today);
+  oneYearFromToday.setFullYear(today.getFullYear() + 1);
 
-    const tomorrowYear = tomorrow.getFullYear();
-    const tomorrowMonth = (tomorrow.getMonth() + 1).toString().padStart(2, '0');
-    const tomorrowDay = tomorrow.getDate().toString().padStart(2, '0');
-
-    return `${tomorrowYear}-${tomorrowMonth}-${tomorrowDay}`;
-  };
-
-  // Function to get the date that is 2 years from a given date
-  const getDateTwoYearsFrom = (today) => {
-    const todayDate = new Date(today + 'T00:00:00');
-    const futureDate = new Date(todayDate);
-    futureDate.setFullYear(todayDate.getFullYear() + 2);
-
-    const futureYear = futureDate.getFullYear();
-    const futureMonth = (futureDate.getMonth() + 1).toString().padStart(2, '0');
-    const futureDay = futureDate.getDate().toString().padStart(2, '0');
-
-    return `${futureYear}-${futureMonth}-${futureDay}`;
-  }
-
-  const today = new Date().toLocaleDateString('en-CA');
-  const tomorrow = getTomorrowDate();
-  const twoYearsFromToday = getDateTwoYearsFrom(today);
-  const twoYearsFromTomorrow = getDateTwoYearsFrom(tomorrow);
+  const oneYearFromTomorrow = new Date(tomorrow);
+  oneYearFromTomorrow.setFullYear(tomorrow.getFullYear() + 1);
 
   return(
     <div className="rooms-page">
       <form className="rooms-page__stay-form">
-        <div className="rooms-page__start-date">
-          <label htmlFor="start_date">Start Date:</label>
-          <input 
-            type="date" 
-            id="start_date" 
-            value={startDate} 
-            min={today}
-            max={twoYearsFromToday}
+        <span className="relative-position">
+          <div 
+            className="rooms-page__date-wrapper clickable"
+            onClick={openStartDatePicker}
+          >
+            <div className="rooms-page__date">{getDate(startDate)}</div>
+            <div className="rooms-page__month">{getMonth(startDate)}</div>
+            <div className="rooms-page__day">{getDay(startDate)}</div>
+          </div>
+          <DatePicker 
+            selected={startDate} 
+            minDate={today}
+            maxDate={oneYearFromToday}
             onChange={handleStartDate}
-            onClick={openDatePicker}
+            dateFormat="yyyy-MM-dd"
             ref={startDatePicker}
           />
-        </div>
-        <div className="rooms-page__end-date">
-          End Date: 
-          <input 
-            type="date" 
-            name="end_date" 
-            value={endDate} 
-            min={tomorrow}
-            max={twoYearsFromTomorrow}
+        </span>
+        <span className="relative-position">
+          <div 
+            className="rooms-page__date-wrapper clickable"
+            onClick={openEndDatePicker}
+          >
+            <div className="rooms-page__date">{getDate(endDate)}</div>
+            <div className="rooms-page__month">{getMonth(endDate)}</div>
+            <div className="rooms-page__day">{getDay(endDate)}</div>
+          </div>
+          <DatePicker 
+            selected={endDate} 
+            minDate={getTomorrow(startDate)}
+            maxDate={oneYearFromTomorrow}
             onChange={handleEndDate}
+            dateFormat="yyyy-MM-dd"
+            ref={endDatePicker}
           />
-        </div>
+        </span>
         <div className="rooms-page__guests-num">
           <button 
             type="button"

@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp/Signup";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 import "./App.css";
 
 function App() {
