@@ -9,7 +9,9 @@
 
   --header-height: 60px;
   
+  --dim-bg-color: rgba(0, 0, 0, .5);
   --light-grey-text: rgb(87, 87, 87);
+  --extra-light-grey: lightgrey;
 }
   
 * {
@@ -37,4 +39,23 @@ button:hover {
 
 .box-shadow-equal {
   box-shadow: 0px 0px 10px rgba(30, 33, 36, 0.3);
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 7px;
+  margin-top: 8px;
+
+  font-size: var(--font-sm);
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+  background-color: #fff;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.btn:focus-visible {
+  outline: none;
 }
