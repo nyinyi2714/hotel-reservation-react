@@ -3,12 +3,10 @@ import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
 import "./RoomsPage.css";
 
-export default function RoomsPage(props) {
-  const states = props.states;
-
+export default function RoomsPage() {
   return(
     <div className="rooms-page">
-      <StayForm states={states} />
+      <StayForm />
       <div className="rooms-page__rooms-gallery">
         <RoomContainer />
       </div>

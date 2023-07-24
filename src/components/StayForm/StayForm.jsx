@@ -3,16 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
 
-export default function StayForm(props) {
-  const {
-    startDate, 
-    endDate, 
-    guestNum, 
-    setStartDate, 
-    setEndDate, 
-    setGuestNum
-  } = props.states;
-
+export default function StayForm() {
   const startDatePicker = useRef();
   const endDatePicker = useRef();
   const daysOfWeek = useRef([
