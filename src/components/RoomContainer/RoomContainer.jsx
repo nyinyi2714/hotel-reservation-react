@@ -16,6 +16,7 @@ export default function RoomContainer(props) {
 
   return (
     <div className="room-container box-shadow">
+      {/* /images/{room-number}/photo-1.jpg */}
       <img 
         src="/images/room-1/photo-1.jpg" 
         className="room-container__img" 
@@ -24,7 +25,7 @@ export default function RoomContainer(props) {
       <div className="room-container__content">
         <h3>Hotel Room Title</h3>
         {/* <Link className="btn" to="/reservation/new">
-          Book for $137
+          Book for ${room_price}
         </Link> */}
         <div className="room-container__unavailable">
         <h4>Sold out</h4>
