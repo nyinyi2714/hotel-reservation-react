@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
 
-export default function StayForm() {
+export default function StayForm(props) {
+  const {startDate, endDate, guestNum, setStartDate, setEndDate, setGuestNum } = props.states;
   const startDatePicker = useRef();
   const endDatePicker = useRef();
   const daysOfWeek = useRef([
@@ -66,13 +67,7 @@ export default function StayForm() {
     if(guestNum >= 6) return;
     setGuestNum(state => state + 1);
   }; 
-
-  // Update DatePickers with today and tomorrow date
-  useEffect(() => {
-    setStartDate(today);
-    setEndDate(tomorrow);
-  }, []);
-
+  
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
