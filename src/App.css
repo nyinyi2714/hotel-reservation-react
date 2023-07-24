@@ -10,8 +10,11 @@
   --header-height: 60px;
   
   --dim-bg-color: rgba(0, 0, 0, .5);
-  --light-grey-text: rgb(87, 87, 87);
-  --extra-light-grey: lightgrey;
+
+  --light-grey: #EEEEEE;
+  --grey: #787A91;
+  --navy: #141E61;
+  --dark-navy: #0F044C;
 }
   
 * {
