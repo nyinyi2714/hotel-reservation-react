@@ -23,8 +23,8 @@ button, .clickable {
   cursor: pointer;
 }
 
-button:hover {
-  outline: none;
+button {
+  outline:none;
 }
 
 .relative-position {
