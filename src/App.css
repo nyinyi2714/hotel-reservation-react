@@ -11,10 +11,11 @@
   
   --dim-bg-color: rgba(0, 0, 0, .5);
 
-  --light-grey: #EEEEEE;
+  --light-grey: #d3d3d3;
   --grey: #787A91;
   --navy: #141E61;
   --dark-navy: #0F044C;
+  --blue: #0f5dbd;
 }
   
 * {
@@ -26,6 +27,11 @@
 
 button, .clickable {
   cursor: pointer;
+}
+
+button {
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 button:hover {
