@@ -1,13 +1,35 @@
 .stay-form {
-  padding: 16px;
+  color: var(--dark-navy);
+  padding: 16px 0;
+
+  --light-blue: rgb(36, 85, 145);
+
+  border-top: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
+  margin-bottom: 15px;
+}
+
+.stay-form__stay-data {
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--light-grey);
+}
+
+.margin-right {
+  margin-right: 6px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.stay-form__flex-container {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
   justify-content: center;
   align-items: center;
-
-  --light-blue: rgb(36, 85, 145);
-  --light-grey: var(--light-grey-text);
+  padding-bottom: 16px;
 }
 
 .stay-form > span {
@@ -22,6 +44,7 @@
   position: relative;
   top: -3px;
   border-right: 1px solid lightgrey;
+  text-transform: uppercase;
 }
 
 .stay-form__date {
@@ -41,7 +64,7 @@
 
 .stay-form__guests-num {
   padding: 7px;
-  outline: 1px solid black;
+  outline: 1px solid;
   border-radius: 5px;
   display: flex;
   flex-wrap: nowrap;
@@ -59,9 +82,30 @@
 }
 
 .stay-form__guests-num > button.disabled {
-  color: var(--light-grey);
+  color: var(--grey);
   cursor: not-allowed;
   opacity: 0.6;
+}
+
+.stay-form__guests-num > button:focus-visible {
+  outline: none;
+}
+
+.stay-form__update-btn {
+  height: 42px;
+  padding: 10px 15px;
+  display: inline-block;
+  border: 1px solid var(--blue);
+  color: #fff;
+  background-color: var(--blue);
+}
+
+.stay-form__update-btn.disabled {
+  color: #fff;
+  background-color: var(--grey);
+  border: 1px solid var(--grey);
+  cursor: not-allowed;
+  opacity: 0.4;
 }
 
 .stay-form .react-datepicker-wrapper {
