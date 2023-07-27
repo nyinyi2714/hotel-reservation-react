@@ -1,34 +1,65 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
 
 export default function StayForm(props) {
-  const {startDate, endDate, guestNum, setStartDate, setEndDate, setGuestNum } = props.states;
+  const {
+    startDate, 
+    endDate, 
+    guestNum, 
+    setStartDate,
+    setEndDate, 
+    setGuestNum, 
+  } = props.states;
+  const updateCallback = props.updateCallback;
+  const [currStartDate, setCurrStartDate] = useState(startDate);
+  const [currEndDate, setCurrEndDate] = useState(endDate);
+  const [currGuestNum, setCurrGuestNum] = useState(guestNum);
   const startDatePicker = useRef();
   const endDatePicker = useRef();
   const daysOfWeek = useRef([
-    "SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"
+    "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
   ]);
   const monthsOfYear = useRef([
-    "Jan", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ]);
 
-  const handleStartDate = (date) => {
-    setStartDate(date);
+  const handleCurrStartDate = (date) => {
+    setCurrStartDate(date);
     date.setHours(0, 0, 0, 0);
-    endDate.setHours(0, 0, 0, 0);
+    currEndDate.setHours(0, 0, 0, 0);
 
-    if(date.getTime() >= endDate.getTime()) {
+    if(date.getTime() >= currEndDate.getTime()) {
       const currDay = new Date(date);
       const nextDay = new Date(currDay);
       nextDay.setDate(currDay.getDate() + 1);
-      setEndDate(nextDay);
+      setCurrEndDate(nextDay);
     }
   };
 
-  const handleEndDate = (date) => {
-    setEndDate(date);
+  const handleCurrEndDate = (date) => {
+    setCurrEndDate(date);
+  };
+
+  const updateStayData = () => {
+    setStartDate(currStartDate);
+    setEndDate(currEndDate);
+    setGuestNum(currGuestNum);
+    updateCallback();
+  }; 
+
+  const haveUnsavedChanges = () => {
+    startDate.setHours(0, 0, 0, 0);
+    currStartDate.setHours(0, 0, 0, 0);
+    endDate.setHours(0, 0, 0, 0);
+    currEndDate.setHours(0, 0, 0, 0);
+    if(startDate.getTime() !== currStartDate.getTime() 
+      || endDate.getTime() !== currEndDate.getTime() 
+      || guestNum !== currGuestNum) {
+      return true;
+    }
+    return false;
   };
 
   const openStartDatePicker = () => {
@@ -59,14 +90,26 @@ export default function StayForm(props) {
   };
 
   const decrementGuestNum = () => {
-    if(guestNum <= 1) return;
-    setGuestNum(state => state - 1);
+    if(currGuestNum <= 1) return;
+    setCurrGuestNum(state => state - 1);
   }; 
 
   const incrementGuestNum = () => {
-    if(guestNum >= 6) return;
-    setGuestNum(state => state + 1);
+    if(currGuestNum >= 6) return;
+    setCurrGuestNum(state => state + 1);
   }; 
+
+  const getNumOfNight = () => {
+    return getDate(endDate) - getDate(startDate);
+  };
+
+  const generateDate = () => {
+    let string = getDay(startDate) + ", " + getMonth(startDate) 
+      + " " + startDate.getDate() + " — " + getDay(endDate)
+      + ", " + getMonth(endDate) 
+      + " " + endDate.getDate() + " ";
+    return string;
+  };
   
   const today = new Date();
   const tomorrow = new Date(today);
@@ -80,58 +123,79 @@ export default function StayForm(props) {
 
   return (
     <form className="stay-form">
-      <span className="relative-position">
-        <div 
-          className="stay-form__date-wrapper clickable"
-          onClick={openStartDatePicker}
-        >
-          <div className="stay-form__date">{getDate(startDate)}</div>
-          <div className="stay-form__month">{getMonth(startDate)}</div>
-          <div className="stay-form__day">{getDay(startDate)}</div>
+      <div className="stay-form__flex-container">
+        <span className="relative-position">
+          <div 
+            className="stay-form__date-wrapper clickable"
+            onClick={openStartDatePicker}
+          >
+            <div className="stay-form__date">{getDate(currStartDate)}</div>
+            <div className="stay-form__month">{getMonth(currStartDate)}</div>
+            <div className="stay-form__day">{getDay(currStartDate)}</div>
+          </div>
+          <DatePicker 
+            selected={currStartDate} 
+            minDate={today}
+            maxDate={oneYearFromToday}
+            onChange={handleCurrStartDate}
+            dateFormat="yyyy-MM-dd"
+            ref={startDatePicker}
+          />
+        </span>
+        <span className="relative-position">
+          <div 
+            className="stay-form__date-wrapper clickable"
+            onClick={openEndDatePicker}
+          >
+            <div className="stay-form__date">{getDate(currEndDate)}</div>
+            <div className="stay-form__month">{getMonth(currEndDate)}</div>
+            <div className="stay-form__day">{getDay(currEndDate)}</div>
+          </div>
+          <DatePicker 
+            selected={currEndDate} 
+            minDate={getTomorrow(currStartDate)}
+            maxDate={oneYearFromTomorrow}
+            onChange={handleCurrEndDate}
+            dateFormat="yyyy-MM-dd"
+            ref={endDatePicker}
+          />
+        </span>
+        <div className="stay-form__guests-num">
+          <button 
+            type="button"
+            className={`${currGuestNum <= 1 && "disabled"}`}
+            onClick={decrementGuestNum}
+          >
+            <i className='bx bx-minus' />
+          </button>
+          {currGuestNum} Guest{currGuestNum > 1 && "s"}
+          <button
+            type="button"
+            className={`${currGuestNum >= 6 && "disabled"}`}
+            onClick={incrementGuestNum}
+          >
+            <i className='bx bx-plus' />
+          </button>
         </div>
-        <DatePicker 
-          selected={startDate} 
-          minDate={today}
-          maxDate={oneYearFromToday}
-          onChange={handleStartDate}
-          dateFormat="yyyy-MM-dd"
-          ref={startDatePicker}
-        />
-      </span>
-      <span className="relative-position">
-        <div 
-          className="stay-form__date-wrapper clickable"
-          onClick={openEndDatePicker}
-        >
-          <div className="stay-form__date">{getDate(endDate)}</div>
-          <div className="stay-form__month">{getMonth(endDate)}</div>
-          <div className="stay-form__day">{getDay(endDate)}</div>
-        </div>
-        <DatePicker 
-          selected={endDate} 
-          minDate={getTomorrow(startDate)}
-          maxDate={oneYearFromTomorrow}
-          onChange={handleEndDate}
-          dateFormat="yyyy-MM-dd"
-          ref={endDatePicker}
-        />
-      </span>
-      <div className="stay-form__guests-num">
         <button 
-          type="button"
-          className={`${guestNum <= 1 && "disabled"}`}
-          onClick={decrementGuestNum}
+          type="button" 
+          className={`stay-form__update-btn ${!haveUnsavedChanges() && "disabled"}`}
+          onClick={updateStayData}
         >
-          <i className='bx bx-minus' />
+          Update
         </button>
-        {guestNum} Guest{guestNum > 1 && "s"}
-        <button
-          type="button"
-          className={`${guestNum >= 6 && "disabled"}`}
-          onClick={incrementGuestNum}
-        >
-          <i className='bx bx-plus' />
-        </button>
+      </div>
+      <div className="stay-form__stay-data">
+        <span className="bold margin-right">Your Stay</span>
+        <span className="stay-form__dates">
+          {generateDate()}
+        </span>
+        <span className="stay-form__nights margin-right">
+          {`(${getNumOfNight()} night${getNumOfNight() > 1 ? "s" : ""})`}
+        </span>
+        <span className="stay-form__guest-num">
+          for {guestNum} Guest{guestNum > 1 && "s"}
+        </span>
       </div>
     </form>
   );

@@ -118,6 +118,7 @@ const [isSigningIn, setIsSigningIn] = useState(false);
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
+              className="password"
               value={password}
               onChange={handlePassword}
               onBlur={validatePassword}
@@ -147,9 +148,6 @@ const [isSigningIn, setIsSigningIn] = useState(false);
             type="submit"
             value={isSigningIn ? "Signing In" : "Sign In"}
           />
-          <Link to="/resetpassword" className="signin__forgot-password">
-            Forgot Password?
-          </Link>
         </form>
       </div>
     </div>
