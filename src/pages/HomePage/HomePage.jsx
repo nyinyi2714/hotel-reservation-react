@@ -14,9 +14,6 @@ export default function HomePage() {
             <a class="main_button" href ="book.now">Book Now</a>
            </div> 
        </div>
-       <section id="main_info">
-         
-       </section>
    </div>
     );
 }

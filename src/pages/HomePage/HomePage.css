@@ -17,12 +17,11 @@ p {
 }
 
 .head_text {
-    color:darkblue;
+    --navy: #141E61;
 }
 
 #sunsetImage {
-    background-image:url("/public/images/back.jpg");
-  
+    background:url("/public/images/back.jpg") no-repeat center;
     height: 650px;
 }
 
