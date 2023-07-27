@@ -19,6 +19,7 @@ export default function App() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(initializeEndDate());
   const [guestNum, setGuestNum] = useState(1);
+  const [roomNumber, setRoomNumber] = useState();
 
   const states = {
     startDate,
@@ -27,6 +28,8 @@ export default function App() {
     setEndDate,
     guestNum,
     setGuestNum,
+    roomNumber, 
+    setRoomNumber,
   };
 
   return (

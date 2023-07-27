@@ -1,18 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import RoomModal from "../RoomModal/RoomModal";
 import "./RoomContainer.css";
 
 export default function RoomContainer(props) {
+  const { setRoomNumber } = props.states; 
+  const navigate = useNavigate();
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
 
   const openRoomModal = () => {
     setIsRoomModalOpen(true);
-  }
+  };
 
   const closeRoomModal = () => {
     setIsRoomModalOpen(false);
-  }
+  };
+
+  const initiateBooking = (e) => {
+    let roomNumber = e.target.id;
+    setRoomNumber(roomNumber);
+    navigate("/reservation/new");
+  };
 
   return (
     <div className="room-container box-shadow">
@@ -24,13 +32,18 @@ export default function RoomContainer(props) {
       />
       <div className="room-container__content">
         <h3>Hotel Room Title</h3>
-        {/* <Link className="btn" to="/reservation/new">
-          Book for ${room_price}
-        </Link> */}
-        <div className="room-container__unavailable">
-        <h4>Sold out</h4>
-        <span>Not available on your selected dates</span>
-        </div>
+        <button 
+          className="btn"
+          type="button"
+          onClick={initiateBooking}
+          id={"room.room_number"}
+        >
+          Book for $137
+        </button>
+        {/* <div className="room-container__unavailable">
+          <h4>Sold out</h4>
+          <span>Not available on your selected dates</span>
+        </div> */}
         <button 
           className="btn" 
           type="button" 
@@ -38,7 +51,13 @@ export default function RoomContainer(props) {
           Room Details
         </button>
       </div>
-      {isRoomModalOpen && <RoomModal closeRoomModal={closeRoomModal} />}
+      {isRoomModalOpen && 
+        <RoomModal 
+          closeRoomModal={closeRoomModal} 
+          initiateBooking={initiateBooking}
+          states={props.states} 
+        />
+      }
     </div>
   );
 }

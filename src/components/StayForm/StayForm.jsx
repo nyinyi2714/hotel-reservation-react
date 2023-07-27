@@ -89,6 +89,10 @@ export default function StayForm(props) {
     return nextDate.setDate(currDate.getDate() + 1);
   };
 
+  const sameStartYearAndEndYear = () => {
+    return startDate.getFullYear() == endDate.getFullYear();
+  }; 
+
   const decrementGuestNum = () => {
     if(currGuestNum <= 1) return;
     setCurrGuestNum(state => state - 1);
@@ -104,10 +108,16 @@ export default function StayForm(props) {
   };
 
   const generateDate = () => {
-    let string = getDay(startDate) + ", " + getMonth(startDate) 
-      + " " + startDate.getDate() + " — " + getDay(endDate)
-      + ", " + getMonth(endDate) 
-      + " " + endDate.getDate() + " ";
+    let displayBothYear = !sameStartYearAndEndYear();
+    let string = getDay(startDate) + ", " 
+      + getMonth(startDate) + " " 
+      + startDate.getDate()
+      + (displayBothYear ? ", " : " ")
+      + (displayBothYear ? startDate.getFullYear() : "")
+      + " — " + getDay(endDate) + ", " 
+      + getMonth(endDate) + " " 
+      + endDate.getDate() + ", "
+      + endDate.getFullYear() + " ";
     return string;
   };
   

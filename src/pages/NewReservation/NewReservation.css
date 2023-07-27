@@ -1,0 +1,133 @@
+.new-reservation {
+  margin-top: var(--header-height);
+  padding: 20px 50px;
+  color: var(--dark-navy);
+}
+
+.new-reservation__receipt {
+  max-width: 800px;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid;
+}
+
+.new-reservation__heading {
+  font-size: var(--font-xxl);
+  padding: 10px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid;
+}
+
+.new-reservation__subheading {
+  font-size: var(--font-md);
+  color: var(--grey);
+  font-weight: normal;
+}
+
+.new-reservation__table {
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.new-reservation__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.new-reservation__total {
+  font-size: var(--font-xl);
+  color: var(--blue);
+}
+
+.new-reservation__tax-info {
+  color: var(--grey);
+  margin-bottom: 3px;
+}
+
+.new-reservation__payment {
+  max-width: 800px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.new-reservation__payment > h3 {
+  font-size: var(--font-xl);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--light-grey);
+}
+
+.new-reservation__payment > form {
+  max-width: 400px;
+  padding: 0 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+}
+
+.new-reservation__payment-input:nth-child(1) {
+  grid-column: 1 / span 2;
+}
+
+.new-reservation__payment-input {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.new-reservation__two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 15px;
+}
+
+.new-reservation__payment-input > label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.new-reservation__payment-input > input,
+.new-reservation__payment-input > select
+{
+  color: inherit;
+  padding: 7px;
+  font-size: var(--font-md);
+  height: 36px;
+  width: 100%;
+}
+
+.new-reservation__payment-input > input:focus-visible,
+.new-reservation__payment-input > select:focus-visible
+{
+  outline-color: var(--dark-navy);
+}
+
+.new-reservation__err {
+  display: none;
+  margin-top: 2px;
+  color: red;
+  font-size: var(--font-sm);
+  align-items: center;
+}
+
+.new-reservation__err.show {
+  display: block;
+}
+
+.new-reservation .new-reseravation__btn {
+  font-weight: bold;
+  font-size: var(--font-md);
+  
+  width: max-content;
+  padding: 15px 20px;
+  margin-bottom: 30px;
+
+  color: #fff;
+  background-color: var(--blue);
+  border: none;
+}
