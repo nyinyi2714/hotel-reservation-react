@@ -11,16 +11,14 @@
 
 .signin {
   --signin-form-bg-color: #ffffff;
-  --signin-form-text-color: #1e2124;
+  --signin-form-text-color: var(--dark-navy);
   --signin-input-field-bg-color: #f1f5ff;
-  --signin-form-submit-btn-color: #fff;
-  --signin-form-submit-btn-bg-color: #1e2124;
   --signin-error-message: red;
 
   width: 100%;
   max-width: 700px;
   height: min-content;
-  /* TODO: Replace 60px with css variable for header height */
+  background-color: white;
   display: grid;
   grid-template-columns: 1fr 1.5fr;
   place-items: center;
@@ -58,8 +56,8 @@
   width: 100%;
   height: 100%;
 
-  opacity: .8;
-  background-image: url("/public/images/hotel-room.jpg");
+  opacity: .6;
+  background-image: url("/public/images/SignIn/hotel-room.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 60% 50%;
@@ -87,7 +85,7 @@
 }
 
 .signin__signup-btn:hover {
-  color: black;
+  color: var(--dark-navy);
   border: 2px solid #fff;
   background-color: #fff;
 }
@@ -120,22 +118,28 @@
   position: relative;
   width: 100%;
   padding: 10px;
+  color: var(--signin-form-text-color);
   background-color: var(--signin-input-field-bg-color);
   border: none;
   border-radius: 3px;
 }
 
-.signin__form input[type="password"] {
+.signin__form .password {
   margin-top: 13px;
 }
 
 .signin__form input[type="submit"] {
-  background-color: var(--signin-form-submit-btn-bg-color);
-  color: var(--signin-form-submit-btn-color);
+  background-color: var(--navy);
+  color: white;
   font-size: var(--font-sm);
 
   margin-top: 13px;
   border-radius: 30px;
+  transition: 100ms ease-in-out;
+}
+
+.signin__form input[type="submit"]:hover {
+  background-color: var(--dark-navy);
 }
 
 .signin__form input:focus-visible {
@@ -181,6 +185,7 @@
   right: 5px;
   padding: 0;
   margin: 0;
+  color: var(--navy);
 
   background-color: transparent;
   border: none;

@@ -1,0 +1,82 @@
+.room-modal-wrapper {
+  display: grid;
+  place-items: center;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: auto;
+  z-index: 99;
+  background-color: var(--dim-bg-color);
+}
+
+.room-modal {
+  position: relative;
+  max-width: 700px;
+  border-radius: 5px;
+  border: 1px solid var(--light-grey);
+  padding: 16px;
+  margin: 35px;
+  background-color: #fff;
+  text-align: left;
+}
+
+.room-modal__close-btn {
+  position: absolute;
+  top: 7px;
+  right: 10px;
+  display: block;
+  color: var(--grey);
+  background-color: transparent;
+  border: none;
+  font-size: var(--font-xxl);
+}
+
+.room-modal > h2 {
+  font-size: var(--font-lg);
+  text-align: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--light-grey);
+  margin-bottom: 20px;
+}
+
+.room-modal__photo-container > img {
+  width: 100%;
+  max-width: 500px;
+}
+
+.room-modal__gallery {
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--light-grey);
+  margin-bottom: 20px;
+}
+
+.room-modal__gallery > img {
+  width: 100px;
+  height: 56px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.room-modal__description > h3 {
+  font-size: var(--font-md);
+  color: var(--light-text);
+  margin-bottom: 10px;
+}
+
+.room-modal__description > p {
+  padding: 0 10px;
+  line-height: 25px;
+  max-width: 500px;
+  margin: 10px 0;
+}
+
+.room-modal .room-modal__btn {
+  margin: 20px auto 10px;
+  padding: 10px 20px;
+  width: max-content;
+  text-align: center;
+}
+
