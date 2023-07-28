@@ -22,11 +22,13 @@ p {
 
 #sunsetImage {
     background:url("/public/images/back.jpg") no-repeat center;
-    height: 650px;
+    height:500px;
+    width:100%;
+    max-width: 1200px;
 }
 
 .container{
-    max-width: 1050px;
+    max-width: 1200px;
     overflow:auto;
     padding: 20px 0;
     margin:auto;
@@ -64,3 +66,59 @@ p {
     color:green;
 }
 
+h2 {
+    padding-bottom:10px;
+    line-height:1.4em;
+    font-family:Arial, Helvetica, sans-serif;
+    font:bold;
+    font-weight:bold;
+    color: #0F044C;
+    --header-height: 60px;
+    padding-top: 20px;
+    text-align: center;
+}
+
+/* for Images*/
+
+.slider-gallery {
+    max-width: 78rem;
+    margin: 0 auto;
+    position: relative;
+}
+
+.sli {
+    display: flex;
+    aspect-ratio: 17/9;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+}
+
+.sli img {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    object-fit: cover;
+}
+
+.sli-nav {
+    display: flex;
+    column-gap: 1rem;
+    position: absolute;
+    bottom: 1.25rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+.sli-nav a {
+    width: 0.5rem;
+    opacity: 0.75;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: white;
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.sli-nav a:hover {
+    opacity: 1;
+}
