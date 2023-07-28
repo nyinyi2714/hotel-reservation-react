@@ -6,6 +6,7 @@ import SignUp from "./pages/SignUp/Signup";
 import Navbar from "./components/Navbar/Navbar";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
+import ManageReservation from "./pages/ManageReservation/ManageReservation";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "./App.css";
 
@@ -42,6 +43,7 @@ export default function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/rooms" element={<RoomsPage states={states} />}  />
         <Route path="/reservation/new" element={<NewReservation states={states} />} />
+        <Route path="/reservations" element={<ManageReservation states={states} />} />
       </Routes>
     </div>
   );
