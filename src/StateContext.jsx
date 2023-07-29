@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from "react";
 
 const StateContext = createContext();
 
@@ -16,6 +16,7 @@ export function StateProvider({ children }) {
   });
   const [guestNum, setGuestNum] = useState(1);
   const [roomNumber, setRoomNumber] = useState();
+  const [user, setUser] = useState(null);
 
   const states = {
     startDate,
@@ -26,6 +27,8 @@ export function StateProvider({ children }) {
     setGuestNum,
     roomNumber, 
     setRoomNumber,
+    user, 
+    setUser
   };
 
   return (
