@@ -8,43 +8,25 @@ import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
 import ManageReservation from "./pages/ManageReservation/ManageReservation";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import { StateProvider } from "./StateContext";
 import "./App.css";
 
 export default function App() {
-  const initializeEndDate = () => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    return tomorrow;
-  };
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(initializeEndDate());
-  const [guestNum, setGuestNum] = useState(1);
-  const [roomNumber, setRoomNumber] = useState();
-
-  const states = {
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    guestNum,
-    setGuestNum,
-    roomNumber, 
-    setRoomNumber,
-  };
-
   return (
     <div className="app">
-      <Navbar/>
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/rooms" element={<RoomsPage states={states} />}  />
-        <Route path="/reservation/new" element={<NewReservation states={states} />} />
-        <Route path="/reservations" element={<ManageReservation states={states} />} />
-      </Routes>
+      <StateProvider>
+        <>
+          <Navbar/>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/rooms" element={<RoomsPage />}  />
+            <Route path="/reservation/new" element={<NewReservation />} />
+            <Route path="/reservations" element={<ManageReservation />} />
+          </Routes>
+        </>
+      </StateProvider>
     </div>
   );
 }

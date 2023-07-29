@@ -3,7 +3,7 @@ import ReservationContainer from "../../components/ReservationContainer/Reservat
 import RoomModal from "../../components/RoomModal/RoomModal";
 import "./ManageReservation.css";
 
-export default function ManageReservation(props) {
+export default function ManageReservation() {
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
 
   const openRoomModal = () => {
