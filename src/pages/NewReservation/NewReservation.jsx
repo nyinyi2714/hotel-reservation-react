@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import StayForm from "../../components/StayForm/StayForm";
+import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
 
-export default function NewReservation(props) {
+export default function NewReservation() {
   const [cardNumber, setCardNumber] = useState("");
   const [month, setMonth] = useState();
   const [year, setYear] = useState(new Date().getFullYear());
   const [isCardNumberValid, setIsCardNumberValid] = useState(true);
   const [isYearValid, setIsYearValid] = useState(true);
 
-  // TODO: roomNumber is in props.states.roomNumber
+  // Room that guest chose in rooms page
+  const { roomNumber } = useStateContext();
 
   const handleCardNumber = (e) => {
     const inputNum = e.target.value;
@@ -99,7 +101,7 @@ export default function NewReservation(props) {
 
   return (
     <div className="new-reservation">
-      <StayForm states={props.states} />
+      <StayForm />
       <div className="new-reservation__receipt">
         <h3 className="new-reservation__subheading">
           Step 2 of 2

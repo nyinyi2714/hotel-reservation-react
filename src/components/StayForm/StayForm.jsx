@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
+import { useStateContext } from "../../StateContext";
 
 export default function StayForm(props) {
   const {
@@ -11,7 +12,7 @@ export default function StayForm(props) {
     setStartDate,
     setEndDate, 
     setGuestNum, 
-  } = props.states;
+  } = useStateContext();
   const updateCallback = props.updateCallback;
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);

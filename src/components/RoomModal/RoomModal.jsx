@@ -83,14 +83,14 @@ export default function RoomModal(props) {
             dolorum cum, consequatur sed beatae nam?
           </p>
         </div>
-        <button 
+        {initiateBooking && <button 
           className="btn room-modal__btn" 
           type="button"
           onClick={initiateBooking}
           id={"room.room_number"}
         >
           Book for $137
-        </button>
+        </button>}
       </div>
     </div>
   );

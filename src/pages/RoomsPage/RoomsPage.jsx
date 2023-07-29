@@ -4,7 +4,7 @@ import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
 import "./RoomsPage.css";
 
-export default function RoomsPage(props) {
+export default function RoomsPage() {
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [isShowingAllRooms, setIsShowingAllRooms] = useState(false);
@@ -113,7 +113,7 @@ export default function RoomsPage(props) {
 
   return(
     <div className="rooms-page">
-      <StayForm states={props.states} updateCallback={updateRooms} />
+      <StayForm updateCallback={updateRooms} />
       <h3 className="rooms-page__subheading">Step 1 of 2</h3>
       <h2 className="rooms-page__heading">Select a Room</h2>
       <div className="rooms-page__filter-wrapper">
@@ -192,10 +192,10 @@ export default function RoomsPage(props) {
         }
       </p>
       <div className="rooms-page__gallery">
-        <RoomContainer states={props.states} />
-        <RoomContainer states={props.states} />
-        <RoomContainer states={props.states} />
-        <RoomContainer states={props.states} />
+        <RoomContainer />
+        <RoomContainer />
+        <RoomContainer />
+        <RoomContainer />
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import RoomModal from "../RoomModal/RoomModal";
+import { useStateContext } from '../../StateContext';
 import "./RoomContainer.css";
 
-export default function RoomContainer(props) {
-  const { setRoomNumber } = props.states; 
+export default function RoomContainer() {
+  const { setRoomNumber } = useStateContext(); 
   const navigate = useNavigate();
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
 
@@ -55,7 +56,6 @@ export default function RoomContainer(props) {
         <RoomModal 
           closeRoomModal={closeRoomModal} 
           initiateBooking={initiateBooking}
-          states={props.states} 
         />
       }
     </div>
