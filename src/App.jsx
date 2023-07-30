@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage/HomePage";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/Signup";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
 import ManageReservation from "./pages/ManageReservation/ManageReservation";
@@ -17,6 +18,7 @@ export default function App() {
       <StateProvider>
         <>
           <Navbar/>
+          <Footer/>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path="/signin" element={<SignIn />} />
