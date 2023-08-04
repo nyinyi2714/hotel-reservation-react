@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
+import EditReservaion from "../../components/EditReservation/EditReservation"
 import "./ManageReservation.css";
 
 export default function ManageReservation() {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
 
   const openRoomModal = () => {
@@ -15,17 +17,33 @@ export default function ManageReservation() {
     setIsRoomOpen(false);
   };
 
+  const openEditModal = () => {
+    setIsEditModalOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+  };
+
   return (
     <div className="manage-reservation">
       <h2>Your Reservations</h2>
         <div className="manage-reservation__display">
-          <ReservationContainer openRoomModal={openRoomModal} />
-          <ReservationContainer openRoomModal={openRoomModal} />
-          <ReservationContainer openRoomModal={openRoomModal} />
-          <ReservationContainer openRoomModal={openRoomModal} />
-          <ReservationContainer openRoomModal={openRoomModal} />
+          <ReservationContainer 
+            openRoomModal={openRoomModal} 
+            openEditModal={openEditModal}
+          />
+          <ReservationContainer 
+            openRoomModal={openRoomModal} 
+            openEditModal={openEditModal}
+          />
+          <ReservationContainer 
+            openRoomModal={openRoomModal} 
+            openEditModal={openEditModal}
+          />
         </div>
       {isRoomModalOpen && <RoomModal closeRoomModal={closeRoomModal} />}
+      {isEditModalOpen && <EditReservaion closeEditModal={closeEditModal} />}
     </div>
   );
 }
