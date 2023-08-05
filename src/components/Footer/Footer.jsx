@@ -1,30 +1,29 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
-    return(
-
-        <footer className="footer_view">
-            <div className="footer_con">
-                <div className="social_media">
-                    <a href =""><i className="fa-brands fa-instagram"></i></a>
-                    <a href =""><i className="fa-brands fa-twitter"></i></a>
-                    <a href =""><i className="fa-brands fa-facebook"></i></a>
-                    <a href =""><i className="fa-brands fa-youtube"></i></a>
-                </div>
-                <div className="footer_nav">
-                    <ul>
-                      <li><a href="#home">Home</a></li>
-                      <li><a href="#rooms">Rooms</a></li>
-                      <li><a href="#Location">Location</a></li>
-                      <li><a href="#ManageYourReservations">Reservation</a></li>
-                      <li><a href="#Manager">Manager</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div className="footer_low_headings">
-                <p>Copyright &copy; 2023; <span className= "grey">Terms and Conditions</span></p>
-            </div>
-        </footer>
-    );
+  return (
+    <footer>
+      <div className="footer__content">
+        <div className="social_media">
+          <i class="bx bxl-instagram" />
+          <i class="bx bxl-twitter" />
+          <i class="bx bxl-facebook" />
+        </div>
+        <div className="footer_low_headings">
+          <div className="top">
+            <Link to="/" className="link">Home</Link>
+            <span>About</span>
+            <span>Services</span>
+            <span>Team</span>
+            <span>Contact</span>
+          </div>
+          <div className="bottom">
+            Created by Emerald
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
 }

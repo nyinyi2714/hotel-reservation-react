@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import SignIn from "./pages/SignIn/SignIn";
@@ -18,7 +18,6 @@ export default function App() {
       <StateProvider>
         <>
           <Navbar/>
-          <Footer/>
           <Routes>
             <Route exact path="/" element={<HomePage />} />
             <Route path="/signin" element={<SignIn />} />
@@ -27,6 +26,7 @@ export default function App() {
             <Route path="/reservation/new" element={<NewReservation />} />
             <Route path="/reservations" element={<ManageReservation />} />
           </Routes>
+          <Footer/>
         </>
       </StateProvider>
     </div>
