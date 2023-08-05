@@ -1,9 +1,11 @@
 .rooms-page {
   margin-top: var(--header-height);
   padding: 20px 50px;
+  color: var(--dark-navy);
 }
 
 .rooms-page__heading {
+  padding-top: 10px;
   font-size: var(--font-xxl);
 }
 
@@ -107,6 +109,11 @@
 .rooms-page__btn.show-all-rooms {
   font-weight: bold;
   margin-bottom: 15px;
+}
+
+.show-all-rooms.activated {
+  outline: 1px solid;
+  box-shadow: 0px 0px 10px;
 }
 
 .rooms-page__message {

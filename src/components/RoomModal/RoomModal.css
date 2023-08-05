@@ -42,6 +42,11 @@
   margin-bottom: 20px;
 }
 
+.room-modal__photo-container {
+  max-width: 500px;
+  height: 337.2px;
+}
+
 .room-modal__photo-container > img {
   width: 100%;
   max-width: 500px;

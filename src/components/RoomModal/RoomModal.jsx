@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import "./RoomModal.css";
 
 export default function RoomModal(props) {
-  const {closeRoomModal} = props;
-  const roomModal = useRef();
+  const {closeRoomModal, initiateBooking } = props;
   const [photoSrc, setPhotoSrc] = useState("/images/room-1/photo-1.jpg");
 
   const changePhoto = (e) => {
@@ -85,9 +83,14 @@ export default function RoomModal(props) {
             dolorum cum, consequatur sed beatae nam?
           </p>
         </div>
-        <Link className="btn room-modal__btn" to="reservation/new">
-          Book Now for $137
-        </Link>
+        {initiateBooking && <button 
+          className="btn room-modal__btn" 
+          type="button"
+          onClick={initiateBooking}
+          id={"room.room_number"}
+        >
+          Book for $137
+        </button>}
       </div>
     </div>
   );
