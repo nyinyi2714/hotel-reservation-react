@@ -7,9 +7,9 @@ export default function Footer() {
     <footer>
       <div className="footer__content">
         <div className="social_media">
-          <i class="bx bxl-instagram" />
-          <i class="bx bxl-twitter" />
-          <i class="bx bxl-facebook" />
+          <i className="bx bxl-instagram" />
+          <i className="bx bxl-twitter" />
+          <i className="bx bxl-facebook" />
         </div>
         <div className="footer_low_headings">
           <div className="top">
