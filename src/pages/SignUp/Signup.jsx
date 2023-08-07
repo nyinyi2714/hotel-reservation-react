@@ -11,6 +11,8 @@ const [isLastNameValid, setIsLastNameValid] = useState(true);
 
 const [email, setEmail] = useState("");
 const [isEmailValid, setIsEmailValid] = useState(true);
+const [phoneNumber, setPhoneNumber] = useState("");
+const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
 
 const [password, setPassword] = useState("");
 const [passLengthTest, setPassLengthTest] = useState(false);
@@ -74,6 +76,27 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   useEffect(() => {
     if (!isEmailValid) validateEmail(); 
   }, [email]);
+
+  const handlePhoneNumber = (e) => {
+    if(e.target.value.length > 10) return;
+    const isIntegerOnly = /^\d*$/.test(e.target.value);
+    if(isIntegerOnly) {
+      setPhoneNumber(e.target.value);
+    } else {
+      return;
+    }
+  };
+
+  const validatePhoneNumber = () => {
+    const result = phoneNumber.length === 10;
+    if(result) {
+      setIsPhoneNumberValid(true);
+      return true;
+    } else {
+      setIsPhoneNumberValid(false);
+      return false;
+    }
+  };
 
   // Update password state on input change
   const handlePassword = (e) => {
@@ -221,6 +244,25 @@ const [isSigningUp, setIsSigningUp] = useState(false);
               }
             >
               Please enter a valid email address
+              <i className="bx bx-error-circle signup__err" />
+            </span>
+          </div>
+          <div className="relative-position">
+            <input
+              type="text"
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChange={handlePhoneNumber}
+              onBlur={validatePhoneNumber}
+            />
+            <span
+              className={
+                isPhoneNumberValid
+                  ? "signup__invalid-field"
+                  : "signup__invalid-field show"
+              }
+            >
+              Please enter a valid US Phone Number
               <i className="bx bx-error-circle signup__err" />
             </span>
           </div>

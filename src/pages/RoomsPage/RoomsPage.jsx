@@ -4,7 +4,7 @@ import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
 import "./RoomsPage.css";
 
-export default function RoomsPage(props) {
+export default function RoomsPage() {
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [isShowingAllRooms, setIsShowingAllRooms] = useState(false);
@@ -23,6 +23,14 @@ export default function RoomsPage(props) {
     revertUnsavedFilters();
   };
 
+  const closeRoomFilterWithOutsideClick = (e) => {
+    if(filterDropDown.current 
+      && !filterDropDown.current.contains(e.target)) {
+      setIsFilterOpen(false);
+      revertUnsavedFilters();
+    }
+  };
+
   const filterAvailableRooms = () => {
     // const availableRooms = rooms.filter();
     // setFilterRooms(availableRooms);
@@ -34,14 +42,6 @@ export default function RoomsPage(props) {
       setFilteredRooms(rooms); 
     } else {
       filterAvailableRooms();
-    }
-  };
-
-  const closeRoomFilterWithOutsideClick = (e) => {
-    if(filterDropDown.current 
-      && !filterDropDown.current.contains(e.target)) {
-      setIsFilterOpen(false);
-      revertUnsavedFilters();
     }
   };
 
@@ -113,7 +113,7 @@ export default function RoomsPage(props) {
 
   return(
     <div className="rooms-page">
-      <StayForm states={props.states} updateCallback={updateRooms} />
+      <StayForm updateCallback={updateRooms} />
       <h3 className="rooms-page__subheading">Step 1 of 2</h3>
       <h2 className="rooms-page__heading">Select a Room</h2>
       <div className="rooms-page__filter-wrapper">
@@ -177,7 +177,9 @@ export default function RoomsPage(props) {
         </div>}
       </div>
       <button 
-        className="rooms-page__btn show-all-rooms" 
+        className={
+          `rooms-page__btn show-all-rooms ${isShowingAllRooms && "activated"}`
+        }
         type="button"
         onClick={showAllRooms}
       >
@@ -185,7 +187,7 @@ export default function RoomsPage(props) {
       </button>
       <p className="rooms-page__message">
         {isShowingAllRooms 
-          ? "Showing all rooms including unavailable ones." 
+          ? "Showing all rooms." 
           : "We found 4 rooms available for your current stay."
         }
       </p>

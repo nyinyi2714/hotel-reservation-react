@@ -1,43 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/Signup";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
+import ManageReservation from "./pages/ManageReservation/ManageReservation";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import { StateProvider } from "./StateContext";
 import "./App.css";
 
 export default function App() {
-  const initializeEndDate = () => {
-    const today = new Date();
-    const tomorrow = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    return tomorrow;
-  };
-
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(initializeEndDate());
-  const [guestNum, setGuestNum] = useState(1);
-
-  const states = {
-    startDate,
-    setStartDate,
-    endDate,
-    setEndDate,
-    guestNum,
-    setGuestNum,
-  };
-
   return (
     <div className="app">
-      <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/rooms" element={<RoomsPage states={states} />}  />
-        <Route path="/reservation/new" element={<NewReservation states={states} />} />
-      </Routes>
+      <StateProvider>
+        <>
+          <Navbar/>
+          <Routes>
+            <Route exact path="/" element={<HomePage />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path="/rooms" element={<RoomsPage />}  />
+            <Route path="/reservation/new" element={<NewReservation />} />
+            <Route path="/reservations" element={<ManageReservation />} />
+          </Routes>
+          <Footer/>
+        </>
+      </StateProvider>
     </div>
   );
 }
