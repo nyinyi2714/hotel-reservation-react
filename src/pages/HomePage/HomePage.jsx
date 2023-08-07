@@ -46,20 +46,20 @@ export default function HomePage() {
           <i class="bx bxs-chevron-left" />
         </button>
         <div className="homepage__image-holder" ref={photoHolder}>
-          <img src="images/gallery-1.jpg" alt="Hotel image" />
-          <img src="images/gallery-2.jpg" alt="Hotel image" />
-          <img src="images/gallery-3.jpg" alt="Hotel image" />
-          <img src="images/gallery-4.jpg" alt="Hotel image" />
-          <img src="images/gallery-5.jpg" alt="Hotel image" />
-          <img src="images/gallery-6.jpg" alt="Hotel image" />
-          <img src="images/gallery-7.jpg" alt="Hotel image" />
-          <img src="images/gallery-8.jpg" alt="Hotel image" />
-          <img src="images/gallery-9.jpg" alt="Hotel image" />
-          <img src="images/gallery-10.jpg" alt="Hotel image" />
-          <img src="images/gallery-11.jpg" alt="Hotel image" />
-          <img src="images/gallery-12.jpg" alt="Hotel image" />
-          <img src="images/gallery-13.jpg" alt="Hotel image" />
-          <img src="images/gallery-14.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-1.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-2.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-3.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-4.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-5.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-6.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-7.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-8.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-9.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-10.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-11.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-12.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-13.jpg" alt="Hotel image" />
+          <img src="images/HomePage/gallery-14.jpg" alt="Hotel image" />
         </div>
       </div>
 
@@ -79,15 +79,15 @@ export default function HomePage() {
         <h2>Nearby Attractions</h2>
         <div className="homepage__attraction-wrapper">
           <div className="attraction box-shadow">
-            <img src="images/attractions-1.jpg" alt="Attraction 1" />
+            <img src="images/HomePage/attractions-1.jpg" alt="Attraction 1" />
             <div>Royal Palace</div>
           </div>
           <div className="attraction box-shadow">
-            <img src="images/attractions-2.webp" alt="Attraction 2" />
+            <img src="images/HomePage/attractions-2.jpg" alt="Attraction 2" />
             <div>Chanrey Tree</div>
           </div>
           <div className="attraction box-shadow">
-            <img src="images/attractions-3.jpg" alt="Attraction 3" />
+            <img src="images/HomePage/attractions-3.jpg" alt="Attraction 3" />
             <div>Koh Tonsay</div>
           </div>
         </div>
