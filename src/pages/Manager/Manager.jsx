@@ -2,19 +2,33 @@ import React from "react";
 import "./Manager.css";
 
 export default function Manager() {
-  return (
 
-    <div className="menu">
-       
-        <ul className="bar">
-          <h2 className="menu-bar">Manager</h2>
-          <li><button className="sidebar">Dashboard</button></li>
-          <li><button className="sidebar">Report</button></li>
+    const Sidebar = () => {
+      return (
+      <div className="manager__bar">
+        <h2 className="manager__heading">Manager</h2>
+        <ul>
+          <li><button className="manager__side__bar">Dashboard</button></li>
+          <li><button className="manager__side__bar">Report</button></li>
         </ul>
-        <container>
-            
-        </container>
+      </div>
+      );
+    }
+
+    const Searchbar = () => {
+      return(
+        <div className="manager__search">
+          <input className="manager__input" type="text" placeholder="Search..."/>
+        </div>
+      );
+    }
+
+    return (
+    <div className="manager__menu">
+      <Searchbar/>
+      <Sidebar/>
     </div>
 
   );
+
 }
