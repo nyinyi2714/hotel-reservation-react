@@ -3,26 +3,26 @@ import "./HomePage.css";
 import { Link } from "react-router-dom";
 
 export default function HomePage() {
-  const [photoInt, setPhotoInt] = useState(0); {/* tracks the position or index of the photo in the slide */}
-  const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false); {/* controls if the previous button is disabled */}
-  const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false); {/* controls the state of the next button if disabled */ }
-  const maxPhotoInt = 6; {/* maximum index for photos (7 photos in total) */}
-  const photoHolder = useRef(); {/* reference to the DOM element containing the photos */}
+  const [photoInt, setPhotoInt] = useState(0); /* tracks the position or index of the photo in the slide */
+  const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false); /* controls if the previous button is disabled */
+  const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false); /* controls the state of the next button if disabled */ 
+  const maxPhotoInt = 6; /* maximum index for photos (7 photos in total) */
+  const photoHolder = useRef(); /* reference to the DOM element containing the photos */
 
   const handleNextPhoto = () => {
-    if (photoInt >= maxPhotoInt) return; {/* end if last photo */}
-    setIsNextBtnDisabled(true); {/* turn off the last button temporarily  */}
-    setPhotoInt(state => state + 1);  {/* expand the photo index  */}
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; {/* photo holder move to the next photo */}
-    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); {/* after 500ms, reactivate the next button*/}
+    if (photoInt >= maxPhotoInt) return; /* end if last photo */
+    setIsNextBtnDisabled(true); /* turn off the last button temporarily  */
+    setPhotoInt(state => state + 1);  /* expand the photo index  */
+    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; /* photo holder move to the next photo */
+    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); /* after 500ms, reactivate the next button*/
   };
 
-  const handlePrevPhoto = () => { {/* function to handle previous button. */}
-    if (photoInt <= 0) return; {/* end if first photo */}
-    setIsPrevBtnDisabled(true);  {/* turn off the last button temporarily  */}
-    setPhotoInt(state => state - 1);  {/* count photos down */}
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; {/* photo holder move to the previous photo */}
-    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); {/* after 500ms, reactivate the previous button */} 
+  const handlePrevPhoto = () => { /* function to handle previous button. */
+    if (photoInt <= 0) return; /* end if first photo */
+    setIsPrevBtnDisabled(true);  /* turn off the last button temporarily  */
+    setPhotoInt(state => state - 1);  /* count photos down */
+    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; /* photo holder move to the previous photo */
+    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); /* after 500ms, reactivate the previous button */ 
   };
 
   return (
