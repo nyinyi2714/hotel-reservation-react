@@ -7,7 +7,7 @@ export default function Navbar() {
   const { user } = useStateContext(); 
   
   return (
-    <nav class="nav">
+    <nav className="nav">
       <Link to="/">LOGO</Link>
       <div className="nav__links">
         <Link className="nav__btn" to="/">Home</Link>
