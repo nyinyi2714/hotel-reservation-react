@@ -33,6 +33,7 @@ export default function RoomModal(props) {
     <div className="room-modal-wrapper" id="room-modal-wrapper">
       <div className="room-modal box-shadow">
         <button 
+          type="button"
           onClick={closeRoomModal}
           className="room-modal__close-btn"
         >
