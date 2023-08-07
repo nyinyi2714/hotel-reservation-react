@@ -31,13 +31,24 @@ nav {
 }
 
 .nav__btn {
-  padding: 5px 15px;
+  margin: 5px 15px;
   border: none;
-  border-radius: 5px;
   font-size: 15px;
   font-weight: bold;
+  position: relative;
 }
 
-.nav__btn:hover {
-  outline: 1px solid;
+.nav__btn::before {
+  position: absolute;
+  display: block;
+  content: "";
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  background-color: var(--dark-navy);
+  transition: 200ms;
+}
+
+.nav__btn:hover.nav__btn::before {
+  width: 100%;
 }
