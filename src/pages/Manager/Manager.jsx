@@ -3,8 +3,8 @@ import "./Manager.css";
 
 export default function Manager() {
 
-    const Sidebar = () => {
-      return (
+    return (
+    <div className="manager__menu">
       <div className="manager__bar">
         <h2 className="manager__heading">Manager</h2>
         <ul>
@@ -12,21 +12,9 @@ export default function Manager() {
           <li><button className="manager__side__bar">Report</button></li>
         </ul>
       </div>
-      );
-    }
-
-    const Searchbar = () => {
-      return(
-        <div className="manager__search">
+      <div className="manager__search">
           <input className="manager__input" type="text" placeholder="Search..."/>
-        </div>
-      );
-    }
-
-    return (
-    <div className="manager__menu">
-      <Searchbar/>
-      <Sidebar/>
+      </div>
     </div>
 
   );

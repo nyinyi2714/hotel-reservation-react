@@ -1,7 +1,7 @@
-.manager_menu {
+.manager__menu {
     display: flex;
-    justify-content: space-between;
-    align-items:center ;
+    
+   
 }
 
 li {
@@ -42,9 +42,8 @@ li {
 }
 
 .manager__search {
-    padding: 45px;
+    padding: 10px;
     margin-top: var(--header-height);
-    display: flex;
     align-items: center;
 }
 
