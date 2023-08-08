@@ -1,7 +1,5 @@
 .manager__menu {
     display: flex;
-    
-   
 }
 
 li {
@@ -10,7 +8,7 @@ li {
 }
 
 .manager__bar {
-  width: 25vh;
+  width: max-content;
   height: 100vh;
   background-color: #ecf5f9ec;
   padding: 20px 50px;
