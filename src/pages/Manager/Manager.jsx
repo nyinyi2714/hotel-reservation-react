@@ -27,7 +27,8 @@ export default function Manager() {
             />
         </div>
         <div class="manager__new__report">
-          <button className="manager__new__button">Generate New Reports</button>
+          <button className="manager__new__button">New Reports</button>
+          <button className="manager__new__button">Delete Reports</button>
         </div>
         <table>
           <thead>

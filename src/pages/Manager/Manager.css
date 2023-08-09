@@ -74,8 +74,33 @@ li {
     
     font-size: 15px;
     font-weight: bold;
+    margin-left: 20px;
 }
 
 table {
-    flex-direction: column;
+    padding-left: 30px;
+    margin-top: 130px;
+    margin-left: 30px;
 }
+table, th, td {
+    border: 1px solid;
+    width: 1000px;
+    border-collapse: collapse;
+    height:70px;
+    text-align: center;
+}
+
+th {
+    background-color: #ecf5f9ec;
+    color: navy;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+td {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
