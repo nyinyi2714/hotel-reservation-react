@@ -18,35 +18,33 @@ export default function Manager() {
           <li><button className="manager__side__bar">Report</button></li>
         </ul>
       </div>
-      <div className="manager__search">
-          <input 
-          className="manager__input" 
-          type="text" 
-          placeholder="Search..."
-          />
-      </div>
-      <div class="manager__new__report">
-        <button className="manager__new__button">Generate New Reports</button>
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody class="manager__table">
-          {reports.map(report => ( 
-            <tr key={report.id}> {/*it create a table row with a unique key*/}
-              <td>{report.id}</td> {/* Shows the Id of table data cell */}
-              <td>{report.title}</td> {/* Shows the title of the data cell */}
-              <td>{report.date}</td> {/* Shows the date for report */}
+      <div>
+        <div className="manager__search">
+            <input 
+            className="manager__input" 
+            type="text" 
+            placeholder="Search..."
+            />
+        </div>
+        <div class="manager__new__report">
+          <button className="manager__new__button">Generate New Reports</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Title</th>
+              <th>Date</th>
+              <th>Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="manager__table">
+            {reports.map(report => ( 
+              <ReportContainer report={report} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 
