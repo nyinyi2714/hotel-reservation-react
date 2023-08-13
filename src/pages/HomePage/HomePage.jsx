@@ -11,7 +11,7 @@ export default function HomePage() {
 
   const handleNextPhoto = () => {
     if (photoInt >= maxPhotoInt) return; /* end if last photo */
-    setIsNextBtnDisabled(true); /* turn off the next button temporarily  */
+    setIsNextBtnDisabled(true); /* turn off the last button temporarily  */
     setPhotoInt(state => state + 1);  /* expand the photo index  */
     photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; /* photo holder move to the next photo */
     setTimeout(() => { setIsNextBtnDisabled(false) }, 500); /* after 500ms, reactivate the next button*/
@@ -19,10 +19,10 @@ export default function HomePage() {
 
   const handlePrevPhoto = () => { /* function to handle previous button. */
     if (photoInt <= 0) return; /* end if first photo */
-    setIsPrevBtnDisabled(true);  /* turn off the prev button temporarily  */
+    setIsPrevBtnDisabled(true);  /* turn off the last button temporarily  */
     setPhotoInt(state => state - 1);  /* count photos down */
     photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; /* photo holder move to the previous photo */
-    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); /* after 500ms, reactivate the previous button */
+    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); /* after 500ms, reactivate the previous button */ 
   };
 
   return (
@@ -35,7 +35,7 @@ export default function HomePage() {
           type="button"
           disabled={isNextBtnDisabled || photoInt >= maxPhotoInt}
         >
-          <i className="bx bxs-chevron-right" />
+          <i class="bx bxs-chevron-right" />
         </button>
         <button
           className="prev"
@@ -43,7 +43,7 @@ export default function HomePage() {
           type="button"
           disabled={isPrevBtnDisabled || photoInt <= 0}
         >
-          <i className="bx bxs-chevron-left" />
+          <i class="bx bxs-chevron-left" />
         </button>
         <div className="homepage__image-holder" ref={photoHolder}>
           <img src="images/HomePage/gallery-1.jpg" alt="Hotel image" />

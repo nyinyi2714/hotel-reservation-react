@@ -8,7 +8,6 @@ import Footer from "./components/Footer/Footer";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
 import ManageReservation from "./pages/ManageReservation/ManageReservation";
-import Manager from "./pages/Manager/Manager";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import { StateProvider } from "./StateContext";
 import "./App.css";
@@ -26,7 +25,6 @@ export default function App() {
             <Route path="/rooms" element={<RoomsPage />}  />
             <Route path="/reservation/new" element={<NewReservation />} />
             <Route path="/reservations" element={<ManageReservation />} />
-            <Route path="/manager" element={<Manager />} />
           </Routes>
           <Footer/>
         </>
