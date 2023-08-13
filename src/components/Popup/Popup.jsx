@@ -31,6 +31,11 @@ export default function Popup() {
         <p>Thank you for trusting us. We are looking forward to it.</p>
         <button type="button" onClick={hidePopup} >close</button>
       </div>
+      <div id="popup" className="popup-message">
+        <h2>Error!</h2>
+        <p>Please retry!</p>
+        <button type="button" onClick={hidePopup} >close</button>
+      </div>
     </div>
   );
 }
