@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
 
-export default function NewReservation() {
+/**`
+ * @component
+ * This component handles the reservation details and payment form.
+ * @returns {JSX.Element} The rendered NewReservation component.
+ */
+function NewReservation() {
+  const navigate = useNavigate();
+  // State variables for payment
   const [cardNumber, setCardNumber] = useState("");
   const [month, setMonth] = useState();
   const [year, setYear] = useState(new Date().getFullYear());
@@ -11,7 +19,7 @@ export default function NewReservation() {
   const [isYearValid, setIsYearValid] = useState(true);
 
   // Room that guest chose in rooms page
-  const { roomNumber } = useStateContext();
+  const { startDate, endDate, roomType, guestNum, user } = useStateContext();
 
   const handleCardNumber = (e) => {
     const inputNum = e.target.value;
@@ -30,7 +38,10 @@ export default function NewReservation() {
     else setYear(inputYear.slice(0, 4));
   };
 
-  // Validate Year
+  /**
+   * Validates the selected year of the card.
+   * @returns {boolean} Whether the card's year is valid.
+   */
   const validateYear = () => {
     const currentYear = new Date().getFullYear();
     const yearInput = parseInt(year, 10);
@@ -39,13 +50,20 @@ export default function NewReservation() {
     return result;
   };
 
-  // Validate Card Number
+  /**
+   * Validates the card number.
+   * @returns {boolean} Whether the card number is valid.
+   */
   const validateCardNumber = () => {
     let result = cardNumber.length >= 15 && cardNumber.length <= 16;
     setIsCardNumberValid(result);
     return result;
   };
 
+  /**
+   * Generates options for selecting the month.
+   * @returns {JSX.Element[]} The rendered option elements.
+   */
   const generateMonthOptions = () => {
     const currentYear = new Date().getFullYear();
     const currentMonth = new Date().getMonth() + 1;
@@ -62,6 +80,12 @@ export default function NewReservation() {
     return options;
   }
 
+  /**
+   * Generates options for selecting the month (helper function).
+   * @param {number} startMonth - The start month.
+   * @param {number} endMonth - The end month.
+   * @returns {JSX.Element[]} The rendered option elements.
+   */
   function generateMonthOptionsHelper(startMonth, endMonth) {
     const monthNames = [
       "Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -93,11 +117,56 @@ export default function NewReservation() {
     validateYear();
   }, [year]);
 
-  const bookReservation = () => {
-    // TODO
-    validateCardNumber();
-    validateYear();
+  /**
+ * Handles the booking of the reservation.
+ * This function validates the card number and year, 
+ * then sends an API request to book the reservation.
+ * @returns {void}
+ */
+const bookReservation = async () => {
+  // Validate card number and year
+  const isCardValid = validateCardNumber();
+  const isYearValid = validateYear();
+
+  // If card number or year is invalid, return early
+  if (!isCardValid || !isYearValid) {
+    return;
+  }
+
+  // Prepare reservation data
+  const reservationData = {
+    startDate, 
+    endDate,   
+    roomType,
+    guestNum,
+    user,
+    cardNumber,
   };
+
+  // API endpoint and access token
+  const apiUrl = "TODO";
+  const accessToken = "TODO";
+
+  try {
+    // Send reservation data via API request
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(reservationData),
+    });
+
+    if (response.ok) {
+      // TODO: show popup message that says successful
+    } else {
+      console.error("Reservation failed.");
+    }
+  } catch (error) {
+    console.error("An error occurred:", error);
+  }
+};
 
   return (
     <div className="new-reservation">
@@ -202,3 +271,5 @@ export default function NewReservation() {
     </div>
   );
 }
+
+export default NewReservation;  
