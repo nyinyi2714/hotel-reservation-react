@@ -7,23 +7,28 @@
     width: max-content;
 }
 
-
 .popup-button {
+    padding: 5px 15px;
+   
+    border: none;
+    border-left: 1px solid var(--light-grey);
+    box-shadow: 0px 4px 10px var(--dark-navy);
+    z-index: 99;
+    border-radius: 6px;
+    
+    font-size: 15px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 23px;
-    font-weight: 500;
-    border: 0;
-    border-radius: 33px;
-    outline: none;
-    padding: 10px 20px;
-    background: white;
+}
+.popup-button:hover {
+    background: #e6e6e6;
 }
 
 
 .popup-message {
-    background: #fff;
+    background: rgb(173, 209, 234);
     color: #343434;
-    top: 0;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.1);
     position: absolute;
@@ -31,9 +36,15 @@
     border-radius: 10px;
     width: 400px;
     text-align: center;
-    visibility: hidden;
-}
+    visibility: hidden; 
+    transition: transform 0.3s ease-in-out, visibility 0.3s ease-in-out; /* Add transition */
+  }
+  
 
+.popup-container .popup-message {
+    visibility: visible;
+    transform: translate(-50%, -50%) scale(1);
+ }
 
 .popup-message h2 {
     margin: 30px 0 12px;
@@ -43,7 +54,7 @@
 
 
 .popup-message button {
-    width: max-content;
+    width: 100px;
     cursor: pointer;
     padding: 10px 0;
     font-size: 20px;
