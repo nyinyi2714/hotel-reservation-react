@@ -4,8 +4,8 @@ import "boxicons/css/boxicons.min.css";
 import "./SignUp.css";
 
 /**
+ * @component
  * SignUp component for the user registration.
- * It will reresents a registration form.
  * @returns {JSX.Element} React component that will show the user registration form.
  */
 export default function SignUp() {
@@ -39,7 +39,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
 
   /**
-   * Validate First name.
    * This checks if the written first name is > 0 and sets a validation state.
    * @param {string} name First name to be validated.
    * @returns {boolean} if first name is valid then true, if not then false
@@ -57,7 +56,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
 
   /**
-   * Validate the Last name.
    * This checks if the written Last name is > 0 and sets a validation state.
    * @param {string} name Last name to be validated.
    * @returns {boolean} if the last name is valid then true, if not then false.
@@ -73,13 +71,8 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     setEmail(e.target.value); 
   };
 
-  /**
-  * Email is valid if it's in this format: 
-  * <local-part>@<domain>.<top-level-domain>
-  */
  /**
   * Validating an email using Reg expression.
-  * This will check if the written email ematches a correct email format and checks the state accordingly.
   * @returns {boolean} true if email is valid, else it's false.
   */
    const validateEmail = () => {
@@ -101,11 +94,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
   /**
    * Handle Phone Number input and validate that it's all integers.
-   * Function to validate that it only contains the input of (0 to 9).
-   * Validate if the input is valid consisting numbers, seting as phone number using a state set. 
-   * @param {object} e The event object shows the input.
-   * @param {string} e.target.value The value of input.
-   * @param {function} setPhoneNumber Using the state function.
+   * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void} Not any specific value.
    */
   const handlePhoneNumber = (e) => {
@@ -149,12 +138,8 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
  /**
   * Password is valid if it's b/w 8 and 32 characters, and
-  * has 1 lowercase letter, 1 uppercase letter, 1 number
+  * has 1 lowercase letter, 1 uppercase letter, and 1 number
   * @param {string} password The password to get validated.
-  * @param {function} setPassLengthTest Using state func for the length test result.
-  * @param {function} setPassLowercaseTest Using state func for the Lower case test result.
-  * @param {function} setPassUppercaseTest Using state func for the Upper case test result.
-  * @param {function} setPassNumberTest Using state func for the Number test result.
   * @returns {boolean} if all the tests passed return true, else false. 
   */
   const validatePassword = (password) => {
@@ -188,7 +173,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
   /**
    * validate if the confirm password matches the original password
-   * @param {string} confirm_password The confirmation password is being validated.
+   * @param {string} confirm_password
    * @returns {boolean} if the confirmation password matches the original one then true, else false. 
    */
   const validatePasswordMatch = (confirm_password) => {
@@ -198,8 +183,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
   
   /**
-   * Will be running all the validation tests for user input. 
-   * This will perform many functions to validate the user input.
+   * Will be running all the validation tests for user inputs in the signup form. 
    * @returns {boolean} if all the validation is passed then true, else false.
    */
   const runAllValidationTests = () => {
@@ -214,7 +198,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   
   /**
    * Handle the sign up form submission
-   * @param {Object} e Event object will represent the submission form event.
+   * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void} no specific return value.
    */
   const handleSubmit = (e) => {
