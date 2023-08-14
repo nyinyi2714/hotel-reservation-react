@@ -4,10 +4,32 @@ import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
 export default function Manager() {
 
-  const [reports, setReports] = useState([
+  const [containerReports, setContainerReports] = useState ([
     { id: 1, title: 'Report-1', date: '08-08-2023' },
     { id: 2, title: 'Report-2', date: '08-08-2023' },
   ]);
+ 
+  const [data, setData] = useState('');
+  const [reports, setReports] = useState(containerReports);
+
+  const filterSearch = (e) => {
+    const searchValue = e.target.value.toLowerCase();
+    setData(searchValue);
+
+    if (searchValue !== '') {
+      const filteredReports = containerReports.filter((report) =>
+        Object.values(report).some((val) => String(val).toLowerCase().includes(searchValue))
+      );
+      setReports(filteredReports);
+    } else {
+      setReports(containerReports);
+    }
+  };
+
+  /*const handleDeleteReport = (idToDelete) => {
+    const updatedReports = reports.filter(report => report.id !== idToDelete);
+    setReports(updatedReports);
+  };*/
 
     return (
     <div className="manager__menu">
@@ -24,11 +46,11 @@ export default function Manager() {
             className="manager__input" 
             type="text" 
             placeholder="Search..."
+            onChange={filterSearch}
             />
         </div>
         <div class="manager__new__report">
           <button className="manager__new__button">New Reports</button>
-          <button className="manager__new__button">Delete Reports</button>
         </div>
         <table>
           <thead>
@@ -36,13 +58,16 @@ export default function Manager() {
               <th>ID</th>
               <th>Title</th>
               <th>Date</th>
-              <th>Action</th>
             </tr>
           </thead>
-          <tbody class="manager__table">
+          <tbody clasName="manager__table">
             {reports.map(report => ( 
-              <ReportContainer report={report} />
-            ))}
+              <ReportContainer 
+              key={report.id}
+              report={report}
+              /*onDelete={handleDeleteReport}*/ />
+            ))
+            }
           </tbody>
         </table>
       </div>

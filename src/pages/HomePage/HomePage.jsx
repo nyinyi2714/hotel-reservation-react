@@ -23,34 +23,19 @@ function HomePage() {
    * @returns {void}
    */
   const handleNextPhoto = () => {
-    // end if last photo 
-    if (photoInt >= maxPhotoInt) return; 
-    // turn off the next button temporarily
-    setIsNextBtnDisabled(true); 
-    // Update Photo index
-    setPhotoInt(state => state + 1);
-    // Display next photo
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; 
-    // after 500ms, reactivate the next button
-    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); 
+    if (photoInt >= maxPhotoInt) return; /* end if last photo */
+    setIsNextBtnDisabled(true); /* turn off the next button temporarily  */
+    setPhotoInt(state => state + 1);  /* expand the photo index  */
+    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; /* photo holder move to the next photo */
+    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); /* after 500ms, reactivate the next button*/
   };
 
-  /**
-   * Handles the previous photo button click event.
-   * Moves to the previous photo in the gallery.
-   * @returns {void}
-   */
-  const handlePrevPhoto = () => {
-    // end if first photo
-    if (photoInt <= 0) return; 
-    // turn off the prev button temporarily
-    setIsPrevBtnDisabled(true); 
-    // Update Photo index
-    setPhotoInt(state => state - 1);
-    // Display previous photo
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`;
-    // after 500ms, reactivate the next button 
-    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); 
+  const handlePrevPhoto = () => { /* function to handle previous button. */
+    if (photoInt <= 0) return; /* end if first photo */
+    setIsPrevBtnDisabled(true);  /* turn off the prev button temporarily  */
+    setPhotoInt(state => state - 1);  /* count photos down */
+    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; /* photo holder move to the previous photo */
+    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); /* after 500ms, reactivate the previous button */
   };
 
   return (
@@ -63,7 +48,7 @@ function HomePage() {
           type="button"
           disabled={isNextBtnDisabled || photoInt >= maxPhotoInt}
         >
-          <i className="bx bxs-chevron-right" />
+          <i class="bx bxs-chevron-right" />
         </button>
         <button
           className="prev"
@@ -71,7 +56,7 @@ function HomePage() {
           type="button"
           disabled={isPrevBtnDisabled || photoInt <= 0}
         >
-          <i className="bx bxs-chevron-left" />
+          <i class="bx bxs-chevron-left" />
         </button>
         <div className="homepage__image-holder" ref={photoHolder}>
           <img src="images/HomePage/gallery-1.jpg" alt="Hotel image" />
