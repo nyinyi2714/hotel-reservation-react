@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 import "./SignIn.css";
 
+/**
+ * Using this form, can sign in to an account that has already been created.
+ * @returns {JSX.Element} component that displays the user sign in form.
+ */
 export default function SignIn() {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
@@ -29,7 +33,12 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     setShowPassword(!showPassword); 
   };
 
-  // Password is invalid if it's empty
+  /**
+   * Password is invalid if it's empty
+   * @param {string} password Validates the password.
+   * @param {function} setIsPasswordValid State function for validation of password.
+   * @returns {boolean} if the input is not empty return tru, else false.
+   */
   const validatePassword = () => {
     if (password.length < 1) {
       setIsPasswordValid(false);
@@ -40,7 +49,12 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     }
   };
 
-  // Email is valid if it's in this format: <local-part>@<domain>.<top-level-domain>
+  /**
+   * // Email is valid if it's in this format: <local-part>@<domain>.<top-level-domain>
+   * @param {string} email Validate the input email.
+   * @param {function} setIsEmailValid State function for email validation.
+   * @returns {boolean} if the email input is valid then true, else false.
+   */
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(email);
@@ -63,6 +77,11 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     if (!isEmailValid) validateEmail(); 
   }, [email]);
 
+  /**
+   * This handle submission, validation and sign in.
+   * @param {Object} e Represent the form submission event.
+   * @returns {void}
+   */
   const handleSubmit = (e) => {
     // Prevent default form submission action
     e.preventDefault(); 
