@@ -1,27 +1,26 @@
 import React from 'react';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import "./Popup.css";
 
 
 export default function Popup() {
  
  // An open or closed state is used to track the pop-up
- const [isPopupOpen, setIsPopupOpen] = useState(false);
- const [isSuccess, setIsSuccess] = useState(false);
+ const [isPopupOpen, setIsPopupOpen] = useState(true);
+ const [isSuccess, setIsSuccess] = useState(true);
 
- // show the popup
- const showPopup = (success) =>{
-  setIsSuccess(success);
-  // Ensure the isPopupOpen state is true in order for the popup to appear
-   setIsPopupOpen(true);
+   const hidePopup = () => {
+    setIsPopupOpen(false);
+  };
 
- };
 
- // hide the popup
- const hidePopup = () => {
-   // Ensure the isPopupOpen state is false in order for the popup to close
-   setIsPopupOpen(false);
- };
+ // using effect to close the popup after some time
+ useEffect(() => {
+  const timer = setTimeout(() => {
+    setIsPopupOpen(false);
+  }, 3000); // correcting after this time
+  return () => clearTimeout(timer); // clear the timer 
+}, []);
 
  // shows the design of popup box
  const popupStyles = {
@@ -31,7 +30,6 @@ export default function Popup() {
 
 return (
  <div className="popup-container">
-   <button type="button" className="popup-button" onClick={() => showPopup(true)}>Book Reservation</button>
    <div id="popup" className="popup-message" style={popupStyles}>
         <h2>{isSuccess ? 'Success!' : 'Error!'}</h2>
         <p>{isSuccess ? 'Thank you for trusting us. We are looking forward to it.' : 'Please retry!'}</p>
