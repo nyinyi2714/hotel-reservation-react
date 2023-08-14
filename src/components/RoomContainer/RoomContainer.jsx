@@ -4,19 +4,40 @@ import RoomModal from "../RoomModal/RoomModal";
 import { useStateContext } from '../../StateContext';
 import "./RoomContainer.css";
 
-export default function RoomContainer() {
+/**
+ * @component
+ * This component displays a hotel room preview with booking and room details options.
+ * @returns {JSX.Element} The rendered RoomContainer component.
+ */
+function RoomContainer() {
+  // Accessing state and navigation
   const { setRoomNumber } = useStateContext(); 
   const navigate = useNavigate();
+
+  // State variable for room modal
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
 
+  /**
+   * Opens the room modal for viewing room details.
+   * @returns {void}
+   */
   const openRoomModal = () => {
     setIsRoomModalOpen(true);
   };
 
+  /**
+   * Closes the room modal.
+   * @returns {void}
+   */
   const closeRoomModal = () => {
     setIsRoomModalOpen(false);
   };
 
+  /**
+   * Initiates the booking process for the selected room.
+   * @param {React.SyntheticEvent} e - The click event object.
+   * @returns {void}
+   */
   const initiateBooking = (e) => {
     let roomNumber = e.target.id;
     setRoomNumber(roomNumber);
@@ -41,10 +62,6 @@ export default function RoomContainer() {
         >
           Book for $137
         </button>
-        {/* <div className="room-container__unavailable">
-          <h4>Sold out</h4>
-          <span>Not available on your selected dates</span>
-        </div> */}
         <button 
           className="btn" 
           type="button" 
@@ -61,3 +78,5 @@ export default function RoomContainer() {
     </div>
   );
 }
+
+export default RoomContainer;

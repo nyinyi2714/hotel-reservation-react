@@ -4,7 +4,12 @@ import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
 import "./RoomsPage.css";
 
-export default function RoomsPage() {
+/**
+ * @component
+ * This component displays a list of rooms with filtering options.
+ * @returns {JSX.Element} The rendered RoomsPage component.
+ */
+function RoomsPage() {
   const [rooms, setRooms] = useState([]);
   const [filteredRooms, setFilteredRooms] = useState([]);
   const [isShowingAllRooms, setIsShowingAllRooms] = useState(false);
@@ -15,6 +20,10 @@ export default function RoomsPage() {
   const [suiteFilter, setSuiteFilter] = useState(false);
   const filterDropDown = useRef();
 
+  /**
+   * Toggles the visibility of the room filter dropdown and handles its interactions.
+   * @param {React.SyntheticEvent} e - The click event object.
+   */
   const openRoomFilter = (e) => {
     setIsFilterOpen(!isFilterOpen);
     if(!isFilterOpen) {
@@ -31,11 +40,10 @@ export default function RoomsPage() {
     }
   };
 
-  const filterAvailableRooms = () => {
-    // const availableRooms = rooms.filter();
-    // setFilterRooms(availableRooms);
-  };
-
+  /**
+   * Toggles between showing all rooms and filtered rooms.
+   * @returns {void}
+   */
   const showAllRooms = () => {
     setIsShowingAllRooms((state) => !state);
     if(!isShowingAllRooms) {
@@ -54,7 +62,10 @@ export default function RoomsPage() {
     return () => document.removeEventListener("click", closeRoomFilterWithOutsideClick);
   }, [isFilterOpen]);
 
-  // Revert unsaved filter settings
+  /**
+   * Reverts unsaved filter settings.
+   * @returns {void}
+   */
   const revertUnsavedFilters = () => {
     let index = FiltersUsed.findIndex((item) => item === "one-bed");
     if(index === -1) setOneBedFilter(false);
@@ -76,6 +87,10 @@ export default function RoomsPage() {
     setSuiteFilter(e.target.checked);
   };
 
+  /**
+   * Saves the selected filters and applies filtering.
+   * @returns {void}
+   */
   const saveFilters = () => {
     const filters = [];
     if(oneBedFilter) filters.push("one-bed");
@@ -85,6 +100,10 @@ export default function RoomsPage() {
     filterRooms();
   };
 
+  /**
+   * Resets all filters to their default state.
+   * @returns {void}
+   */
   const resetFilters = () => {
     setOneBedFilter(false);
     setTwoBedFilter(false);
@@ -93,12 +112,19 @@ export default function RoomsPage() {
     filterRooms();
   };
 
+  /**
+   * Filters the rooms based on the selected filters.
+   * @returns {void}
+   */
   const filterRooms = () => {
     setIsFilterOpen(false);
     // TODO
   };
 
-  // Fetch rooms data from backend
+  /**
+   * Fetches rooms data from the backend and updates state.
+   * @returns {void}
+   */
   const updateRooms = () => {
     // TODO
   };
@@ -106,9 +132,6 @@ export default function RoomsPage() {
   useEffect(() => {
     // Fetch rooms data from backend
     updateRooms();
-
-    // Get available rooms from all rooms from backend
-    filterAvailableRooms();
   }, []);
 
   return(
@@ -200,3 +223,5 @@ export default function RoomsPage() {
     </div>
   );
 }
+
+export default RoomsPage;

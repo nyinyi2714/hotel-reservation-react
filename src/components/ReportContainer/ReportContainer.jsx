@@ -1,7 +1,16 @@
 import React from "react";
 
-export default function ReportContainer(props) {
-
+/**
+ * @component
+ * Renders a table row containing report information.
+ * @param {Object} props - The component props.
+ * @param {Object} props.report - The report object containing report details.
+ * @param {number} props.report.id - The unique identifier for the report.
+ * @param {string} props.report.title - The title of the report.
+ * @param {string} props.report.date - The date of the report.
+ * @returns {JSX.Element} The rendered ReportContainer component.
+ */
+function ReportContainer(props) {
   const {report} = props;
 
   return (
@@ -12,6 +21,8 @@ export default function ReportContainer(props) {
     </tr>
   );
 }
+
+export default ReportContainer;
 
 
 
