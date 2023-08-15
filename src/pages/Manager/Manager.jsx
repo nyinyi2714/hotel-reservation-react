@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import "./Manager.css";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
+/**
+ * @component
+ * This component handles the reports and do the search filter.
+ * @returns {JSX.Element} The rendered Manager component.
+ */
 export default function Manager() {
 
   const [containerReports, setContainerReports] = useState ([
@@ -11,7 +16,11 @@ export default function Manager() {
  
   const [data, setData] = useState('');
   const [reports, setReports] = useState(containerReports);
-
+  
+  /**
+   * The filter function which by entering the user input will show data accordinly either in lower case or capital.
+   * @param {React.SyntheticEvent} e The click event object.
+   */
   const filterSearch = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setData(searchValue);
@@ -25,11 +34,6 @@ export default function Manager() {
       setReports(containerReports);
     }
   };
-
-  /*const handleDeleteReport = (idToDelete) => {
-    const updatedReports = reports.filter(report => report.id !== idToDelete);
-    setReports(updatedReports);
-  };*/
 
     return (
     <div className="manager__menu">
@@ -65,7 +69,7 @@ export default function Manager() {
               <ReportContainer 
               key={report.id}
               report={report}
-              /*onDelete={handleDeleteReport}*/ />
+              />
             ))
             }
           </tbody>

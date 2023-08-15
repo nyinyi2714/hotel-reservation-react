@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 /**
  * @component
- * Renders the homepage of the Hotel Del Luna website
+ * Renders the homepage of the Hotel Del Luna website.
  * @returns {JSX.Element} The rendered HomePage component.
  */
 function HomePage() {
@@ -29,7 +29,12 @@ function HomePage() {
     photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; /* photo holder move to the next photo */
     setTimeout(() => { setIsNextBtnDisabled(false) }, 500); /* after 500ms, reactivate the next button*/
   };
-
+  
+  /**
+   * Handles the prev photo button click event.
+   * Moves to the prev photo in the gallery.
+   * @returns {void}
+   */
   const handlePrevPhoto = () => { /* function to handle previous button. */
     if (photoInt <= 0) return; /* end if first photo */
     setIsPrevBtnDisabled(true);  /* turn off the prev button temporarily  */

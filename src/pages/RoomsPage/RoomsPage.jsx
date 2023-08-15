@@ -31,7 +31,13 @@ function RoomsPage() {
     }
     revertUnsavedFilters();
   };
-
+  
+  /**
+   * It checks if the clicked element's target is outside the 
+   * filterDropDown. Unsaved filters are reverted to previous 
+   * state if it's outside, and the room filter dropdown is closed.
+   * @param {React.SyntheticEvent} e The click event object.
+   */
   const closeRoomFilterWithOutsideClick = (e) => {
     if(filterDropDown.current 
       && !filterDropDown.current.contains(e.target)) {

@@ -32,7 +32,7 @@ function StayForm(props) {
   const monthsOfYear = useRef([
     "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ]);
-
+  
   const handleCurrStartDate = (date) => {
     setCurrStartDate(date);
     date.setHours(0, 0, 0, 0);
@@ -45,15 +45,24 @@ function StayForm(props) {
       setCurrEndDate(nextDay);
     }
   };
-
+  
+  /**
+   * Update the current end date.
+   * @param {Date} date The new end date to set.
+   * @return {void}
+   */
   const handleCurrEndDate = (date) => {
     setCurrEndDate(date);
   };
 
   /**
- * Updates the stay data and invokes the updateCallback function.
- * @returns {void}
- */
+   * Updates the stay data and invokes the updateCallback function.
+   * Using the current values of currStartDate, currEndDate, and 
+   * currGuestNum, this function updates the start date, end date,
+   * and guest number. The updateCallback function is called 
+   * after updating the data.
+   * @returns {void}
+   */
   const updateStayData = () => {
     setStartDate(currStartDate);
     setEndDate(currEndDate);
@@ -62,9 +71,9 @@ function StayForm(props) {
   }; 
 
   /**
- * Checks if there are unsaved changes in the form.
- * @returns {boolean} True if there are unsaved changes, otherwise false.
- */
+   * Checks if there are unsaved changes in the form.
+   * @returns {boolean} True if there are unsaved changes, otherwise false.
+  */
   const haveUnsavedChanges = () => {
     startDate.setHours(0, 0, 0, 0);
     currStartDate.setHours(0, 0, 0, 0);
@@ -79,14 +88,13 @@ function StayForm(props) {
   };
 
   /**
- * Opens the start date picker.
- * @returns {void}
- */
+   * Opens the start date picker.
+   * @returns {void}
+  */
   const openStartDatePicker = () => {
     startDatePicker.current.setOpen(true);
   };
 
-  
 /**
  * Opens the end date picker.
  * @returns {void}
@@ -96,10 +104,10 @@ function StayForm(props) {
   };
 
   /**
- * Formats the date to return day of the month with leading zero.
- * @param {Date} d - The input date.
- * @returns {string} The formatted day of the month.
- */
+   * Formats the date to return day of the month with leading zero.
+   * @param {Date} d - The input date.
+   * @returns {string} The formatted day of the month.
+  */
   const getDate = (d) => {
     const date = d.getDate();
     return date < 9 ? "0" + date : date;
