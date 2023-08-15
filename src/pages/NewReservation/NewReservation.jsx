@@ -196,6 +196,7 @@ function NewReservation() {
 
   /**
  * Compute the total price of the room based on the number of nights.
+ * @returns {void}
  */
   const computeRoomPrice = () => {
     const pricePerNight = 85.00;
@@ -205,6 +206,7 @@ function NewReservation() {
 
   /**
  * Calculate the taxes based on the room price and tax rate percentage.
+ * @returns {void}
  */
   const computeTaxes = () => {
     const taxes = (roomPrice * taxRatePercent);
@@ -213,6 +215,7 @@ function NewReservation() {
 
   /**
  * Calculate additional fees based on the number of guests above the base count.
+ * @returns {void}
  */
   const computeAdditionalFee = () => {
     setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
