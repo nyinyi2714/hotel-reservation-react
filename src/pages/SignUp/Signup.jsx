@@ -8,7 +8,7 @@ import "./SignUp.css";
  * SignUp component for the user registration.
  * @returns {JSX.Element} React component that will show the user registration form.
  */
-export default function SignUp() {
+function SignUp() {
 const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
 const [isFirstNameValid, setIsFirstNameValid] = useState(true);
@@ -358,3 +358,5 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     </div>
   );
 }
+
+export default SignUp;
