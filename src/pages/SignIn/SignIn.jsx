@@ -36,7 +36,7 @@ const [isSigningIn, setIsSigningIn] = useState(false);
 
   /**
    * Password is invalid if it's empty
-   * @param {string} password Validates the password.
+   * Validates the password.
    * @returns {boolean} if the input is not empty return tru, else false.
    */
   const validatePassword = () => {
@@ -50,8 +50,8 @@ const [isSigningIn, setIsSigningIn] = useState(false);
   };
 
   /**
-   * // Email is valid if it's in this format: <local-part>@<domain>.<top-level-domain>
-   * @param {string} email Validate the input email.
+   * Email is valid if it's in this format: <local-part>@<domain>.<top-level-domain>
+   * Parameter email Validate the input email.
    * @returns {boolean} if the email input is valid then true, else false.
    */
   const validateEmail = () => {
