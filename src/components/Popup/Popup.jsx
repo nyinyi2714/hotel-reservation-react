@@ -2,27 +2,48 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import "./Popup.css";
 
-
+/**
+ * @component
+ * Customizable popup component with optional success state.
+ * @returns {JSX.Element}
+ */
 export default function Popup() {
  
- // An open or closed state is used to track the pop-up
+ /**
+   * An open or closed state is used to track the pop-up.
+   * @type {boolean}
+ */
  const [isPopupOpen, setIsPopupOpen] = useState(true);
+ /**
+   * State shows either the popup represents a success message.
+   * @type {boolean}
+ */
  const [isSuccess, setIsSuccess] = useState(true);
 
+ /**
+   * Using func to hide the popup by showing open state to false.
+   * @returns {void}
+ */
    const hidePopup = () => {
     setIsPopupOpen(false);
   };
 
-
- // using effect to close the popup after some time
+ /**
+   * Using effect hook to close the popup automatically after some time.
+ */
  useEffect(() => {
   const timer = setTimeout(() => {
     setIsPopupOpen(false);
-  }, 3000); // correcting after this time
-  return () => clearTimeout(timer); // clear the timer 
-}, []);
+  }, 3000); // Adjusting the time as needed.
+  return () => {
+    clearTimeout(timer); // clear the timer.
+  } 
+ }, []);
 
- // shows the design of popup box
+ /**
+   * Visibility and transformation styles for popup boxes.
+   * @type {object}
+ */
  const popupStyles = {
   visibility: isPopupOpen ? 'visible' : 'hidden',
   transform: isPopupOpen ? 'translate(-50%, -50%) scale(1)' : 'translate(-50%, -50%) scale(0.1)',
