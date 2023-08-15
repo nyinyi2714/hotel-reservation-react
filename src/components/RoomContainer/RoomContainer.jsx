@@ -11,7 +11,7 @@ import "./RoomContainer.css";
  */
 function RoomContainer() {
   // Accessing state and navigation
-  const { setRoomNumber } = useStateContext(); 
+  const { setRoomType } = useStateContext(); 
   const navigate = useNavigate();
 
   // State variable for room modal
@@ -39,14 +39,14 @@ function RoomContainer() {
    * @returns {void}
    */
   const initiateBooking = (e) => {
-    let roomNumber = e.target.id;
-    setRoomNumber(roomNumber);
+    let roomType = e.target.id;
+    setRoomType(roomType);
     navigate("/reservation/new");
   };
 
   return (
     <div className="room-container box-shadow">
-      {/* /images/{room-number}/photo-1.jpg */}
+      {/* /images/{room-type}/photo-1.jpg */}
       <img 
         src="/images/room-1/photo-1.jpg" 
         className="room-container__img" 

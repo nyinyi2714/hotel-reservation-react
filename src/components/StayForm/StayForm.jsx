@@ -7,11 +7,9 @@ import { useStateContext } from "../../StateContext";
 /**
  * @component
  * This component allows users to select stay dates and guest numbers.
- * @param {Object} props - The props passed to the StayForm component.
- * @param {Function} props.updateCallback - A callback function to update stay data.
  * @returns {JSX.Element} The rendered StayForm component.
  */
-function StayForm(props) {
+function StayForm() {
   const {
     startDate, 
     endDate, 
@@ -20,7 +18,6 @@ function StayForm(props) {
     setEndDate, 
     setGuestNum, 
   } = useStateContext();
-  const updateCallback = props.updateCallback;
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);
   const [currGuestNum, setCurrGuestNum] = useState(guestNum);
@@ -65,7 +62,6 @@ function StayForm(props) {
     setStartDate(currStartDate);
     setEndDate(currEndDate);
     setGuestNum(currGuestNum);
-    updateCallback();
   }; 
 
   /**
