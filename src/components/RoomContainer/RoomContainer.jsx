@@ -4,8 +4,8 @@ import RoomModal from "../RoomModal/RoomModal";
 import { useStateContext } from '../../StateContext';
 import "./RoomContainer.css";
 
-export default function RoomContainer() {
-  const { setRoomNumber } = useStateContext(); 
+export default function RoomContainer(props) {
+  const { setRoomType } = useStateContext(); 
   const navigate = useNavigate();
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
 
@@ -18,14 +18,14 @@ export default function RoomContainer() {
   };
 
   const initiateBooking = (e) => {
-    let roomNumber = e.target.id;
-    setRoomNumber(roomNumber);
+    let roomType = e.target.id;
+    setRoomType(roomType);
     navigate("/reservation/new");
   };
 
   return (
     <div className="room-container box-shadow">
-      {/* /images/{room-number}/photo-1.jpg */}
+      {/* /images/{room-type}/photo-1.jpg */}
       <img 
         src="/images/room-1/photo-1.jpg" 
         className="room-container__img" 
@@ -41,10 +41,6 @@ export default function RoomContainer() {
         >
           Book for $137
         </button>
-        {/* <div className="room-container__unavailable">
-          <h4>Sold out</h4>
-          <span>Not available on your selected dates</span>
-        </div> */}
         <button 
           className="btn" 
           type="button" 

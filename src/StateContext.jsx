@@ -15,7 +15,7 @@ export function StateProvider({ children }) {
     return tomorrow;
   });
   const [guestNum, setGuestNum] = useState(1);
-  const [roomNumber, setRoomNumber] = useState();
+  const [roomType, setRoomType] = useState();
   const [user, setUser] = useState(null);
 
   const states = {
@@ -25,8 +25,8 @@ export function StateProvider({ children }) {
     setEndDate,
     guestNum,
     setGuestNum,
-    roomNumber, 
-    setRoomNumber,
+    roomType, 
+    setRoomType,
     user, 
     setUser
   };

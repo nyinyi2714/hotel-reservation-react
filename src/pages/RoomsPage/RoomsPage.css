@@ -7,6 +7,7 @@
 .rooms-page__heading {
   padding-top: 10px;
   font-size: var(--font-xxl);
+  margin-bottom: 15px;
 }
 
 .rooms-page__subheading {
@@ -15,108 +16,41 @@
   font-weight: normal;
 }
 
-.rooms-page__gallery {
-  margin-top: 5px;
-  padding-top: 15px;
-  border-top: 1px solid var(--light-grey);
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  place-items: center;
-  gap: 30px;
-
+.rooms-page__search {
+  padding: 7px 5px;
+  width: 30%;
+  margin-bottom: 15px;
+  border: 1px solid var(--dark-navy);
+  border-radius: 5px;
+  font-size: var(--font-md);
 }
 
 .rooms-page__btn {
-  color: var(--blue);
-  padding: 10px 15px;
-  border: 1px solid var(--blue);
+  display: inline-block;
+  width: max-content;
+  padding: 8.5px;
+  margin-left: 10px;
+  color: red;
+  border: 1px solid red;
 }
 
-.rooms-page__btn.filter {
-  font-weight: bold;
-  margin: 15px 0;
-  position: relative;
-} 
+.rooms-page__search:focus-visible {
+  outline: 1px solid var(--dark-navy);
+}
 
-.filter-num {
-  position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(50%, -50%);
+.rooms-page__gallery {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid var(--light-grey);
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  align-items: center;
+}
 
-  color: #fff;
-  background-color: var(--blue);
-
+.rooms-page__err {
+  height: 30vh;
+  width: 100%;
   display: grid;
   place-items: center;
-
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
 }
-
-.rooms-page__btn:focus-visible {
-  outline: none;
-}
-
-.rooms-page__filter-wrapper {
-  position: relative;
-  width: fit-content;
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.rooms-page__filter {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  flex-wrap: nowrap;
-
-  position: absolute;
-  top: 80%;
-  background-color: #fff;
-  padding: 25px;
-  border: 1px solid var(--light-grey);
-}
-
-.rooms-page__filter > label {
-  display: flex;
-  gap: 10px;
-}
-
-.rooms-page__btn.update {
-  color: var(--blue);
-  width: 100%;
-  transition: 150ms ease-in-out;
-}
-
-.rooms-page__btn.update:hover {
-  color: white;
-  background-color: var(--blue);
-}
-
-.rooms-page__btn.reset {
-  color: red;
-  border-color: red;
-  transition: 150ms ease-in-out;
-}
-
-.rooms-page__btn.reset:hover{
-  color: #fff;
-  background-color: red;
-}
-
-.rooms-page__btn.show-all-rooms {
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.show-all-rooms.activated {
-  outline: 1px solid;
-  box-shadow: 0px 0px 10px;
-}
-
-.rooms-page__message {
-  margin-bottom: 15px; 
-}
-
