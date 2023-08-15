@@ -40,7 +40,7 @@ export default function RoomsPage() {
 
   return(
     <div className="rooms-page">
-      <StayForm updateCallback={updateRooms} />
+      <StayForm />
       <h3 className="rooms-page__subheading">Step 1 of 2</h3>
       <h2 className="rooms-page__heading">Select a Room</h2>
       <input

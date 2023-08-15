@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
 import { useStateContext } from "../../StateContext";
 
-export default function StayForm(props) {
+export default function StayForm() {
   const {
     startDate, 
     endDate, 
@@ -13,7 +13,6 @@ export default function StayForm(props) {
     setEndDate, 
     setGuestNum, 
   } = useStateContext();
-  const updateCallback = props.updateCallback;
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);
   const [currGuestNum, setCurrGuestNum] = useState(guestNum);
@@ -47,7 +46,6 @@ export default function StayForm(props) {
     setStartDate(currStartDate);
     setEndDate(currEndDate);
     setGuestNum(currGuestNum);
-    updateCallback();
   }; 
 
   const haveUnsavedChanges = () => {

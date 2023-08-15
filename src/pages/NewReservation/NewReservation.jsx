@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
 import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
@@ -10,13 +9,20 @@ import "./NewReservation.css";
  * @returns {JSX.Element} The rendered NewReservation component.
  */
 function NewReservation() {
-  const navigate = useNavigate();
   // State variables for payment
   const [cardNumber, setCardNumber] = useState("");
   const [month, setMonth] = useState();
   const [year, setYear] = useState(new Date().getFullYear());
   const [isCardNumberValid, setIsCardNumberValid] = useState(true);
   const [isYearValid, setIsYearValid] = useState(true);
+
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [taxes, setTaxes] = useState(0);
+  const [roomPrice, setRoomPrice] = useState(0);
+  const taxRatePercent = 0.13;
+  // Additional fee for guests after 2 people
+  const additionalFeePerGuest = 25;
+  const [additionalFee, setAdditionalFee] = useState(0);
 
   // Room that guest chose in rooms page
   const { startDate, endDate, roomType, guestNum, user } = useStateContext();
@@ -123,50 +129,101 @@ function NewReservation() {
  * then sends an API request to book the reservation.
  * @returns {void}
  */
-const bookReservation = async () => {
-  // Validate card number and year
-  const isCardValid = validateCardNumber();
-  const isYearValid = validateYear();
+  const bookReservation = async () => {
+    // Validate card number and year
+    const isCardValid = validateCardNumber();
+    const isYearValid = validateYear();
 
-  // If card number or year is invalid, return early
-  if (!isCardValid || !isYearValid) {
-    return;
-  }
+    // If card number or year is invalid, return early
+    if (!isCardValid || !isYearValid) {
+      return;
+    }
 
-  // Prepare reservation data
-  const reservationData = {
-    startDate, 
-    endDate,   
-    roomType,
-    guestNum,
-    user,
-    cardNumber,
+    // Prepare reservation data
+    const reservationData = {
+      startDate, 
+      endDate,   
+      roomType,
+      guestNum,
+      user,
+      cardNumber,
+    };
+
+    // API endpoint and access token
+    const apiUrl = "TODO";
+    const accessToken = "TODO";
+
+    try {
+      // Send reservation data via API request
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(reservationData),
+      });
+
+      if (response.ok) {
+        // TODO: show popup message that says successful
+      } else {
+        console.error("Reservation failed.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
 
-  // API endpoint and access token
-  const apiUrl = "TODO";
-  const accessToken = "TODO";
+  /**
+ * Get the day date as a string with leading zero if less than 10.
+ * @param {Date} d - The date object to extract the day from.
+ * @returns {string} The formatted day date.
+ */
+  const getDate = (d) => {
+    const date = d.getDate();
+    return date < 9 ? "0" + date : date;
+  } 
 
-  try {
-    // Send reservation data via API request
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify(reservationData),
-    });
+  /**
+ * Calculate the number of nights between two dates.
+ * @param {Date} endDate - The end date.
+ * @param {Date} startDate - The start date.
+ * @returns {number} The number of nights between the dates.
+ */
+  const getNumOfNight = (endDate, startDate) => {
+    return getDate(endDate) - getDate(startDate);
+  };
 
-    if (response.ok) {
-      // TODO: show popup message that says successful
-    } else {
-      console.error("Reservation failed.");
-    }
-  } catch (error) {
-    console.error("An error occurred:", error);
-  }
-};
+  /**
+ * Compute the total price of the room based on the number of nights.
+ */
+  const computeRoomPrice = () => {
+    const pricePerNight = 85.00;
+    let roomPrice = (pricePerNight * getNumOfNight(endDate, startDate));
+    setRoomPrice(roomPrice);
+  };
+
+  /**
+ * Calculate the taxes based on the room price and tax rate percentage.
+ */
+  const computeTaxes = () => {
+    const taxes = (roomPrice * taxRatePercent);
+    setTaxes(taxes);
+  };
+
+  /**
+ * Calculate additional fees based on the number of guests above the base count.
+ */
+  const computeAdditionalFee = () => {
+    setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
+  };
+
+  useMemo(() => {
+    computeRoomPrice();
+    computeTaxes();
+    computeAdditionalFee();
+    setTotalPrice((taxes + roomPrice + additionalFee));
+  }, [startDate, endDate, roomType, guestNum, roomPrice, taxes]);
 
   return (
     <div className="new-reservation">
@@ -181,12 +238,23 @@ const bookReservation = async () => {
         <div className="new-reservation__table">
           <div className="new-reservation__row">
             <h3 className="new-reservation__total">Total for Stay</h3>
-            <h3 className="new-reservation__total">$283.92</h3>
+            <h3 className="new-reservation__total">
+              ${totalPrice.toFixed(2)}
+            </h3>
           </div>
           <div className="new-reservation__row">
             <span>1 King Bed Stardard</span>
-            <span>$251.26</span>
+            <span>${roomPrice.toFixed(2)}</span>
           </div>
+          {guestNum > 2 && <div className="new-reservation__row">
+            <span>
+              <div className="new-reservation__tax-info">
+                ($25.00 per person)
+              </div>
+              Additional Fee for guests after 2 people
+            </span>
+            <span>${additionalFee.toFixed(2)}</span>
+          </div>}
           <div className="new-reservation__row">
             <span>
               <div className="new-reservation__tax-info">
@@ -194,7 +262,7 @@ const bookReservation = async () => {
               </div>
               Total Taxes
             </span>
-            <span>$32.26</span>
+            <span>${taxes.toFixed(2)}</span>
           </div>
         </div>
       </div>
