@@ -119,8 +119,8 @@ function NewReservation() {
 
   /**
  * Handles the booking of the reservation.
- * This function validates the card number and year, 
- * then sends an API request to book the reservation.
+ * Run all validation tests and if all pass, then it
+ * sends an API request to book the reservation.
  * @returns {void}
  */
 const bookReservation = async () => {

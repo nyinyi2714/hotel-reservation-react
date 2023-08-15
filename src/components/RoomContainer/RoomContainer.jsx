@@ -6,7 +6,7 @@ import "./RoomContainer.css";
 
 /**
  * @component
- * This component displays a hotel room preview with booking and room details options.
+ * This component displays a hotel room preview with room details.
  * @returns {JSX.Element} The rendered RoomContainer component.
  */
 function RoomContainer() {

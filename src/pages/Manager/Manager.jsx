@@ -4,7 +4,7 @@ import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
 /**
  * @component
- * This component handles the reports and do the search filter.
+ * This component displays a list of reports.
  * @returns {JSX.Element} The rendered Manager component.
  */
 export default function Manager() {
@@ -18,7 +18,7 @@ export default function Manager() {
   const [reports, setReports] = useState(containerReports);
   
   /**
-   * The filter function which by entering the user input will show data accordinly either in lower case or capital.
+   * Filter the reports using the search query entered by the manager.
    * @param {React.SyntheticEvent} e The click event object.
    */
   const filterSearch = (e) => {

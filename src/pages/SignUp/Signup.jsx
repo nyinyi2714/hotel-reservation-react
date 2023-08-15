@@ -73,7 +73,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
  /**
   * Validating an email using Reg expression.
-  * Parameter function setIsEmailValid to check if the email is valid.
+  * Access email react state.
   * @returns {boolean} true if email is valid, else it's false.
   */
    const validateEmail = () => {
@@ -111,7 +111,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   /**
    * This function vaidates the Phone number.
    * Total numbers length should be equal to 10 digits. 
-   * Parameter state function setIsPhoneNumberValid is for the validation of phone number.
    * @returns {boolean} true if result digits is equal to the length of 10 integers, otherwise false.
    */
   const validatePhoneNumber = () => {
@@ -186,11 +185,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   
   /**
    * Will be running all the validation tests for user inputs in the signup form. 
-   * Parameter State function validateFirstName is for to check the first name test result.
-   * Parameter State function validateLastName is for to check the last name test result.
-   * Parameter State function validateEmail is for to check the email test result.
-   * Parameter State function validatePassword is for to check the password test result.
-   * Parameter State function validatePasswordMatch is for to check the Password Match with the original one test result.
    * @returns {boolean} if all the validation is passed then true, else false.
    */
   const runAllValidationTests = () => {

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
-import EditReservaion from "../../components/EditReservation/EditReservation"
+import EditReservation from "../../components/EditReservation/EditReservation"
 import "./ManageReservation.css";
 
 /**

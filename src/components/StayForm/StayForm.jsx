@@ -56,11 +56,9 @@ function StayForm(props) {
   };
 
   /**
-   * Updates the stay data and invokes the updateCallback function.
    * Using the current values of currStartDate, currEndDate, and 
    * currGuestNum, this function updates the start date, end date,
-   * and guest number. The updateCallback function is called 
-   * after updating the data.
+   * and guest number stored in StateContest.jsx.
    * @returns {void}
    */
   const updateStayData = () => {

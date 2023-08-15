@@ -35,8 +35,8 @@ const [isSigningIn, setIsSigningIn] = useState(false);
   };
 
   /**
-   * Password is invalid if it's empty.
    * Validates the password.
+   * Password is invalid if it's empty.
    * @returns {boolean} if the input is not empty return true, else false.
    */
   const validatePassword = () => {

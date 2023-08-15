@@ -23,11 +23,11 @@ function HomePage() {
    * @returns {void}
    */
   const handleNextPhoto = () => {
-    if (photoInt >= maxPhotoInt) return; /* end if last photo */
-    setIsNextBtnDisabled(true); /* turn off the next button temporarily  */
-    setPhotoInt(state => state + 1);  /* expand the photo index  */
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; /* photo holder move to the next photo */
-    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); /* after 500ms, reactivate the next button*/
+    if (photoInt >= maxPhotoInt) return; 
+    setIsNextBtnDisabled(true); 
+    setPhotoInt(state => state + 1);  
+    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; 
+    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); 
   };
   
   /**
@@ -35,12 +35,12 @@ function HomePage() {
    * Moves to the prev photo in the gallery.
    * @returns {void}
    */
-  const handlePrevPhoto = () => { /* function to handle previous button. */
-    if (photoInt <= 0) return; /* end if first photo */
-    setIsPrevBtnDisabled(true);  /* turn off the prev button temporarily  */
-    setPhotoInt(state => state - 1);  /* count photos down */
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; /* photo holder move to the previous photo */
-    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); /* after 500ms, reactivate the previous button */
+  const handlePrevPhoto = () => { 
+    if (photoInt <= 0) return; 
+    setIsPrevBtnDisabled(true);  
+    setPhotoInt(state => state - 1); 
+    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; 
+    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); 
   };
 
   return (
