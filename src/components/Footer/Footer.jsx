@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import "./Footer.css";
 
 /**
- * @component
  * Renders the footer section of the application, containing social media links and navigation links.
+ * @component
  * @returns {JSX.Element} The rendered Footer component.
  */
 function Footer() {

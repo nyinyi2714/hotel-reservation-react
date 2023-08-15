@@ -5,8 +5,8 @@ import EditReservation from "../../components/EditReservation/EditReservation"
 import "./ManageReservation.css";
 
 /**
- * @component
  * This component displays a list of reservations and provides options to open modals for rooms and editing.
+ * @component
  * @returns {JSX.Element} The rendered ManageReservation component.
  */
 function ManageReservation() {

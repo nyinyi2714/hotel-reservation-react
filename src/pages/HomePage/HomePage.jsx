@@ -3,8 +3,8 @@ import "./HomePage.css";
 import { Link } from "react-router-dom";
 
 /**
- * @component
  * Renders the homepage of the Hotel Del Luna website.
+ * @component
  * @returns {JSX.Element} The rendered HomePage component.
  */
 function HomePage() {

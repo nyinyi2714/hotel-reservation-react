@@ -4,8 +4,8 @@ import "boxicons/css/boxicons.min.css";
 import "./SignIn.css";
 
 /**
- * @component
  * Using this form, can sign in to an account that has already been created.
+ * @component
  * @returns {JSX.Element} component that displays the user sign in form.
  */
 function SignIn() {

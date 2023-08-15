@@ -48,6 +48,10 @@
 
 
 
+<div class="description">
+    <p>Represents the Rooms page where users can search and select available rooms.</p>
+</div>
+
 
 
 
@@ -89,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line12">line 12</a>
+        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -118,7 +122,7 @@
 
         
 <div class="param-desc">
-    <p>The rendered RoomsPage component.</p>
+    <p>component that displays rooms page.</p>
 </div>
 
 
@@ -167,7 +171,7 @@
     
 
     
-    <h4 class="name" id="~filterRooms"><span class="type-signature">(inner) </span>filterRooms<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="~clearRoomQuery"><span class="type-signature">(inner) </span>clearRoomQuery<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -175,7 +179,7 @@
 
 
 <div class="description">
-    <p>Filters the rooms based on the selected filters.</p>
+    <p>Clears the room search query.</p>
 </div>
 
 
@@ -219,7 +223,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line119">line 119</a>
+        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line34">line 34</a>
     </li></ul></dd>
     
 
@@ -273,7 +277,7 @@
     
 
     
-    <h4 class="name" id="~openRoomFilter"><span class="type-signature">(inner) </span>openRoomFilter<span class="signature">(e)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~displayMessage"><span class="type-signature">(inner) </span>displayMessage<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -281,144 +285,7 @@
 
 
 <div class="description">
-    <p>Toggles the visibility of the room filter dropdown and handles its interactions.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>e</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">React.SyntheticEvent</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The click event object.</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line27">line 27</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~resetFilters"><span class="type-signature">(inner) </span>resetFilters<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Resets all filters to their default state.</p>
+    <p>Generates a message to display the number of available rooms based on the query.</p>
 </div>
 
 
@@ -462,7 +329,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line107">line 107</a>
+        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -490,333 +357,21 @@
 <h5>Returns:</h5>
 
         
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~revertUnsavedFilters"><span class="type-signature">(inner) </span>revertUnsavedFilters<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Reverts unsaved filter settings.</p>
+<div class="param-desc">
+    <ul>
+<li>The message to display.</li>
+</ul>
 </div>
 
 
 
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line69">line 69</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
 <dl>
     <dt>
         Type
     </dt>
     <dd>
         
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~saveFilters"><span class="type-signature">(inner) </span>saveFilters<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Saves the selected filters and applies filtering.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line94">line 94</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~showAllRooms"><span class="type-signature">(inner) </span>showAllRooms<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Toggles between showing all rooms and filtered rooms.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line47">line 47</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
+<span class="param-type">string</span>
 
 
     </dd>
@@ -886,7 +441,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line128">line 128</a>
+        <a href="pages_RoomsPage_RoomsPage.jsx.html">pages/RoomsPage/RoomsPage.jsx</a>, <a href="pages_RoomsPage_RoomsPage.jsx.html#line53">line 53</a>
     </li></ul></dd>
     
 
@@ -950,13 +505,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Footer.html">Footer</a></li><li><a href="HomePage.html">HomePage</a></li><li><a href="ManageReservation.html">ManageReservation</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="NewReservation.html">NewReservation</a></li><li><a href="ReservationContainer.html">ReservationContainer</a></li><li><a href="RoomContainer.html">RoomContainer</a></li><li><a href="RoomModal.html">RoomModal</a></li><li><a href="RoomsPage.html">RoomsPage</a></li><li><a href="SignIn.html">SignIn</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="StayForm.html">StayForm</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Footer.html">Footer</a></li><li><a href="HomePage.html">HomePage</a></li><li><a href="ManageReservation.html">ManageReservation</a></li><li><a href="Manager.html">Manager</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="NewReservation.html">NewReservation</a></li><li><a href="Popup.html">Popup</a></li><li><a href="ReservationContainer.html">ReservationContainer</a></li><li><a href="RoomContainer.html">RoomContainer</a></li><li><a href="RoomModal.html">RoomModal</a></li><li><a href="RoomsPage.html">RoomsPage</a></li><li><a href="SignIn.html">SignIn</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="StayForm.html">StayForm</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 14 2023 19:07:58 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 14 2023 22:30:52 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

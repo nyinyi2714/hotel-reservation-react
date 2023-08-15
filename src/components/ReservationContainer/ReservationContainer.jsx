@@ -2,8 +2,8 @@ import React from "react";
 import "./ReservationContainer.css";
 
 /**
- * @component
  * Renders a container for displaying reservation information.
+ * @component
  * @param {Object} props - The component props.
  * @param {Function} props.openRoomModal - Function to open the room modal.
  * @param {Function} props.openEditModal - Function to open the edit modal.

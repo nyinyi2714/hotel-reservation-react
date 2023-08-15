@@ -5,8 +5,8 @@ import "./StayForm.css";
 import { useStateContext } from "../../StateContext";
 
 /**
- * @component
- * This component allows users to select stay dates and guest numbers.
+ * This component allows users to select checkin / checkout dates and guest numbers.
+ * @component 
  * @returns {JSX.Element} The rendered StayForm component.
  */
 function StayForm() {
@@ -43,11 +43,6 @@ function StayForm() {
     }
   };
   
-  /**
-   * Update the current end date.
-   * @param {Date} date The new end date to set.
-   * @return {void}
-   */
   const handleCurrEndDate = (date) => {
     setCurrEndDate(date);
   };
@@ -163,8 +158,8 @@ function StayForm() {
   };
 
   /**
- * Generates a formatted date range string.
- * @returns {string} The formatted date range string.
+ * Generates a formatted date string.
+ * @returns {string} The formatted date string.
  */
   const generateDate = () => {
     let displayBothYear = !sameStartYearAndEndYear();

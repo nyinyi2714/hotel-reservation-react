@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    <p>`</p>
+    <p>This component handles the reservation details and payment form.</p>
 </div>
 
 
@@ -93,7 +93,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line12">line 12</a>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -180,8 +180,8 @@
 
 <div class="description">
     <p>Handles the booking of the reservation.
-This function validates the card number and year,
-then sends an API request to book the reservation.</p>
+Run all validation tests and if all pass, then it
+sends an API request to book the reservation.</p>
 </div>
 
 
@@ -225,7 +225,325 @@ then sends an API request to book the reservation.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line126">line 126</a>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~computeAdditionalFee"><span class="type-signature">(inner) </span>computeAdditionalFee<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Calculate additional fees based on the number of guests above the base count.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line220">line 220</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~computeRoomPrice"><span class="type-signature">(inner) </span>computeRoomPrice<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Compute the total price of the room based on the number of nights.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line201">line 201</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">void</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~computeTaxes"><span class="type-signature">(inner) </span>computeTaxes<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Calculate the taxes based on the room price and tax rate percentage.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line211">line 211</a>
     </li></ul></dd>
     
 
@@ -331,7 +649,7 @@ then sends an API request to book the reservation.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line67">line 67</a>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line73">line 73</a>
     </li></ul></dd>
     
 
@@ -513,7 +831,7 @@ then sends an API request to book the reservation.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line89">line 89</a>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line95">line 95</a>
     </li></ul></dd>
     
 
@@ -554,6 +872,347 @@ then sends an API request to book the reservation.</p>
     <dd>
         
 <span class="param-type">Array.&lt;JSX.Element></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~getDate"><span class="type-signature">(inner) </span>getDate<span class="signature">(d)</span><span class="type-signature"> &rarr; {string}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Get the day date as a string with leading zero if less than 10.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The date object to extract the day from.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line182">line 182</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The formatted day date.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~getNumOfNight"><span class="type-signature">(inner) </span>getNumOfNight<span class="signature">(endDate, startDate)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Calculate the number of nights between two dates.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>endDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The end date.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>startDate</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Date</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The start date.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line193">line 193</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>The number of nights between the dates.</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
 
 
     </dd>
@@ -623,7 +1282,7 @@ then sends an API request to book the reservation.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line57">line 57</a>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line63">line 63</a>
     </li></ul></dd>
     
 
@@ -733,7 +1392,7 @@ then sends an API request to book the reservation.</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line45">line 45</a>
+        <a href="pages_NewReservation_NewReservation.jsx.html">pages/NewReservation/NewReservation.jsx</a>, <a href="pages_NewReservation_NewReservation.jsx.html#line51">line 51</a>
     </li></ul></dd>
     
 
@@ -801,13 +1460,13 @@ then sends an API request to book the reservation.</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Footer.html">Footer</a></li><li><a href="HomePage.html">HomePage</a></li><li><a href="ManageReservation.html">ManageReservation</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="NewReservation.html">NewReservation</a></li><li><a href="ReservationContainer.html">ReservationContainer</a></li><li><a href="RoomContainer.html">RoomContainer</a></li><li><a href="RoomModal.html">RoomModal</a></li><li><a href="RoomsPage.html">RoomsPage</a></li><li><a href="SignIn.html">SignIn</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="StayForm.html">StayForm</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Footer.html">Footer</a></li><li><a href="HomePage.html">HomePage</a></li><li><a href="ManageReservation.html">ManageReservation</a></li><li><a href="Manager.html">Manager</a></li><li><a href="Navbar.html">Navbar</a></li><li><a href="NewReservation.html">NewReservation</a></li><li><a href="Popup.html">Popup</a></li><li><a href="ReservationContainer.html">ReservationContainer</a></li><li><a href="RoomContainer.html">RoomContainer</a></li><li><a href="RoomModal.html">RoomModal</a></li><li><a href="RoomsPage.html">RoomsPage</a></li><li><a href="SignIn.html">SignIn</a></li><li><a href="SignUp.html">SignUp</a></li><li><a href="StayForm.html">StayForm</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 14 2023 19:07:58 GMT-0700 (Pacific Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Aug 14 2023 22:30:52 GMT-0700 (Pacific Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

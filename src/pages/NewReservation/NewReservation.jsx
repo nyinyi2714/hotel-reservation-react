@@ -3,9 +3,9 @@ import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
 
-/**`
- * @component
+/**
  * This component handles the reservation details and payment form.
+ * @component
  * @returns {JSX.Element} The rendered NewReservation component.
  */
 function NewReservation() {

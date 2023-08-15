@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./RoomModal.css";
 
 /**
- * @component
  * This component displays detailed information about a hotel room, including photos and description.
+ * @component
  * @param {Object} props - The props passed to the RoomModal component.
  * @param {Function} props.closeRoomModal - A function to close the room modal.
  * @param {Function} props.initiateBooking - A function to initiate the booking process.

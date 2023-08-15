@@ -5,8 +5,8 @@ import { useStateContext } from '../../StateContext';
 import "./RoomContainer.css";
 
 /**
- * @component
  * This component displays a hotel room preview with room details.
+ * @component
  * @returns {JSX.Element} The rendered RoomContainer component.
  */
 function RoomContainer() {

@@ -4,8 +4,8 @@ import { useStateContext } from '../../StateContext';
 import "./Navbar.css";
 
 /**
- * @component
  * Renders the navigation bar with links to different sections and user authentication options.
+ * @component
  * @returns {JSX.Element} The rendered Navbar component.
  */
 function Navbar() {

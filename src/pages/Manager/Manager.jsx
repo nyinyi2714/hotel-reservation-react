@@ -3,11 +3,11 @@ import "./Manager.css";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
 /**
- * @component
  * This component displays a list of reports.
+ * @component
  * @returns {JSX.Element} The rendered Manager component.
  */
-export default function Manager() {
+function Manager() {
 
   const [containerReports, setContainerReports] = useState ([
     { id: 1, title: 'Report-1', date: '08-08-2023' },
@@ -79,3 +79,5 @@ export default function Manager() {
   );
 
 }
+
+export default Manager;

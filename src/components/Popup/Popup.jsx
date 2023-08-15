@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import "./Popup.css";
 
 /**
- * @component
  * Display a popup message box to tell users if a process is successful or failed.
+ * @component
  * @returns {JSX.Element}
  */
-export default function Popup() {
+function Popup() {
   const [isPopupOpen, setIsPopupOpen] = useState(true);
   const [isSuccess, setIsSuccess] = useState(true);
 
@@ -43,3 +43,5 @@ export default function Popup() {
     </div>
   );
 }
+
+export default Popup;

@@ -4,8 +4,8 @@ import "boxicons/css/boxicons.min.css";
 import "./SignUp.css";
 
 /**
+ * SignUp page for new user to register.
  * @component
- * SignUp component for the user registration.
  * @returns {JSX.Element} React component that will show the user registration form.
  */
 function SignUp() {
