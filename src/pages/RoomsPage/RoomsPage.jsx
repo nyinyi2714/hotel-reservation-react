@@ -3,32 +3,53 @@ import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
 import "./RoomsPage.css";
 
-export default function RoomsPage() {
+/**
+ * Represents the Rooms page where users can search and select available rooms.
+ * @component
+ * @returns {JSX.Element} component that displays rooms page.
+ */
+function RoomsPage() {
   const [rooms, setRooms] = useState([{roomType: "standard"}, {roomType: "deluxe"}, {roomType: "suite"}]);
   const [roomQuery, setRoomQuery] = useState("");
 
+  // Handles changes in the room search query input.
   const handleRoomQuery = (e) => {
     setRoomQuery(e.target.value);
   };
 
+  /**
+   * Filters rooms based on the room query using memoization.
+   * @returns {void}
+   */
   const searchedRooms = useMemo(() => {
     // Search Room Type
     const result = rooms.filter((room) => room.roomType.includes(roomQuery.toLowerCase()));
     return result;
   }, [rooms, roomQuery]);
 
+  /**
+   * Clears the room search query.
+   * @returns {void}
+   */
   const clearRoomQuery = () => {
     if(roomQuery.length <= 0) return;
     setRoomQuery("");
   };
 
+  /**
+   * Generates a message to display the number of available rooms based on the query.
+   * @returns {string} - The message to display.
+   */
   const displayMessage = () => {
     let numOfRoomAvailable = (roomQuery.length > 0) ? searchedRooms.length: rooms.length;
     let message = (roomQuery.length > 0) ? "search query" : "stay";
     return `We found ${numOfRoomAvailable} available room type for your current ${message}.`;
   };
 
-  // Fetch rooms data from backend
+  /**
+   * Fetches rooms data from the backend and updates state.
+   * @returns {void}
+   */
   const updateRooms = () => {
     // TODO
   };
@@ -69,3 +90,5 @@ export default function RoomsPage() {
     </div>
   );
 }
+
+export default RoomsPage;

@@ -3,9 +3,9 @@ import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
 
-/**`
- * @component
+/**
  * This component handles the reservation details and payment form.
+ * @component
  * @returns {JSX.Element} The rendered NewReservation component.
  */
 function NewReservation() {
@@ -125,8 +125,8 @@ function NewReservation() {
 
   /**
  * Handles the booking of the reservation.
- * This function validates the card number and year, 
- * then sends an API request to book the reservation.
+ * Run all validation tests and if all pass, then it
+ * sends an API request to book the reservation.
  * @returns {void}
  */
   const bookReservation = async () => {
@@ -196,6 +196,7 @@ function NewReservation() {
 
   /**
  * Compute the total price of the room based on the number of nights.
+ * @returns {void}
  */
   const computeRoomPrice = () => {
     const pricePerNight = 85.00;
@@ -205,6 +206,7 @@ function NewReservation() {
 
   /**
  * Calculate the taxes based on the room price and tax rate percentage.
+ * @returns {void}
  */
   const computeTaxes = () => {
     const taxes = (roomPrice * taxRatePercent);
@@ -213,6 +215,7 @@ function NewReservation() {
 
   /**
  * Calculate additional fees based on the number of guests above the base count.
+ * @returns {void}
  */
   const computeAdditionalFee = () => {
     setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
