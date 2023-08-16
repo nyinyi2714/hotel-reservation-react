@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
+import { backendUrl } from "../../config";
+import { useStateContext } from "../../StateContext";
 import "./SignIn.css";
 
 /**
@@ -11,15 +13,19 @@ import "./SignIn.css";
  * @returns {JSX.Element} component that displays the user sign in form.
  */
 function SignIn() {
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [isPasswordValid, setIsPasswordValid] = useState(true);
-const [isEmailValid, setIsEmailValid] = useState(true);
-// State for toggling password visibility
-const [showPassword, setShowPassword] = useState(false);
-// State for indicating if signing in is in progress
-const [isSigningIn, setIsSigningIn] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  // State for toggling password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  // State for indicating if signing in is in progress
+  const [isSigningIn, setIsSigningIn] = useState(false);
 
+  const navigate = useNavigate();
+
+  // Retrieve functions stored in central react state
+  const { setAccessToken } = useStateContext();
 
   // Update email state on input change
   const handleEmail = (e) => {
@@ -82,7 +88,7 @@ const [isSigningIn, setIsSigningIn] = useState(false);
    * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void}
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Prevent default form submission action
     e.preventDefault(); 
 
@@ -93,7 +99,36 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     if (!validateEmail() || !validatePassword()) return;
     
     setIsSigningIn(true);
-    // TODO: Implement sign in to backend
+    // Sending sign in credentials to backend API
+    try {
+      const response = await fetch(`${backendUrl}/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+  
+      const responseData = await response.json();
+  
+      if (response.ok) {
+        console.log("Sign-in successful:", responseData.user);
+        // Store the access token 
+        setAccessToken(responseData.user.access);
+        // Navigate back to the previous route after successful registration
+        navigate(-1);
+      } else {
+        console.error("Sign-in failed:", responseData.error);
+        // Handle sign-in failure, display an error message, etc.
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      // Handle fetch or other errors.
+    }
+
     setIsSigningIn(false);
   };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 import { backendUrl } from "../../config";
 import "./SignUp.css";
@@ -34,6 +34,8 @@ const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
 // State for indicating if signupg in is in progress
 const [isSigningUp, setIsSigningUp] = useState(false);
+
+const navigate = useNavigate();
 
 // Update first name state on input change
   const handleFirstName = (e) => {
@@ -234,7 +236,9 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
       if (response.ok) {
         console.log("User registered successfully:", responseData.message);
-        // You might want to redirect the user to a login page or show a success message here.
+        // Navigate back to the previous route after successful registration
+        // TODO: Implement sign in after signing up
+        navigate(-1);
       } else {
         console.error("Registration failed:", responseData.error);
         // Handle registration failure, display an error message, etc.
