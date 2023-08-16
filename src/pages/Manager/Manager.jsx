@@ -26,11 +26,6 @@ export default function Manager() {
     }
   };
 
-  /*const handleDeleteReport = (idToDelete) => {
-    const updatedReports = reports.filter(report => report.id !== idToDelete);
-    setReports(updatedReports);
-  };*/
-
     return (
     <div className="manager__menu">
       <div className="manager__bar">
@@ -65,7 +60,7 @@ export default function Manager() {
               <ReportContainer 
               key={report.id}
               report={report}
-              /*onDelete={handleDeleteReport}*/ />
+              />
             ))
             }
           </tbody>
