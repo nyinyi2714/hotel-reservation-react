@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import { useStateContext } from '../../StateContext';
 import "./Navbar.css";
 
-export default function Navbar() {
+/**
+ * Renders the navigation bar with links to different sections and user authentication options.
+ * @component
+ * @returns {JSX.Element} The rendered Navbar component.
+ */
+function Navbar() {
   const { user } = useStateContext(); 
   
   return (
-    <nav class="nav">
+    <nav className="nav">
       <Link to="/">LOGO</Link>
       <div className="nav__links">
         <Link className="nav__btn" to="/">Home</Link>
@@ -22,3 +27,5 @@ export default function Navbar() {
     </nav>
   );
 } 
+
+export default Navbar;

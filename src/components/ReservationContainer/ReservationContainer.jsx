@@ -1,7 +1,15 @@
 import React from "react";
 import "./ReservationContainer.css";
 
-export default function ReservationContainer(props) {
+/**
+ * Renders a container for displaying reservation information.
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.openRoomModal - Function to open the room modal.
+ * @param {Function} props.openEditModal - Function to open the edit modal.
+ * @returns {JSX.Element} The rendered ReservationContainer component.
+ */
+function ReservationContainer(props) {
   const { openRoomModal, openEditModal } = props;
 
   return (
@@ -35,3 +43,5 @@ export default function ReservationContainer(props) {
     </div>
   );
 }
+
+export default ReservationContainer;

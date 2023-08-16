@@ -2,7 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-export default function Footer() {
+/**
+ * Renders the footer section of the application, containing social media links and navigation links.
+ * @component
+ * @returns {JSX.Element} The rendered Footer component.
+ */
+function Footer() {
   return (
     <footer>
       <div className="footer__content">
@@ -27,3 +32,5 @@ export default function Footer() {
     </footer>
   );
 }
+
+export default Footer;

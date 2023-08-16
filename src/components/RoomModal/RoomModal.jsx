@@ -1,10 +1,23 @@
 import React, { useState, useEffect } from "react";
 import "./RoomModal.css";
 
-export default function RoomModal(props) {
+/**
+ * This component displays detailed information about a hotel room, including photos and description.
+ * @component
+ * @param {Object} props - The props passed to the RoomModal component.
+ * @param {Function} props.closeRoomModal - A function to close the room modal.
+ * @param {Function} props.initiateBooking - A function to initiate the booking process.
+ * @returns {JSX.Element} The rendered RoomModal component.
+ */
+function RoomModal(props) {
   const {closeRoomModal, initiateBooking } = props;
   const [photoSrc, setPhotoSrc] = useState("/images/room-1/photo-1.jpg");
 
+  /**
+   * Changes the displayed photo in the modal.
+   * @param {React.SyntheticEvent} e - The click event object.
+   * @returns {void}
+   */
   const changePhoto = (e) => {
     setPhotoSrc(`/images/room-1/${e.target.id}.jpg`);
   };
@@ -19,10 +32,12 @@ export default function RoomModal(props) {
     }
   };
 
+  // Adding event listeners for keyboard and click events
   useEffect(() => {
     document.addEventListener('keydown', closeWithEsc);
     document.addEventListener('click', closeWithClickOutside);
 
+    // Removing event listeners on unmount
     return () => {
       document.removeEventListener('keydown', closeWithEsc);
       document.removeEventListener('click', closeWithClickOutside);
@@ -96,3 +111,5 @@ export default function RoomModal(props) {
     </div>
   );
 }
+
+export default RoomModal;

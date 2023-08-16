@@ -1,12 +1,14 @@
 import React from "react";
 import "./EditReservation.css";
 
-export default function ManageReservation(props) {
+function EditReservation(props) {
   const { closeEditModal } = props;
   
   return (
     <div className="edit-reservation-modal">
-      
+      {/* TODO */}
     </div>
   );
 }
+
+export default EditReservation;

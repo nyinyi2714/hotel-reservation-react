@@ -5,9 +5,10 @@ import "./SignIn.css";
 
 /**
  * Using this form, can sign in to an account that has already been created.
+ * @component
  * @returns {JSX.Element} component that displays the user sign in form.
  */
-export default function SignIn() {
+function SignIn() {
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 const [isPasswordValid, setIsPasswordValid] = useState(true);
@@ -34,10 +35,9 @@ const [isSigningIn, setIsSigningIn] = useState(false);
   };
 
   /**
-   * Password is invalid if it's empty
-   * @param {string} password Validates the password.
-   * @param {function} setIsPasswordValid State function for validation of password.
-   * @returns {boolean} if the input is not empty return tru, else false.
+   * Validates the password.
+   * Password is invalid if it's empty.
+   * @returns {boolean} if the input is not empty return true, else false.
    */
   const validatePassword = () => {
     if (password.length < 1) {
@@ -50,9 +50,7 @@ const [isSigningIn, setIsSigningIn] = useState(false);
   };
 
   /**
-   * // Email is valid if it's in this format: <local-part>@<domain>.<top-level-domain>
-   * @param {string} email Validate the input email.
-   * @param {function} setIsEmailValid State function for email validation.
+   * access email state and validate the input email.
    * @returns {boolean} if the email input is valid then true, else false.
    */
   const validateEmail = () => {
@@ -79,7 +77,7 @@ const [isSigningIn, setIsSigningIn] = useState(false);
 
   /**
    * This handle submission, validation and sign in.
-   * @param {Object} e Represent the form submission event.
+   * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void}
    */
   const handleSubmit = (e) => {
@@ -172,3 +170,5 @@ const [isSigningIn, setIsSigningIn] = useState(false);
     </div>
   );
 }
+
+export default SignIn;

@@ -1,26 +1,47 @@
 import React, { useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
-import EditReservaion from "../../components/EditReservation/EditReservation"
+import EditReservation from "../../components/EditReservation/EditReservation"
 import "./ManageReservation.css";
 
-export default function ManageReservation() {
+/**
+ * This component displays a list of reservations and provides options to open modals for rooms and editing.
+ * @component
+ * @returns {JSX.Element} The rendered ManageReservation component.
+ */
+function ManageReservation() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
 
+  /**
+   * Opens the room modal for viewing room details.
+   * @returns {void}
+   */
   const openRoomModal = () => {
     // TODO: Pass room obj as props to roomModal
     setIsRoomOpen(true);
   };
 
+  /**
+   * Closes the room modal.
+   * @returns {void}
+   */
   const closeRoomModal = () => {
     setIsRoomOpen(false);
   };
 
+  /**
+   * Opens the edit reservation modal.
+   * @returns {void}
+   */
   const openEditModal = () => {
     setIsEditModalOpen(true);
   };
 
+  /**
+   * Closes the edit reservation modal.
+   * @returns {void}
+   */
   const closeEditModal = () => {
     setIsEditModalOpen(false);
   };
@@ -43,7 +64,9 @@ export default function ManageReservation() {
           />
         </div>
       {isRoomModalOpen && <RoomModal closeRoomModal={closeRoomModal} />}
-      {isEditModalOpen && <EditReservaion closeEditModal={closeEditModal} />}
+      {isEditModalOpen && <EditReservation closeEditModal={closeEditModal} />}
     </div>
   );
 }
+
+export default ManageReservation;

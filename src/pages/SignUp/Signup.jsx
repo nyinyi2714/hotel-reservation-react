@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
+import { backendUrl } from "../../config";
 import "./SignUp.css";
 
 /**
- * SignUp component for the user registration.
- * It will reresents a registration form.
+ * SignUp page for new user to register.
+ * @component
  * @returns {JSX.Element} React component that will show the user registration form.
  */
-export default function SignUp() {
+function SignUp() {
 const [firstName, setFirstName] = useState("");
 const [lastName, setLastName] = useState("");
 const [isFirstNameValid, setIsFirstNameValid] = useState(true);
@@ -39,7 +40,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
 
   /**
-   * Validate First name.
    * This checks if the written first name is > 0 and sets a validation state.
    * @param {string} name First name to be validated.
    * @returns {boolean} if first name is valid then true, if not then false
@@ -57,7 +57,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
 
   /**
-   * Validate the Last name.
    * This checks if the written Last name is > 0 and sets a validation state.
    * @param {string} name Last name to be validated.
    * @returns {boolean} if the last name is valid then true, if not then false.
@@ -73,14 +72,10 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     setEmail(e.target.value); 
   };
 
-  /**
-  * Email is valid if it's in this format: 
-  * <local-part>@<domain>.<top-level-domain>
-  */
  /**
   * Validating an email using Reg expression.
-  * This will check if the written email ematches a correct email format and checks the state accordingly.
-  * @returns {boolean} true if email is valid, else it's false.
+  * Access email react state.
+  * @returns {boolean} true if email is valid, else it"s false.
   */
    const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -100,12 +95,8 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   }, [email]);
 
   /**
-   * Handle Phone Number input and validate that it's all integers.
-   * Function to validate that it only contains the input of (0 to 9).
-   * Validate if the input is valid consisting numbers, seting as phone number using a state set. 
-   * @param {object} e The event object shows the input.
-   * @param {string} e.target.value The value of input.
-   * @param {function} setPhoneNumber Using the state function.
+   * Handle Phone Number input and validate that it"s all integers.
+   * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void} Not any specific value.
    */
   const handlePhoneNumber = (e) => {
@@ -148,13 +139,9 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
 
  /**
-  * Password is valid if it's b/w 8 and 32 characters, and
-  * has 1 lowercase letter, 1 uppercase letter, 1 number
+  * Password is valid if it"s b/w 8 and 32 characters, and
+  * has 1 lowercase letter, 1 uppercase letter, and 1 number
   * @param {string} password The password to get validated.
-  * @param {function} setPassLengthTest Using state func for the length test result.
-  * @param {function} setPassLowercaseTest Using state func for the Lower case test result.
-  * @param {function} setPassUppercaseTest Using state func for the Upper case test result.
-  * @param {function} setPassNumberTest Using state func for the Number test result.
   * @returns {boolean} if all the tests passed return true, else false. 
   */
   const validatePassword = (password) => {
@@ -188,7 +175,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
   /**
    * validate if the confirm password matches the original password
-   * @param {string} confirm_password The confirmation password is being validated.
+   * @param {string} confirm_password
    * @returns {boolean} if the confirmation password matches the original one then true, else false. 
    */
   const validatePasswordMatch = (confirm_password) => {
@@ -198,8 +185,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   };
   
   /**
-   * Will be running all the validation tests for user input. 
-   * This will perform many functions to validate the user input.
+   * Will be running all the validation tests for user inputs in the signup form. 
    * @returns {boolean} if all the validation is passed then true, else false.
    */
   const runAllValidationTests = () => {
@@ -214,10 +200,10 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   
   /**
    * Handle the sign up form submission
-   * @param {Object} e Event object will represent the submission form event.
+   * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void} no specific return value.
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Prevent default form submission action
     e.preventDefault(); 
 
@@ -228,8 +214,34 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     if (!runAllValidationTests()) return;
     
     setIsSigningUp(true);
-    console.log('Signing In')
-    // TODO: Implement sign up to backend
+    try {
+      const response = await fetch(`${backendUrl}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+        }),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        console.log("User registered successfully:", responseData.message);
+        // You might want to redirect the user to a login page or show a success message here.
+      } else {
+        console.error("Registration failed:", responseData.error);
+        // Handle registration failure, display an error message, etc.
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      // Handle fetch or other errors.
+    }
+
     setIsSigningUp(false);
   };
 
@@ -374,3 +386,5 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     </div>
   );
 }
+
+export default SignUp;

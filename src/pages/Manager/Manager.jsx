@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import "./Manager.css";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
-export default function Manager() {
+/**
+ * This component displays a list of reports.
+ * @component
+ * @returns {JSX.Element} The rendered Manager component.
+ */
+function Manager() {
 
   const [containerReports, setContainerReports] = useState ([
     { id: 1, title: 'Report-1', date: '08-08-2023' },
@@ -11,7 +16,11 @@ export default function Manager() {
  
   const [data, setData] = useState('');
   const [reports, setReports] = useState(containerReports);
-
+  
+  /**
+   * Filter the reports using the search query entered by the manager.
+   * @param {React.SyntheticEvent} e The click event object.
+   */
   const filterSearch = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setData(searchValue);
@@ -25,11 +34,6 @@ export default function Manager() {
       setReports(containerReports);
     }
   };
-
-  /*const handleDeleteReport = (idToDelete) => {
-    const updatedReports = reports.filter(report => report.id !== idToDelete);
-    setReports(updatedReports);
-  };*/
 
     return (
     <div className="manager__menu">
@@ -65,7 +69,7 @@ export default function Manager() {
               <ReportContainer 
               key={report.id}
               report={report}
-              /*onDelete={handleDeleteReport}*/ />
+              />
             ))
             }
           </tbody>
@@ -75,3 +79,5 @@ export default function Manager() {
   );
 
 }
+
+export default Manager;
