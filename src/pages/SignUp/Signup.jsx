@@ -5,6 +5,8 @@ import "./SignUp.css";
 
 /**
  * SignUp page for new user to register.
+ * @author Nyi Nyi Moe Htet 
+ * @Date August 5th 2023
  * @component
  * @returns {JSX.Element} React component that will show the user registration form.
  */

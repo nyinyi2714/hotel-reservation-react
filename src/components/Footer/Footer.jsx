@@ -4,6 +4,8 @@ import "./Footer.css";
 
 /**
  * Renders the footer section of the application, containing social media links and navigation links.
+ * @author Raneen Kakar 
+ * @Date July th 2023
  * @component
  * @returns {JSX.Element} The rendered Footer component.
  */
