@@ -6,6 +6,8 @@ import "./Navbar.css";
 /**
  * Renders the navigation bar with links to different sections and user authentication options.
  * @component
+ * @author Raneen Kakar
+ * @since July 10th 2023
  * @returns {JSX.Element} The rendered Navbar component.
  */
 function Navbar() {

@@ -6,6 +6,8 @@ import "./RoomsPage.css";
 /**
  * Represents the Rooms page where users can search and select available rooms.
  * @component
+ * @author Nyi Nyi Moe Htet
+ * @since July 13th 2023
  * @returns {JSX.Element} component that displays rooms page.
  */
 function RoomsPage() {

@@ -5,6 +5,8 @@ import "./Popup.css";
 /**
  * Display a popup message box to tell users if a process is successful or failed.
  * @component
+ * @author Raneen Kakar
+ * @since August 10th 2023
  * @returns {JSX.Element}
  */
 function Popup() {

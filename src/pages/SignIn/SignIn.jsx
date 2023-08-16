@@ -6,6 +6,8 @@ import "./SignIn.css";
 /**
  * Using this form, can sign in to an account that has already been created.
  * @component
+ * @author Nyi Nyi Moe Htet
+ * @since July 17 2023
  * @returns {JSX.Element} component that displays the user sign in form.
  */
 function SignIn() {
