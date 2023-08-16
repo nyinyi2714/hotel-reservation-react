@@ -5,8 +5,8 @@ import { backendUrl } from "../../config";
 import "./EditReservation.css";
 
 function EditReservation(props) {
-  const { closeEditModal } = props;
-  const { startDate, endDate, guestNum, user, accessToken, resetState } = useStateContext();
+  const { closeEditModal, reservation, fetchReservations } = props;
+  const { startDate, endDate, guestNum, accessToken, resetState } = useStateContext();
   // TODO: access reservation.roomType from props
   const [selectedRoomType, setSelectedRoomType] = useState("standard");
 
@@ -21,12 +21,11 @@ function EditReservation(props) {
 
   const saveChanges = async () => {
     const requestData = {
-      startDate,
-      endDate,
-      guestNum,
-      roomType: selectedRoomType,
-      user,
-      accessToken,
+      date_of_occupancy: startDate,
+      date_of_departure: endDate,
+      num_guests: guestNum,
+      room_id: selectedRoomType,
+      reservation_id: "", // TODO reservation.id
     };
 
     try {
@@ -53,6 +52,8 @@ function EditReservation(props) {
 
     // reset states in StateContext.jsx
     resetState();
+    // update reversations list from backend
+    fetchReservations();
   };
   
   return (
@@ -60,7 +61,7 @@ function EditReservation(props) {
       <div className="edit-reservation-modal">
         <h2>Modifying Your Reservation</h2>
         {/* TODO: pass reservation as props */}
-        <StayForm isModifying={true} reservation={{}} />
+        <StayForm isModifying={true} reservation={reservation} />
         <div className="edit-reservation__flexbox">
           <label for="room-type">Room Type: </label>
           <select 

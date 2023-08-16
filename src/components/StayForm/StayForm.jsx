@@ -24,9 +24,9 @@ function StayForm(props) {
 
   // TODO: remove comment after backend returns reservation
   // if(isModifying) {
-  //   startDate = reservation.startDate;
-  //   endDate = reservation.endDate;
-  //   guestNum = reservation.guestNum;
+  //   startDate = reservation.date_of_occupancy;
+  //   endDate = reservation.date_of_departure;
+  //   guestNum = reservation.num_guests;
   // }
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);

@@ -1,5 +1,6 @@
 .manage-reservation {
   margin-top: var(--header-height);
+  height: 100%;
   min-height: 70vh;
   padding: 20px 50px;
 }
@@ -8,5 +9,10 @@
   margin: 20px 0;
   border-top: 1px solid var(--light-grey);
   border-bottom: 1px solid var(--light-grey);
+}
+
+.manage-reservation__err {
+  color: var(--dark-navy);
+  font-size: var(--font-lg);
 }
 

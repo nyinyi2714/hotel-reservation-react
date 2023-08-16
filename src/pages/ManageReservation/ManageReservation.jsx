@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
 import EditReservation from "../../components/EditReservation/EditReservation";
@@ -12,6 +12,8 @@ import "./ManageReservation.css";
  * @returns {JSX.Element} The rendered ManageReservation component.
  */
 function ManageReservation() {
+  // TODO: delete the {}
+  const [reservations, setReservations] = useState([{}]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
 
@@ -48,20 +50,40 @@ function ManageReservation() {
     setIsEditModalOpen(false);
   };
 
+  const fetchReservations = () => {
+    // TODO
+  };
+
+  useEffect(() => {
+    fetchReservations();
+  }, []);
+
   return (
     <div className="manage-reservation">
       <h2>Your Reservations</h2>
         <div className="manage-reservation__display">
-          <ReservationContainer 
-            openRoomModal={openRoomModal} 
-            openEditModal={openEditModal}
-            reservation={{}}
-            // TODO: pass reservation as props
-          />
+          {reservations.map(reservation => {
+            return <ReservationContainer 
+              openRoomModal={openRoomModal} 
+              openEditModal={openEditModal}
+              reservation={reservation}
+            />
+          })}
         </div>
+        {reservations.length <= 0 && 
+          <div className="manage-reservation__err">
+            You Don't Have Any Reservation.
+          </div>
+        }
       {isRoomModalOpen && <RoomModal closeRoomModal={closeRoomModal} />}
-      {/* TODO: pass reservation as props */}
-      {isEditModalOpen && <EditReservation closeEditModal={closeEditModal} reservation={{}} />}
+      {/* TODO: pass reservation (has to be the one user clicks) as props */}
+      {isEditModalOpen && 
+        <EditReservation 
+          closeEditModal={closeEditModal} 
+          reservation={{}} 
+          fetchReservations={fetchReservations}
+        />
+      }
     </div>
   );
 }
