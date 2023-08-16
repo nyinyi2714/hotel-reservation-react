@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
+import { backendUrl } from "../../config";
 import "./SignUp.css";
 
 /**
  * SignUp page for new user to register.
  * @component
+ * @author Nyi Nyi Moe Htet
+ * @since July 17th 2023
  * @returns {JSX.Element} React component that will show the user registration form.
  */
 function SignUp() {
@@ -74,7 +77,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
  /**
   * Validating an email using Reg expression.
   * Access email react state.
-  * @returns {boolean} true if email is valid, else it's false.
+  * @returns {boolean} true if email is valid, else it"s false.
   */
    const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -94,7 +97,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   }, [email]);
 
   /**
-   * Handle Phone Number input and validate that it's all integers.
+   * Handle Phone Number input and validate that it"s all integers.
    * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void} Not any specific value.
    */
@@ -138,7 +141,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
 
  /**
-  * Password is valid if it's b/w 8 and 32 characters, and
+  * Password is valid if it"s b/w 8 and 32 characters, and
   * has 1 lowercase letter, 1 uppercase letter, and 1 number
   * @param {string} password The password to get validated.
   * @returns {boolean} if all the tests passed return true, else false. 
@@ -202,7 +205,7 @@ const [isSigningUp, setIsSigningUp] = useState(false);
    * @param {React.SyntheticEvent} e - The click event object.
    * @returns {void} no specific return value.
    */
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     // Prevent default form submission action
     e.preventDefault(); 
 
@@ -213,8 +216,34 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     if (!runAllValidationTests()) return;
     
     setIsSigningUp(true);
-    console.log('Signing In')
-    // TODO: Implement sign up to backend
+    try {
+      const response = await fetch(`${backendUrl}/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          first_name: firstName,
+          last_name: lastName,
+          email,
+          password,
+        }),
+      });
+
+      const responseData = await response.json();
+
+      if (response.ok) {
+        console.log("User registered successfully:", responseData.message);
+        // You might want to redirect the user to a login page or show a success message here.
+      } else {
+        console.error("Registration failed:", responseData.error);
+        // Handle registration failure, display an error message, etc.
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      // Handle fetch or other errors.
+    }
+
     setIsSigningUp(false);
   };
 

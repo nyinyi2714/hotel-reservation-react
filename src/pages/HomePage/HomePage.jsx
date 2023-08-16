@@ -5,6 +5,8 @@ import { Link } from "react-router-dom";
 /**
  * Renders the homepage of the Hotel Del Luna website.
  * @component
+ * @author Raneen Kakar
+ * @since August 1st 2023
  * @returns {JSX.Element} The rendered HomePage component.
  */
 function HomePage() {

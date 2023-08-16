@@ -4,6 +4,8 @@ import "./RoomModal.css";
 /**
  * This component displays detailed information about a hotel room, including photos and description.
  * @component
+ * @author Nyi Nyi Moe Htet
+ * @since July 29th 2023
  * @param {Object} props - The props passed to the RoomModal component.
  * @param {Function} props.closeRoomModal - A function to close the room modal.
  * @param {Function} props.initiateBooking - A function to initiate the booking process.

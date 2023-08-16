@@ -5,6 +5,8 @@ import ReportContainer from "../../components/ReportContainer/ReportContainer";
 /**
  * This component displays a list of reports.
  * @component
+ * @author Raneen Kakar
+ * @since August 10th 2023
  * @returns {JSX.Element} The rendered Manager component.
  */
 function Manager() {

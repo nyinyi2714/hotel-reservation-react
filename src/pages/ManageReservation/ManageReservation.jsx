@@ -7,6 +7,8 @@ import "./ManageReservation.css";
 /**
  * This component displays a list of reservations and provides options to open modals for rooms and editing.
  * @component
+ * @author Nyi Nyi Moe Htet
+ * @since July 28th 2023
  * @returns {JSX.Element} The rendered ManageReservation component.
  */
 function ManageReservation() {
