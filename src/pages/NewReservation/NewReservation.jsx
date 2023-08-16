@@ -5,8 +5,6 @@ import "./NewReservation.css";
 
 /**
  * This component handles the reservation details and payment form.
- * @author Nyi Nyi Moe Htet
- * @Date August 5th 2023
  * @component
  * @returns {JSX.Element} The rendered NewReservation component.
  */

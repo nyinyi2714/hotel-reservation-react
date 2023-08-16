@@ -6,8 +6,6 @@ import "./RoomContainer.css";
 
 /**
  * This component displays a hotel room preview with room details.
- * @author Nyi Nyi Moe Htet
- * @Date August 5th 2023
  * @component
  * @returns {JSX.Element} The rendered RoomContainer component.
  */

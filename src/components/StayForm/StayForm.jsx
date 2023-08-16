@@ -6,8 +6,6 @@ import { useStateContext } from "../../StateContext";
 
 /**
  * This component allows users to select checkin / checkout dates and guest numbers.
- * @author Nyi Nyi Moe Htet
- * @Date August 5th 2023
  * @component 
  * @returns {JSX.Element} The rendered StayForm component.
  */
