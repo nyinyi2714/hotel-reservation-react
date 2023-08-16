@@ -2,15 +2,8 @@ import React, { useState } from "react";
 import "./Manager.css";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
-/**
- * This component displays a list of reports.
- * @component
- * @author Raneen Kakar
- * @since August 10th 2023
- * @returns {JSX.Element} The rendered Manager component.
- */
-function Manager() {
-
+export default function Manager() {
+  
   const [containerReports, setContainerReports] = useState ([
     { id: 1, title: 'Report-1', date: '08-08-2023' },
     { id: 2, title: 'Report-2', date: '08-08-2023' },
@@ -18,11 +11,7 @@ function Manager() {
  
   const [data, setData] = useState('');
   const [reports, setReports] = useState(containerReports);
-  
-  /**
-   * Filter the reports using the search query entered by the manager.
-   * @param {React.SyntheticEvent} e The click event object.
-   */
+
   const filterSearch = (e) => {
     const searchValue = e.target.value.toLowerCase();
     setData(searchValue);
@@ -71,7 +60,7 @@ function Manager() {
               <ReportContainer 
               key={report.id}
               report={report}
-              />
+             />
             ))
             }
           </tbody>
@@ -81,5 +70,3 @@ function Manager() {
   );
 
 }
-
-export default Manager;
