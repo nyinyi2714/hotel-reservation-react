@@ -3,7 +3,7 @@ import "./Manager.css";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
 export default function Manager() {
-
+  
   const [containerReports, setContainerReports] = useState ([
     { id: 1, title: 'Report-1', date: '08-08-2023' },
     { id: 2, title: 'Report-2', date: '08-08-2023' },
@@ -25,11 +25,6 @@ export default function Manager() {
       setReports(containerReports);
     }
   };
-
-  /*const handleDeleteReport = (idToDelete) => {
-    const updatedReports = reports.filter(report => report.id !== idToDelete);
-    setReports(updatedReports);
-  };*/
 
     return (
     <div className="manager__menu">
@@ -65,7 +60,7 @@ export default function Manager() {
               <ReportContainer 
               key={report.id}
               report={report}
-              /*onDelete={handleDeleteReport}*/ />
+             />
             ))
             }
           </tbody>
