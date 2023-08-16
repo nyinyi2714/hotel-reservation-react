@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useMemo } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
@@ -11,8 +11,9 @@ import { useStateContext } from "../../StateContext";
  * @since August 1st 2023
  * @returns {JSX.Element} The rendered StayForm component.
  */
-function StayForm() {
-  const {
+function StayForm(props) {
+  const { isModifying, reservation } = props;
+  let {
     startDate, 
     endDate, 
     guestNum, 
@@ -20,6 +21,13 @@ function StayForm() {
     setEndDate, 
     setGuestNum, 
   } = useStateContext();
+
+  // TODO: remove comment after backend returns reservation
+  // if(isModifying) {
+  //   startDate = reservation.startDate;
+  //   endDate = reservation.endDate;
+  //   guestNum = reservation.guestNum;
+  // }
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);
   const [currGuestNum, setCurrGuestNum] = useState(guestNum);
@@ -60,6 +68,11 @@ function StayForm() {
     setEndDate(currEndDate);
     setGuestNum(currGuestNum);
   }; 
+
+  useMemo(() => {
+    if(!isModifying) return;
+    updateStayData();
+  }, [currStartDate, currEndDate, currGuestNum]);
 
   /**
    * Checks if there are unsaved changes in the form.
@@ -138,7 +151,7 @@ function StayForm() {
  * @returns {boolean} True if the start and end dates have the same year, otherwise false.
  */
   const sameStartYearAndEndYear = () => {
-    return startDate.getFullYear() == endDate.getFullYear();
+    return startDate.getFullYear() === endDate.getFullYear();
   }; 
 
   const decrementGuestNum = () => {
@@ -147,7 +160,7 @@ function StayForm() {
   }; 
 
   const incrementGuestNum = () => {
-    if(currGuestNum >= 6) return;
+    if(currGuestNum >= 4) return;
     setCurrGuestNum(state => state + 1);
   }; 
 
@@ -237,19 +250,19 @@ function StayForm() {
           {currGuestNum} Guest{currGuestNum > 1 && "s"}
           <button
             type="button"
-            className={`${currGuestNum >= 6 && "disabled"}`}
+            className={`${currGuestNum >= 4 && "disabled"}`}
             onClick={incrementGuestNum}
           >
             <i className='bx bx-plus' />
           </button>
         </div>
-        <button 
+        {!isModifying && <button 
           type="button" 
           className={`stay-form__update-btn ${!haveUnsavedChanges() && "disabled"}`}
           onClick={updateStayData}
         >
           Update
-        </button>
+        </button>}
       </div>
       <div className="stay-form__stay-data">
         <span className="bold margin-right">Your Stay</span>

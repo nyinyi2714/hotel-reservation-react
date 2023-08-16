@@ -1,5 +1,6 @@
 .manage-reservation {
   margin-top: var(--header-height);
+  min-height: 70vh;
   padding: 20px 50px;
 }
 

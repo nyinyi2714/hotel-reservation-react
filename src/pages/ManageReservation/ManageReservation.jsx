@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
-import EditReservation from "../../components/EditReservation/EditReservation"
+import EditReservation from "../../components/EditReservation/EditReservation";
 import "./ManageReservation.css";
 
 /**
@@ -55,18 +55,13 @@ function ManageReservation() {
           <ReservationContainer 
             openRoomModal={openRoomModal} 
             openEditModal={openEditModal}
-          />
-          <ReservationContainer 
-            openRoomModal={openRoomModal} 
-            openEditModal={openEditModal}
-          />
-          <ReservationContainer 
-            openRoomModal={openRoomModal} 
-            openEditModal={openEditModal}
+            reservation={{}}
+            // TODO: pass reservation as props
           />
         </div>
       {isRoomModalOpen && <RoomModal closeRoomModal={closeRoomModal} />}
-      {isEditModalOpen && <EditReservation closeEditModal={closeEditModal} />}
+      {/* TODO: pass reservation as props */}
+      {isEditModalOpen && <EditReservation closeEditModal={closeEditModal} reservation={{}} />}
     </div>
   );
 }
