@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
@@ -18,6 +19,7 @@ function NewReservation() {
   const [isCardNumberValid, setIsCardNumberValid] = useState(true);
   const [isYearValid, setIsYearValid] = useState(true);
 
+  // State variables for reciept
   const [totalPrice, setTotalPrice] = useState(0);
   const [taxes, setTaxes] = useState(0);
   const [roomPrice, setRoomPrice] = useState(0);
@@ -29,6 +31,10 @@ function NewReservation() {
   // Room that guest chose in rooms page
   const { startDate, endDate, roomType, guestNum, user } = useStateContext();
 
+  const successfulReservationMessage = "Your new reservation has been successfully created. Thank you!";
+  const failedReservationMessage = "We are unable to process your request at the moment. Please try again later.";
+  const [displayMessage, setDisplayMessage] = useState("");
+  
   const handleCardNumber = (e) => {
     const inputNum = e.target.value;
     if(isNaN(inputNum)) return;
@@ -167,9 +173,9 @@ function NewReservation() {
       });
 
       if (response.ok) {
-        // TODO: show popup message that says successful
+        setDisplayMessage(successfulReservationMessage);
       } else {
-        console.error("Reservation failed.");
+        setDisplayMessage(failedReservationMessage);
       }
     } catch (error) {
       console.error("An error occurred:", error);
@@ -231,117 +237,128 @@ function NewReservation() {
   }, [startDate, endDate, roomType, guestNum, roomPrice, taxes]);
 
   return (
-    <div className="new-reservation">
-      <StayForm />
-      <div className="new-reservation__receipt">
-        <h3 className="new-reservation__subheading">
-          Step 2 of 2
-        </h3>
-        <h2 className="new-reservation__heading">
-          Reservation Details
-        </h2>
-        <div className="new-reservation__table">
-          <div className="new-reservation__row">
-            <h3 className="new-reservation__total">Total for Stay</h3>
-            <h3 className="new-reservation__total">
-              ${totalPrice.toFixed(2)}
-            </h3>
+    <React.Fragment>
+      <div className={`new-reservation__message ${displayMessage.length <= 0 && "hide"}`}>
+        <span>
+          <div className="margin-bottom">{displayMessage}</div>
+          <div>
+            Return to {" "}
+            <Link to="/">Home</Link>
           </div>
-          <div className="new-reservation__row">
-            <span>1 King Bed Stardard</span>
-            <span>${roomPrice.toFixed(2)}</span>
-          </div>
-          {guestNum > 2 && <div className="new-reservation__row">
-            <span>
-              <div className="new-reservation__tax-info">
-                ($25.00 per person)
-              </div>
-              Additional Fee for guests after 2 people
-            </span>
-            <span>${additionalFee.toFixed(2)}</span>
-          </div>}
-          <div className="new-reservation__row">
-            <span>
-              <div className="new-reservation__tax-info">
-                13.00 % per room, per night
-              </div>
-              Total Taxes
-            </span>
-            <span>${taxes.toFixed(2)}</span>
+        </span>
+      </div>
+      <div className={`new-reservation ${displayMessage.length > 0 && "hide"}`}>
+        <StayForm />
+        <div className="new-reservation__receipt">
+          <h3 className="new-reservation__subheading">
+            Step 2 of 2
+          </h3>
+          <h2 className="new-reservation__heading">
+            Reservation Details
+          </h2>
+          <div className="new-reservation__table">
+            <div className="new-reservation__row">
+              <h3 className="new-reservation__total">Total for Stay</h3>
+              <h3 className="new-reservation__total">
+                ${totalPrice.toFixed(2)}
+              </h3>
+            </div>
+            <div className="new-reservation__row">
+              <span>1 King Bed Stardard</span>
+              <span>${roomPrice.toFixed(2)}</span>
+            </div>
+            {guestNum > 2 && <div className="new-reservation__row">
+              <span>
+                <div className="new-reservation__tax-info">
+                  ($25.00 per person)
+                </div>
+                Additional Fee for guests after 2 people
+              </span>
+              <span>${additionalFee.toFixed(2)}</span>
+            </div>}
+            <div className="new-reservation__row">
+              <span>
+                <div className="new-reservation__tax-info">
+                  13.00 % per room, per night
+                </div>
+                Total Taxes
+              </span>
+              <span>${taxes.toFixed(2)}</span>
+            </div>
           </div>
         </div>
+        <div className="new-reservation__payment">
+          <h3>Payment</h3>
+          <form>
+            <div className="new-reservation__payment-input">
+              <label htmlFor="card-number">Card Number</label>
+              <input 
+                id="card-number" 
+                type="text" 
+                onChange={handleCardNumber}
+                value={cardNumber}
+                onBlur={validateCardNumber}
+                className={isCardNumberValid 
+                  ? "" 
+                  :"new-reservation__invalid"
+                }
+              />
+              <span 
+                className={isCardNumberValid 
+                  ? "new-reservation__err" 
+                  : "new-reservation__err show"
+                }
+              >
+                <i className="bx bx-error-circle" />
+                Please enter a valid card number.
+              </span>
+            </div>
+            <div className="new-reservation__payment-input">
+              <label htmlFor="month">Month</label>
+              <select
+                id="month" 
+                name="month"
+                onChange={handleMonth} 
+                value={month}
+              >
+                {generateMonthOptions()}
+              </select>
+            </div>
+            <div className="new-reservation__payment-input">
+              <label htmlFor="year">Year</label>
+              <input
+                id="year"
+                type="number"
+                onChange={handleYear}
+                value={year}
+                min={new Date().getFullYear()}
+                onBlur={validateYear}
+                className={isYearValid 
+                  ? "" 
+                  : "new-reservation__invalid"
+                }
+              />
+              <span
+                className={isYearValid 
+                  ? "new-reservation__err" 
+                  : "new-reservation__err show"
+                }
+              >
+                <i className="bx bx-error-circle" />
+                Please enter a valid year.
+              </span>
+            </div>
+          </form>
+        </div>
+        <button
+          className="btn new-reseravation__btn" 
+          type="button" 
+          onClick={bookReservation}
+        >
+          Book Reservation
+        </button>
       </div>
-      <div className="new-reservation__payment">
-        <h3>Payment</h3>
-        <form>
-          <div className="new-reservation__payment-input">
-            <label htmlFor="card-number">Card Number</label>
-            <input 
-              id="card-number" 
-              type="text" 
-              onChange={handleCardNumber}
-              value={cardNumber}
-              onBlur={validateCardNumber}
-              className={isCardNumberValid 
-                ? "" 
-                :"new-reservation__invalid"
-              }
-            />
-            <span 
-              className={isCardNumberValid 
-                ? "new-reservation__err" 
-                : "new-reservation__err show"
-              }
-            >
-              <i className="bx bx-error-circle" />
-              Please enter a valid card number.
-            </span>
-          </div>
-          <div className="new-reservation__payment-input">
-            <label htmlFor="month">Month</label>
-            <select
-              id="month" 
-              name="month"
-              onChange={handleMonth} 
-              value={month}
-            >
-              {generateMonthOptions()}
-            </select>
-          </div>
-          <div className="new-reservation__payment-input">
-            <label htmlFor="year">Year</label>
-            <input
-              id="year"
-              type="number"
-              onChange={handleYear}
-              value={year}
-              min={new Date().getFullYear()}
-              onBlur={validateYear}
-              className={isYearValid 
-                ? "" 
-                : "new-reservation__invalid"
-              }
-            />
-            <span
-              className={isYearValid 
-                ? "new-reservation__err" 
-                : "new-reservation__err show"
-              }
-            >
-              <i className="bx bx-error-circle" />
-              Please enter a valid year.
-            </span>
-          </div>
-        </form>
-      </div>
-      <button
-        className="btn new-reseravation__btn" 
-        type="button" 
-        onClick={bookReservation}
-      >
-        Book Reservation
-      </button>
-    </div>
+    </React.Fragment>
   );
 }
 

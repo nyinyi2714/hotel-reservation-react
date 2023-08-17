@@ -1,12 +1,15 @@
 import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
+import { StateProvider } from "../../StateContext";
 import { BrowserRouter } from 'react-router-dom';
 import SignIn from "./SignIn";
 
 test('inputs for email, password, and submit button exist', () => {
 	render(
 	  <BrowserRouter>
-		<SignIn />
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
 	  </BrowserRouter>
 	);
   
@@ -22,8 +25,10 @@ test('inputs for email, password, and submit button exist', () => {
 test("displays a link for the sign-up page", () => {
   render(
     <BrowserRouter>
-      <SignIn />
-    </BrowserRouter>
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
+	  </BrowserRouter>
   );
 
   const signUpLink = screen.getByRole("link", { name: "Sign Up" });
@@ -35,8 +40,10 @@ test("displays a link for the sign-up page", () => {
 test("handles email input correctly", () => {
 	render(
 		<BrowserRouter>
-			<SignIn />
-		</BrowserRouter>
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
+	  </BrowserRouter>
 	);
 	const emailInput = screen.getByPlaceholderText("Email");
 	
@@ -47,8 +54,10 @@ test("handles email input correctly", () => {
 test("handles password input correctly", () => {
 	render(
 		<BrowserRouter>
-			<SignIn />
-		</BrowserRouter>
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
+	  </BrowserRouter>
 	);
 	const passwordInput = screen.getByPlaceholderText("Password");
 	
@@ -59,8 +68,10 @@ test("handles password input correctly", () => {
 test("toggles password visibility", () => {
 	render(
 		<BrowserRouter>
-			<SignIn />
-		</BrowserRouter>
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
+	  </BrowserRouter>
 	);
 	const passwordInput = screen.getByPlaceholderText("Password");
 	const toggleButton = screen.getByTestId("toggle-password-button");
@@ -75,8 +86,10 @@ test("toggles password visibility", () => {
 test("displays error messages for invalid email and password", () => {
 	render(
 		<BrowserRouter>
-			<SignIn />
-		</BrowserRouter>
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
+	  </BrowserRouter>
 	);
 	const emailInput = screen.getByPlaceholderText("Email");
 	const passwordInput = screen.getByPlaceholderText("Password");
@@ -93,8 +106,10 @@ test("displays error messages for invalid email and password", () => {
 test("don't display any error messages initially", () => {
   render(
     <BrowserRouter>
-      <SignIn />
-    </BrowserRouter>
+      <StateProvider>
+		    <SignIn />
+      </StateProvider>
+	  </BrowserRouter>
   );
 
   const emailErrorMessage = screen.getByText("Please enter a valid email address");
@@ -102,22 +117,4 @@ test("don't display any error messages initially", () => {
   expect(emailErrorMessage).not.toHaveClass("show");
   expect(passwordErrorMessage).not.toHaveClass("show");
 });
-
-// TODO: Complete the test after implementing fetch function when form is submitted
-// test("displays Signing In when form is submitted correctly", () => {
-// 	render(
-// 		<BrowserRouter>
-// 			<SignIn />
-// 		</BrowserRouter>
-// 	);
-// 	const emailInput = screen.getByPlaceholderText("Email");
-// 	const passwordInput = screen.getByPlaceholderText("Password");
-// 	const submitButton = screen.getByText("Sign In");
-	
-// 	fireEvent.change(emailInput, { target: { value: "validEmail@gmail.com" } });
-// 	fireEvent.change(passwordInput, { target: { value: "testPassword$1" } });
-// 	fireEvent.click(submitButton);
-	
-//   	expect(submitButton.value).toBe("Signing In");
-// });
 
