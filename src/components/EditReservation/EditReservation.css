@@ -1,0 +1,63 @@
+.edit-reservation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  background-color: var(--dim-bg-color);
+  z-index: 10;
+}
+
+.edit-reservation-modal {
+  position: relative;
+  width: max-content;
+  background-color: #fff;
+  padding: 40px;
+  border-radius: 5px;
+}
+
+.edit-reservation-modal h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: normal;
+  color: var(--dark-navy);
+}
+
+.edit-reservation-modal select {
+  margin-left: 5px;
+  padding: 5px;
+  font-size: var(--font-md);
+  border: 1px solid var(--light-grey);
+  border-radius: 5px;
+  width: max-content;
+  cursor: pointer;
+  transition: border-color 100ms;
+}
+
+.edit-reservation-modal select:focus-visible {
+  outline: none;
+  border-color: var(--grey);
+}
+
+.edit-reservation__flexbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit-reservation-modal .edit-reservation__btn {
+  padding: 6.5px 7px;
+  margin: 0;
+  margin-left: 10px;
+  display: inline-block;
+  width: max-content;
+  color: var(--blue);
+  border-color: var(--blue);
+}
+
+.edit-reservation-modal .btn--red {
+  color: #ff0000;
+  border-color: #ff0000;
+}

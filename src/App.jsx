@@ -2,12 +2,13 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import SignIn from "./pages/SignIn/SignIn";
-import SignUp from "./pages/SignUp/Signup";
+import SignUp from "./pages/SignUp/SignUp";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
 import ManageReservation from "./pages/ManageReservation/ManageReservation";
+import Manager from "./pages/Manager/Manager";
 import Popup from "./components/Popup/Popup";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import { StateProvider } from "./StateContext";
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/rooms" element={<RoomsPage />}  />
             <Route path="/reservation/new" element={<NewReservation />} />
             <Route path="/reservations" element={<ManageReservation />} />
+            <Route path="/manager" element={<Manager />} />
             <Route path="/popup" element={<Popup />} />
           </Routes>
           <Footer/>

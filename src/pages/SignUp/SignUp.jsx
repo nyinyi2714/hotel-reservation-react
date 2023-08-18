@@ -1,8 +1,49 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 import { backendUrl } from "../../config";
 import "./SignUp.css";
+
+/**
+  * Password is valid if it"s b/w 8 and 32 characters, and
+  * has 1 lowercase letter, 1 uppercase letter, and 1 number
+  * @param {string} password The password to get validated.
+  * @returns {boolean} if all the tests passed return true, else false. 
+  */
+export const validatePassword = (password, callbacks = {}) => {
+  const {
+    setPassLengthTest,
+    setPassLowercaseTest,
+    setPassUppercaseTest,
+    setPassNumberTest
+  } = callbacks;
+  const passwordRegex = {
+    lengthRegex: /^.{8,32}$/,
+    lowercaseRegex: /^(?=.*[a-z])/,
+    uppercaseRegex: /^(?=.*[A-Z])/,
+    numberRegex: /^(?=.*\d)/,
+  };
+
+  const results = {
+    lengthRegex: false,
+    lowercaseRegex: false,
+    uppercaseRegex: false,
+    numberRegex: false,
+  };
+
+  let allTestsPassed = true;
+  Object.keys(passwordRegex).forEach((regex) => {
+    const result = passwordRegex[regex].test(password);
+    if(!result) allTestsPassed = false;
+    results[regex] = result;
+  });
+
+  if (setPassLengthTest) setPassLengthTest(results.lengthRegex);
+  if (setPassLowercaseTest) setPassLowercaseTest(results.lowercaseRegex);
+  if (setPassUppercaseTest) setPassUppercaseTest(results.uppercaseRegex);
+  if (setPassNumberTest) setPassNumberTest(results.numberRegex);
+  return allTestsPassed;
+}; 
 
 /**
  * SignUp page for new user to register.
@@ -34,6 +75,8 @@ const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
 // State for indicating if signupg in is in progress
 const [isSigningUp, setIsSigningUp] = useState(false);
+
+const navigate = useNavigate();
 
 // Update first name state on input change
   const handleFirstName = (e) => {
@@ -130,7 +173,13 @@ const [isSigningUp, setIsSigningUp] = useState(false);
   // Update password state on input change
   const handlePassword = (e) => {
     setPassword(e.target.value); 
-    validatePassword(e.target.value);
+    validatePassword(e.target.value, 
+      {
+        setPassLengthTest,
+        setPassLowercaseTest,
+        setPassUppercaseTest,
+        setPassNumberTest
+      });
   };
 
   // Update confirmPassword state on input change
@@ -138,42 +187,6 @@ const [isSigningUp, setIsSigningUp] = useState(false);
     setConfirmPassword(e.target.value);
     validatePasswordMatch(e.target.value);
   };
-
-
- /**
-  * Password is valid if it"s b/w 8 and 32 characters, and
-  * has 1 lowercase letter, 1 uppercase letter, and 1 number
-  * @param {string} password The password to get validated.
-  * @returns {boolean} if all the tests passed return true, else false. 
-  */
-  const validatePassword = (password) => {
-    const passwordRegex = {
-      lengthRegex: /^.{8,32}$/,
-      lowercaseRegex: /^(?=.*[a-z])/,
-      uppercaseRegex: /^(?=.*[A-Z])/,
-      numberRegex: /^(?=.*\d)/,
-    };
- 
-    const results = {
-      lengthRegex: false,
-      lowercaseRegex: false,
-      uppercaseRegex: false,
-      numberRegex: false,
-    };
-  
-    let allTestsPassed = true;
-    Object.keys(passwordRegex).forEach((regex) => {
-      const result = passwordRegex[regex].test(password);
-      if(!result) allTestsPassed = false;
-      results[regex] = result;
-    });
-
-    setPassLengthTest(results.lengthRegex);
-    setPassLowercaseTest(results.lowercaseRegex);
-    setPassUppercaseTest(results.uppercaseRegex);
-    setPassNumberTest(results.numberRegex);
-    return allTestsPassed;
-  }; 
 
   /**
    * validate if the confirm password matches the original password
@@ -195,7 +208,12 @@ const [isSigningUp, setIsSigningUp] = useState(false);
       validateFirstName(firstName)
       && validateLastName(lastName)
       && validateEmail() 
-      && validatePassword(password)
+      && validatePassword(password, {
+        setPassLengthTest,
+        setPassLowercaseTest,
+        setPassUppercaseTest,
+        setPassNumberTest
+      })
       && validatePasswordMatch(confirmPassword) 
     )
   };
@@ -234,7 +252,9 @@ const [isSigningUp, setIsSigningUp] = useState(false);
 
       if (response.ok) {
         console.log("User registered successfully:", responseData.message);
-        // You might want to redirect the user to a login page or show a success message here.
+        // Navigate back to the previous route after successful registration
+        // TODO: Implement sign in after signing up
+        navigate(-1);
       } else {
         console.error("Registration failed:", responseData.error);
         // Handle registration failure, display an error message, etc.

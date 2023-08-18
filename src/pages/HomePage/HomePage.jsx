@@ -55,7 +55,7 @@ function HomePage() {
           type="button"
           disabled={isNextBtnDisabled || photoInt >= maxPhotoInt}
         >
-          <i class="bx bxs-chevron-right" />
+          <i className="bx bxs-chevron-right" />
         </button>
         <button
           className="prev"
@@ -63,7 +63,7 @@ function HomePage() {
           type="button"
           disabled={isPrevBtnDisabled || photoInt <= 0}
         >
-          <i class="bx bxs-chevron-left" />
+          <i className="bx bxs-chevron-left" />
         </button>
         <div className="homepage__image-holder" ref={photoHolder}>
           <img src="images/HomePage/gallery-1.jpg" alt="Hotel image" />

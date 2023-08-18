@@ -2,42 +2,9 @@ import React, { useState } from "react";
 import "./Manager.css";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
-/**
- * This component displays a list of reports.
- * @component
- * @author Raneen Kakar
- * @since August 10th 2023
- * @returns {JSX.Element} The rendered Manager component.
- */
-function Manager() {
+export default function Manager() {
 
-  const [containerReports, setContainerReports] = useState ([
-    { id: 1, title: 'Report-1', date: '08-08-2023' },
-    { id: 2, title: 'Report-2', date: '08-08-2023' },
-  ]);
- 
-  const [data, setData] = useState('');
-  const [reports, setReports] = useState(containerReports);
-  
-  /**
-   * Filter the reports using the search query entered by the manager.
-   * @param {React.SyntheticEvent} e The click event object.
-   */
-  const filterSearch = (e) => {
-    const searchValue = e.target.value.toLowerCase();
-    setData(searchValue);
-
-    if (searchValue !== '') {
-      const filteredReports = containerReports.filter((report) =>
-        Object.values(report).some((val) => String(val).toLowerCase().includes(searchValue))
-      );
-      setReports(filteredReports);
-    } else {
-      setReports(containerReports);
-    }
-  };
-
-    return (
+  return (
     <div className="manager__menu">
       <div className="manager__bar">
         <h2 className="manager__heading">Manager</h2>
@@ -48,14 +15,13 @@ function Manager() {
       </div>
       <div>
         <div className="manager__search">
-            <input 
-            className="manager__input" 
-            type="text" 
+          <input
+            className="manager__input"
+            type="text"
             placeholder="Search..."
-            onChange={filterSearch}
-            />
+          />
         </div>
-        <div class="manager__new__report">
+        <div className="manager__new__report">
           <button className="manager__new__button">New Reports</button>
         </div>
         <table>
@@ -63,17 +29,17 @@ function Manager() {
             <tr>
               <th>ID</th>
               <th>Title</th>
-              <th>Date</th>
+              <th>Month</th>
             </tr>
           </thead>
-          <tbody clasName="manager__table">
-            {reports.map(report => ( 
-              <ReportContainer 
-              key={report.id}
-              report={report}
+          <tbody className="manager__table">
+            {/* {reports.map(report => (
+              <ReportContainer
+                key={report.id}
+                report={report}
               />
             ))
-            }
+            } */}
           </tbody>
         </table>
       </div>
@@ -81,5 +47,3 @@ function Manager() {
   );
 
 }
-
-export default Manager;

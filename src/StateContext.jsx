@@ -17,6 +17,19 @@ export function StateProvider({ children }) {
   const [guestNum, setGuestNum] = useState(1);
   const [roomType, setRoomType] = useState();
   const [user, setUser] = useState(null);
+  const [accessToken, setAccessToken] = useState("");
+
+  const resetState = () => {
+    setStartDate(new Date());
+    setEndDate(() => {
+      const today = new Date();
+      const tomorrow = new Date(today);
+      tomorrow.setDate(today.getDate() + 1);
+      return tomorrow;
+    });
+    setGuestNum(1);
+    setRoomType(null);
+  };
 
   const states = {
     startDate,
@@ -28,7 +41,10 @@ export function StateProvider({ children }) {
     roomType, 
     setRoomType,
     user, 
-    setUser
+    setUser,
+    accessToken,
+    setAccessToken,
+    resetState,
   };
 
   return (

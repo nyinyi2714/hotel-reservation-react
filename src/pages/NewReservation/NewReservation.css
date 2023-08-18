@@ -131,3 +131,22 @@
   background-color: var(--blue);
   border: none;
 }
+
+.new-reservation.hide,
+.new-reservation__message.hide
+{
+  display: none;
+}
+
+.new-reservation__message {
+  padding-top: var(--header-height);
+  min-height: calc(100vh - 162px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: var(--font-lg);
+}
+
+.new-reservation__message .margin-bottom {
+  margin-bottom: 5px;
+}
