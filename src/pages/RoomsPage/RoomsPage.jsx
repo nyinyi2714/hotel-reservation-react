@@ -4,6 +4,22 @@ import RoomContainer from "../../components/RoomContainer/RoomContainer";
 import "./RoomsPage.css";
 
 /**
+ * Filters an array of rooms based on a room type query.
+ * @param {Array} rooms - An array of room objects to be filtered.
+ * @param {string} roomQuery - The room type query to filter the rooms.
+ * @returns {Array} An array of room objects matching the room type query.
+ */
+export const filterRooms = (rooms, roomQuery) => {
+  const filteredRooms = [];
+    for (const room of rooms) {
+      if (room.roomType.includes(roomQuery.toLowerCase())) {
+        filteredRooms.push(room);
+      }
+    }
+  return filteredRooms;
+};
+
+/**
  * Represents the Rooms page where users can search and select available rooms.
  * @component
  * @author Nyi Nyi Moe Htet
@@ -11,6 +27,7 @@ import "./RoomsPage.css";
  * @returns {JSX.Element} component that displays rooms page.
  */
 function RoomsPage() {
+  // TODO change the roomType, as it's coming from backend
   const [rooms, setRooms] = useState([{roomType: "standard"}, {roomType: "deluxe"}, {roomType: "suite"}]);
   const [roomQuery, setRoomQuery] = useState("");
 
@@ -19,14 +36,10 @@ function RoomsPage() {
     setRoomQuery(e.target.value);
   };
 
-  /**
-   * Filters rooms based on the room query using memoization.
-   * @returns {void}
-   */
-  const searchedRooms = useMemo(() => {
-    // Search Room Type
-    const result = rooms.filter((room) => room.roomType.includes(roomQuery.toLowerCase()));
-    return result;
+  
+  const filteredRooms = useMemo(() => {
+    // Filter Room Type
+    return filterRooms(rooms, roomQuery);
   }, [rooms, roomQuery]);
 
   /**
@@ -43,9 +56,9 @@ function RoomsPage() {
    * @returns {string} - The message to display.
    */
   const displayMessage = () => {
-    let numOfRoomAvailable = (roomQuery.length > 0) ? searchedRooms.length: rooms.length;
+    let numOfRoomAvailable = (roomQuery.length > 0) ? filteredRooms.length: rooms.length;
     let message = (roomQuery.length > 0) ? "search query" : "stay";
-    return `We found ${numOfRoomAvailable} available room type for your current ${message}.`;
+    return `We found ${numOfRoomAvailable} available room type${numOfRoomAvailable > 1 ? "s" : ""} for your current ${message}.`;
   };
 
   /**
@@ -82,9 +95,9 @@ function RoomsPage() {
       </button>
       <div>{displayMessage()}</div>
       <div className="rooms-page__gallery">
-        {searchedRooms.map(room => <RoomContainer room={room} />)}
+        {filteredRooms.map(room => <RoomContainer room={room} />)}
       </div>
-      {searchedRooms.length === 0 && 
+      {filteredRooms.length === 0 && 
         <div className="rooms-page__err">
           No room found for current search query
         </div>

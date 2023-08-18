@@ -5,6 +5,47 @@ import { backendUrl } from "../../config";
 import "./SignUp.css";
 
 /**
+  * Password is valid if it"s b/w 8 and 32 characters, and
+  * has 1 lowercase letter, 1 uppercase letter, and 1 number
+  * @param {string} password The password to get validated.
+  * @returns {boolean} if all the tests passed return true, else false. 
+  */
+export const validatePassword = (password, callbacks = {}) => {
+  const {
+    setPassLengthTest,
+    setPassLowercaseTest,
+    setPassUppercaseTest,
+    setPassNumberTest
+  } = callbacks;
+  const passwordRegex = {
+    lengthRegex: /^.{8,32}$/,
+    lowercaseRegex: /^(?=.*[a-z])/,
+    uppercaseRegex: /^(?=.*[A-Z])/,
+    numberRegex: /^(?=.*\d)/,
+  };
+
+  const results = {
+    lengthRegex: false,
+    lowercaseRegex: false,
+    uppercaseRegex: false,
+    numberRegex: false,
+  };
+
+  let allTestsPassed = true;
+  Object.keys(passwordRegex).forEach((regex) => {
+    const result = passwordRegex[regex].test(password);
+    if(!result) allTestsPassed = false;
+    results[regex] = result;
+  });
+
+  if (setPassLengthTest) setPassLengthTest(results.lengthRegex);
+  if (setPassLowercaseTest) setPassLowercaseTest(results.lowercaseRegex);
+  if (setPassUppercaseTest) setPassUppercaseTest(results.uppercaseRegex);
+  if (setPassNumberTest) setPassNumberTest(results.numberRegex);
+  return allTestsPassed;
+}; 
+
+/**
  * SignUp page for new user to register.
  * @component
  * @author Nyi Nyi Moe Htet
@@ -132,7 +173,13 @@ const navigate = useNavigate();
   // Update password state on input change
   const handlePassword = (e) => {
     setPassword(e.target.value); 
-    validatePassword(e.target.value);
+    validatePassword(e.target.value, 
+      {
+        setPassLengthTest,
+        setPassLowercaseTest,
+        setPassUppercaseTest,
+        setPassNumberTest
+      });
   };
 
   // Update confirmPassword state on input change
@@ -140,42 +187,6 @@ const navigate = useNavigate();
     setConfirmPassword(e.target.value);
     validatePasswordMatch(e.target.value);
   };
-
-
- /**
-  * Password is valid if it"s b/w 8 and 32 characters, and
-  * has 1 lowercase letter, 1 uppercase letter, and 1 number
-  * @param {string} password The password to get validated.
-  * @returns {boolean} if all the tests passed return true, else false. 
-  */
-  const validatePassword = (password) => {
-    const passwordRegex = {
-      lengthRegex: /^.{8,32}$/,
-      lowercaseRegex: /^(?=.*[a-z])/,
-      uppercaseRegex: /^(?=.*[A-Z])/,
-      numberRegex: /^(?=.*\d)/,
-    };
- 
-    const results = {
-      lengthRegex: false,
-      lowercaseRegex: false,
-      uppercaseRegex: false,
-      numberRegex: false,
-    };
-  
-    let allTestsPassed = true;
-    Object.keys(passwordRegex).forEach((regex) => {
-      const result = passwordRegex[regex].test(password);
-      if(!result) allTestsPassed = false;
-      results[regex] = result;
-    });
-
-    setPassLengthTest(results.lengthRegex);
-    setPassLowercaseTest(results.lowercaseRegex);
-    setPassUppercaseTest(results.uppercaseRegex);
-    setPassNumberTest(results.numberRegex);
-    return allTestsPassed;
-  }; 
 
   /**
    * validate if the confirm password matches the original password
@@ -197,7 +208,12 @@ const navigate = useNavigate();
       validateFirstName(firstName)
       && validateLastName(lastName)
       && validateEmail() 
-      && validatePassword(password)
+      && validatePassword(password, {
+        setPassLengthTest,
+        setPassLowercaseTest,
+        setPassUppercaseTest,
+        setPassNumberTest
+      })
       && validatePasswordMatch(confirmPassword) 
     )
   };

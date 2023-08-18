@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
+import { backendUrl } from "../../config";
 import "./NewReservation.css";
 
 /**
@@ -28,18 +29,17 @@ function NewReservation() {
   const additionalFeePerGuest = 25;
   const [additionalFee, setAdditionalFee] = useState(0);
 
-  // Room that guest chose in rooms page
-  const { startDate, endDate, roomType, guestNum, user } = useStateContext();
+  const { startDate, endDate, roomType, guestNum, user, accessToken } = useStateContext();
 
   const successfulReservationMessage = "Your new reservation has been successfully created. Thank you!";
   const failedReservationMessage = "We are unable to process your request at the moment. Please try again later.";
   const [displayMessage, setDisplayMessage] = useState("");
-  
+
   const handleCardNumber = (e) => {
     const inputNum = e.target.value;
-    if(isNaN(inputNum)) return;
-    if(inputNum.length <= 16) setCardNumber(inputNum);
-    else setCardNumber(inputNum.slice(0, 16));
+    if (isNaN(inputNum)) return;
+    if (inputNum.length <= 20) setCardNumber(inputNum);
+    else setCardNumber(inputNum.slice(0, 20));
   };
 
   const handleMonth = (e) => {
@@ -48,7 +48,7 @@ function NewReservation() {
 
   const handleYear = (e) => {
     const inputYear = e.target.value;
-    if(inputYear.length <= 4) setYear(inputYear);
+    if (inputYear.length <= 4) setYear(inputYear);
     else setYear(inputYear.slice(0, 4));
   };
 
@@ -69,7 +69,7 @@ function NewReservation() {
    * @returns {boolean} Whether the card number is valid.
    */
   const validateCardNumber = () => {
-    let result = cardNumber.length >= 15 && cardNumber.length <= 16;
+    let result = cardNumber.length === 16;
     setIsCardNumberValid(result);
     return result;
   };
@@ -85,7 +85,7 @@ function NewReservation() {
 
     if (parseInt(year, 10) > currentYear) {
       // If selected year is greater than current year, show all months
-      options = generateMonthOptionsHelper(1, 12);     
+      options = generateMonthOptionsHelper(1, 12);
     } else {
       // If selected year is same as current year, 
       // show current month to December
@@ -105,11 +105,11 @@ function NewReservation() {
       "Jan", "Feb", "Mar", "Apr", "May", "Jun",
       "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
-  
+
     const start = parseInt(startMonth, 10);
     const end = parseInt(endMonth, 10);
     const options = [];
-  
+
     if (start <= end) {
       for (let month = start; month <= end; month++) {
         const value = month.toString().padStart(2, "0");
@@ -117,19 +117,33 @@ function NewReservation() {
         options.push(<option key={value} value={value}>{label}</option>);
       }
     }
-  
+
     return options;
   }
 
   useEffect(() => {
-    if(isCardNumberValid) return;
+    if (isCardNumberValid) return;
     validateCardNumber();
   }, [cardNumber]);
 
   useEffect(() => {
-    if(isYearValid) return;
+    if (isYearValid) return;
     validateYear();
   }, [year]);
+
+  /**
+ * Converts a given date to an object containing its components.
+ *
+ * @param {Date} date - The input date object.
+ * @returns {Object} An object containing the date's components: date, month, and year.
+ */
+  const convertDateToObj = (date) => {
+    return {
+      date: startDate.getDate(), 
+      month: startDate.getMonth(), 
+      year: startDate.getFullYear()
+    };
+  };
 
   /**
  * Handles the booking of the reservation.
@@ -148,22 +162,20 @@ function NewReservation() {
     }
 
     // Prepare reservation data
+    // TODO: convert date to obj and rename keys
     const reservationData = {
-      startDate, 
-      endDate,   
+      startDate,
+      endDate,
       roomType,
       guestNum,
       user,
       cardNumber,
     };
 
-    // API endpoint and access token
-    const apiUrl = "TODO";
-    const accessToken = "TODO";
-
     try {
       // Send reservation data via API request
-      const response = await fetch(apiUrl, {
+      // TODO: new reservation route
+      const response = await fetch(`${backendUrl}/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,7 +202,7 @@ function NewReservation() {
   const getDate = (d) => {
     const date = d.getDate();
     return date < 9 ? "0" + date : date;
-  } 
+  }
 
   /**
  * Calculate the number of nights between two dates.
@@ -292,20 +304,20 @@ function NewReservation() {
           <form>
             <div className="new-reservation__payment-input">
               <label htmlFor="card-number">Card Number</label>
-              <input 
-                id="card-number" 
-                type="text" 
+              <input
+                id="card-number"
+                type="text"
                 onChange={handleCardNumber}
                 value={cardNumber}
                 onBlur={validateCardNumber}
-                className={isCardNumberValid 
-                  ? "" 
-                  :"new-reservation__invalid"
+                className={isCardNumberValid
+                  ? ""
+                  : "new-reservation__invalid"
                 }
               />
-              <span 
-                className={isCardNumberValid 
-                  ? "new-reservation__err" 
+              <span
+                className={isCardNumberValid
+                  ? "new-reservation__err"
                   : "new-reservation__err show"
                 }
               >
@@ -316,9 +328,9 @@ function NewReservation() {
             <div className="new-reservation__payment-input">
               <label htmlFor="month">Month</label>
               <select
-                id="month" 
+                id="month"
                 name="month"
-                onChange={handleMonth} 
+                onChange={handleMonth}
                 value={month}
               >
                 {generateMonthOptions()}
@@ -333,14 +345,14 @@ function NewReservation() {
                 value={year}
                 min={new Date().getFullYear()}
                 onBlur={validateYear}
-                className={isYearValid 
-                  ? "" 
+                className={isYearValid
+                  ? ""
                   : "new-reservation__invalid"
                 }
               />
               <span
-                className={isYearValid 
-                  ? "new-reservation__err" 
+                className={isYearValid
+                  ? "new-reservation__err"
                   : "new-reservation__err show"
                 }
               >
@@ -351,8 +363,8 @@ function NewReservation() {
           </form>
         </div>
         <button
-          className="btn new-reseravation__btn" 
-          type="button" 
+          className="btn new-reseravation__btn"
+          type="button"
           onClick={bookReservation}
         >
           Book Reservation

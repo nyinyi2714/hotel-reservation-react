@@ -67,6 +67,8 @@ function ManageReservation() {
               openRoomModal={openRoomModal} 
               openEditModal={openEditModal}
               reservation={reservation}
+              // TODO: check if reservation.id is correctly accessed
+              key={reservation.id}
             />
           })}
         </div>
