@@ -39,24 +39,6 @@ li {
     outline: 1px solid;
 }
 
-.manager__search {
-    padding: 10px;
-    margin-top: var(--header-height);
-    align-items: center;
-}
-
-.manager__search .manager__input {
-    padding: 0.5rem;
-    border-radius: 20px;
-    border: 2px solid #ccc;
-    height: top;
-    border-left: 1px solid var(--light-grey);
-    box-shadow: 0px 4px 10px var(--dark-navy);
-    z-index: 99;
-    width: 850px;
-    font-size: 14px;
-}
-
 .manager__new__report {
     padding: 10px;
     margin-top: var(--header-height);
@@ -103,4 +85,10 @@ td {
     font-weight: bold;
     letter-spacing: 0.1rem;
 }
+
+.custom-datepicker-input {
+    position: relative; /* Ensure relative positioning */
+  }
+  
+ 
 
