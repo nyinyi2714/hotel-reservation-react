@@ -50,7 +50,7 @@ function RoomContainer() {
     <div className="room-container box-shadow">
       {/* /images/{room-type}/photo-1.jpg */}
       <img 
-        src="/images/room-1/photo-1.jpg" 
+        src="/images/suite/photo-1.jpg" 
         className="room-container__img" 
         alt="room-preview" 
       />

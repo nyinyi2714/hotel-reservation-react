@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
+import { backendUrl } from "../../config";
 import "./RoomsPage.css";
 
 /**
@@ -65,8 +66,14 @@ function RoomsPage() {
    * Fetches rooms data from the backend and updates state.
    * @returns {void}
    */
-  const updateRooms = () => {
-    // TODO
+  const updateRooms = async () => {
+    try {
+      const data = await fetch(`${backendUrl}/show/allRooms`);
+      const roomsData = await data.json();
+      setRooms(roomsData);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
