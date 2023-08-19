@@ -88,11 +88,6 @@ td {
   letter-spacing: 0.1rem;
 }
 
-.custom-datepicker-input {
-  position: relative;
-  /* Ensure relative positioning */
-}
-
 .react-datepicker-popper {
   position: absolute;
   inset: 132px auto auto 398px !important;
