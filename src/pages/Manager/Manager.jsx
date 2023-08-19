@@ -3,7 +3,7 @@ import "./Manager.css";
 import DatePicker from "react-datepicker";
 import ReportContainer from "../../components/ReportContainer/ReportContainer";
 
-export default function Manager() {
+function Manager() {
     
   const [selectMonthYear, setSelectMonthYear] = useState(null);
 
@@ -23,9 +23,10 @@ export default function Manager() {
       <div>
         <div class="manager__new__report">
           <button className="manager__new__button">Generate Reports</button>
-          <DatePicker  className="manager__new__button"
+          <DatePicker  className="manager__new__button input"
             selected={selectMonthYear}
             onChange={handleMonthYear}
+            placeholderText="Select Month and Year"
             dateFormat="MMMM yyyy"
             showMonthYearPicker
           />
@@ -54,3 +55,5 @@ export default function Manager() {
   );
 
 }
+
+export default Manager;

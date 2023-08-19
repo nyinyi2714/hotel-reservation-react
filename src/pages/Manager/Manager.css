@@ -1,10 +1,12 @@
 .manager__menu {
-    display: flex;
+  margin-top: var(--header-height);
+  color: var(--dark-navy);
+  display: flex;
 }
 
-li {
-    list-style:none;
-    padding: 7px 1px;
+.manager__menu li {
+  list-style: none;
+  padding: 7px 1px;
 }
 
 .manager__bar {
@@ -15,80 +17,83 @@ li {
   border-right: 1px solid #1c333b55;
 }
 
-.manager__bar .manager__heading {
-    margin-top: var(--header-height);
-    padding-bottom: 30px;
-    
-    color: var(--dark-navy);
+.manager__bar .manager__side__bar {
+  padding: 5px 15px;
+
+  border: none;
+  border-left: 1px solid var(--light-grey);
+  box-shadow: 0px 4px 10px var(--dark-navy);
+  z-index: 99;
+  border-radius: 6px;
+
+  font-size: 15px;
+  font-weight: bold;
 }
 
-.manager__bar .manager__side__bar {
-    padding: 5px 15px;
-   
-    border: none;
-    border-left: 1px solid var(--light-grey);
-    box-shadow: 0px 4px 10px var(--dark-navy);
-    z-index: 99;
-    border-radius: 6px;
-    
-    font-size: 15px;
-    font-weight: bold;
-  }
-
 .manager__side__bar:hover {
-    outline: 1px solid;
+  outline: 1px solid;
 }
 
 .manager__new__report {
-    padding: 10px;
-    margin-top: var(--header-height);
-    align-items: center;
+  padding: 10px;
+  margin-top: var(--header-height);
+  align-items: center;
 }
 
-.manager__new__report .manager__new__button {
-    padding: 5px 15px;
-   
-    border: none;
-    border-left: 1px solid var(--light-grey);
-    box-shadow: 0px 4px 10px var(--dark-navy);
-    z-index: 99;
-    border-radius: 6px;
-    
-    font-size: 15px;
-    font-weight: bold;
-    margin-left: 20px;
+.manager__new__button {
+  padding: 5px 15px;
+  color: var(--blue);
+  border: 1px solid;
+  border-radius: 6px;
+
+  font-size: 15px;
+  margin-left: 20px;
 }
 
-table {
-    padding-left: 30px;
-    margin-top: 130px;
-    margin-left: 30px;
-}
-table, th, td {
-    border: 1px solid;
-    width: 1000px;
-    border-collapse: collapse;
-    height:70px;
-    text-align: center;
+.manager__new__button.input {
+  padding: 5px;
 }
 
-th {
-    background-color: #ecf5f9ec;
-    color: navy;
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 0.1rem;
+.manager__new__button:focus-visible {
+  outline: none;
+}
+
+.manager__menu table {
+  padding-left: 30px;
+  margin-top: 130px;
+  margin-left: 30px;
+}
+
+.manager__menu table,
+.manager__menu th,
+.manager__menu td {
+  border: 1px solid;
+  width: 1000px;
+  border-collapse: collapse;
+  height: 70px;
+  text-align: center;
+}
+
+.manager__menu th {
+  background-color: #ecf5f9ec;
+  color: navy;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
 }
 
 td {
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 0.1rem;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.1rem;
 }
 
 .custom-datepicker-input {
-    position: relative; /* Ensure relative positioning */
-  }
-  
- 
+  position: relative;
+  /* Ensure relative positioning */
+}
 
+.react-datepicker-popper {
+  position: absolute;
+  inset: 132px auto auto 398px !important;
+}
