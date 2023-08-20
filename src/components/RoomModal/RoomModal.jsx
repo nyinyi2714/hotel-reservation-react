@@ -12,8 +12,8 @@ import "./RoomModal.css";
  * @returns {JSX.Element} The rendered RoomModal component.
  */
 function RoomModal(props) {
-  const {closeRoomModal, initiateBooking } = props;
-  const [photoSrc, setPhotoSrc] = useState("/images/room-1/photo-1.jpg");
+  const {closeRoomModal, initiateBooking, room } = props;
+  const [photoSrc, setPhotoSrc] = useState(`/images/${room.name.toLowerCase()}/photo-1.jpg`);
 
   /**
    * Changes the displayed photo in the modal.
@@ -56,32 +56,32 @@ function RoomModal(props) {
         >
           <i className='bx bx-x' />
         </button>
-        <h2>Hotel Room Title</h2>
+        <h2>{room.name}</h2>
         <div className="room-modal__photo-container">
           <img src={photoSrc} alt="room-preview--zoom" />
         </div>
         <div className="room-modal__gallery">
           <img 
             id="photo-1"
-            src="/images/room-1/photo-1.jpg" 
+            src={`/images/${room.name.toLowerCase()}/photo-1.jpg`}
             alt="room-preview-1" 
             onClick={changePhoto}
           />
           <img
             id="photo-2"
-           src="/images/room-1/photo-2.jpg" 
+           src={`/images/${room.name.toLowerCase()}/photo-2.jpg`}
            alt="room-preview-2" 
             onClick={changePhoto}
           />
           <img
             id="photo-3"
-            src="/images/room-1/photo-3.jpg" 
+            src={`/images/${room.name.toLowerCase()}/photo-3.jpg`} 
             alt="room-preview-3" 
             onClick={changePhoto}
           />
           <img 
             id="photo-4"
-            src="/images/room-1/photo-4.jpg" 
+            src={`/images/${room.name.toLowerCase()}/photo-4.jpg`} 
             alt="room-preview-4" 
             onClick={changePhoto}
           />
@@ -105,9 +105,9 @@ function RoomModal(props) {
           className="btn room-modal__btn" 
           type="button"
           onClick={initiateBooking}
-          id={"room.room_number"}
+          id={room.id}
         >
-          Book for $137
+          Book for ${room.price}
         </button>}
       </div>
     </div>

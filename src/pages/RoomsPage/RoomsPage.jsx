@@ -13,7 +13,7 @@ import "./RoomsPage.css";
 export const filterRooms = (rooms, roomQuery) => {
   const filteredRooms = [];
     for (const room of rooms) {
-      if (room.roomType.includes(roomQuery.toLowerCase())) {
+      if (room.name.toLowerCase().includes(roomQuery.toLowerCase())) {
         filteredRooms.push(room);
       }
     }
@@ -70,7 +70,7 @@ function RoomsPage() {
     try {
       const data = await fetch(`${backendUrl}/show/allRooms`);
       const roomsData = await data.json();
-      setRooms(roomsData);
+      setRooms(roomsData.rooms);
     } catch (error) {
       console.error(error);
     }
@@ -80,8 +80,6 @@ function RoomsPage() {
     // Fetch rooms data from backend
     updateRooms();
   }, []);
-
-  console.log(rooms);
 
   return(
     <div className="rooms-page">
@@ -104,7 +102,7 @@ function RoomsPage() {
       </button>
       <div>{displayMessage()}</div>
       <div className="rooms-page__gallery">
-        {filteredRooms.map(room => <RoomContainer room={room} />)}
+        {filteredRooms.map(room => <RoomContainer room={room} key={room.id} rooms={rooms} />)}
       </div>
       {filteredRooms.length === 0 && 
         <div className="rooms-page__err">
