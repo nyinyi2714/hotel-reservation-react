@@ -29,7 +29,7 @@ export const filterRooms = (rooms, roomQuery) => {
  */
 function RoomsPage() {
   // TODO change the roomType, as it's coming from backend
-  const [rooms, setRooms] = useState([{roomType: "standard"}, {roomType: "deluxe"}, {roomType: "suite"}]);
+  const [rooms, setRooms] = useState([]);
   const [roomQuery, setRoomQuery] = useState("");
 
   // Handles changes in the room search query input.
@@ -80,6 +80,8 @@ function RoomsPage() {
     // Fetch rooms data from backend
     updateRooms();
   }, []);
+
+  console.log(rooms);
 
   return(
     <div className="rooms-page">

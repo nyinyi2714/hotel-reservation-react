@@ -1,1 +1,1 @@
-export const backendUrl = "http://127.0.0.1:5000/api/v1";
+export const backendUrl = "https://flask-api-396223.wm.r.appspot.com/api/v1";
