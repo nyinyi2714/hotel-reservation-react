@@ -88,7 +88,8 @@ function ManageReservation() {
       });
 
       const reservationsData = await response.json();
-      setReservations(reservationsData.reservations);
+      const activeReservations = reservationsData.reservations.filter(reservation => reservation.is_active);
+      setReservations(activeReservations);
 
       if (response.ok) {
         console.log("fetch successfully")

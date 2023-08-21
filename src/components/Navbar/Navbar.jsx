@@ -20,15 +20,20 @@ function Navbar() {
     setAccessToken(""); 
     navigate("/");
   };
-  
+
   return (
     <nav className="nav">
       <Link to="/"><img className="nav__logo" src="/images/logo.jpg" alt="logo" /></Link>
       <div className="nav__links">
-        {user && <span className="nav__name">Hello, {user.role === "manager" ? "Admin" : user.first_name}</span>}
+        {user && <span className="nav__name">
+          Hello, {" "} 
+          {user.role === "manager" ? "Admin" : user.first_name}
+        </span>}
         <Link className="nav__btn" to="/rooms">Rooms</Link>
         {user && <Link className="nav__btn" to="/reservations">Reservations</Link>}
-        {(user && user.role === "manager") && <Link className="nav__btn" to="/manager">Manager</Link>}
+        {(user && user.role === "manager") && 
+          <Link className="nav__btn" to="/manager">Manager</Link>
+        }
         {user ? 
           <button className="nav__btn" onClick={handleSignOut}>Sign Out</button>
           :<Link className="nav__btn" to="/signin">Sign In</Link> 

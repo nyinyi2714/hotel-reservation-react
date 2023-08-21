@@ -208,6 +208,7 @@ function NewReservation() {
         setDisplayMessage(failedReservationMessage);
       }
     } catch (error) {
+      alert(error);
       console.error("An error occurred:", error);
     }
   };

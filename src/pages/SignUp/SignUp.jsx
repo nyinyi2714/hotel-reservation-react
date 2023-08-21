@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 import { backendUrl } from "../../config";
+import { useStateContext } from "../../StateContext";
 import "./SignUp.css";
 
 /**
@@ -77,6 +78,8 @@ const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 const [isSigningUp, setIsSigningUp] = useState(false);
 
 const navigate = useNavigate();
+
+const { setUser, setAccessToken } = useStateContext();
 
 // Update first name state on input change
   const handleFirstName = (e) => {
@@ -249,19 +252,20 @@ const navigate = useNavigate();
       });
 
       const responseData = await response.json();
-
+      console.log(response)
       if (response.ok) {
         console.log("User registered successfully:", responseData.message);
-        // Navigate back to the previous route after successful registration
-        // TODO: Implement sign in after signing up
-        navigate(-1);
+        // Navigate back to homepage after successful registration
+        setUser(responseData.user);
+        setAccessToken(responseData.access_token);
+        navigate("/");
       } else {
         console.error("Registration failed:", responseData.error);
-        // Handle registration failure, display an error message, etc.
+        alert(responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle fetch or other errors.
+      alert(error);
     }
 
     setIsSigningUp(false);

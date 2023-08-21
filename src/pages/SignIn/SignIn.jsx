@@ -123,11 +123,11 @@ function SignIn() {
         navigate(-1);
       } else {
         console.error("Sign-in failed:", responseData.error);
-        // Handle sign-in failure, display an error message, etc.
+        alert(responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle fetch or other errors.
+      alert(error);
     }
 
     setIsSigningIn(false);

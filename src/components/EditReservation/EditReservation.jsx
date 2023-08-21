@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import StayForm from "../StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import { backendUrl } from "../../config";
@@ -63,9 +62,11 @@ function EditReservation(props) {
     const requestData = {
       date_of_occupancy: convertDateToObj(startDate),
       date_of_departure: convertDateToObj(endDate),
-      num_guests: guestNum,
+      num_of_guest: guestNum,
       room_id: roomIds[selectedRoomType],
     };
+
+    console.log(requestData)
 
     try {
       const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
@@ -80,13 +81,15 @@ function EditReservation(props) {
       const responseData = await response.json();
 
       if (response.ok) {
-        // TODO: display successful modification message
         console.log("modify successfully")
+        closeEditModal();
       } else {
+        alert(responseData.error);
         console.error("Reservation modification failed:", responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
+      alert(error);
     }
 
     // reset states in StateContext.jsx
@@ -109,20 +112,21 @@ function EditReservation(props) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-        // TODO: set is _available set to false
         body: JSON.stringify({ is_active: "false" }),
       });
 
       const responseData = await response.json();
 
       if (response.ok) {
-        // TODO: display successful deleted reservtion message
-        console.log("deleted successfully")
+        console.log("deleted successfully");
+        closeEditModal();
       } else {
         console.error("Reservation Deletion failed:", responseData.error);
+        alert(responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
+      alert(error);
     }
 
     // reset states in StateContext.jsx
