@@ -65,7 +65,6 @@ function ManageReservation() {
       });
 
       const reservationsData = await response.json();
-      console.log(reservationData)
       setReservations(reservationsData);
 
       if (response.ok) {
