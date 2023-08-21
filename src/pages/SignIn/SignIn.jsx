@@ -101,7 +101,7 @@ function SignIn() {
     setIsSigningIn(true);
     // Sending sign in credentials to backend API
     try {
-      const response = await fetch(`${backendUrl}/auth/signin`, {
+      const response = await fetch(`${backendUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
