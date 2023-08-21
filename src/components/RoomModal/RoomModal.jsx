@@ -21,7 +21,7 @@ function RoomModal(props) {
    * @returns {void}
    */
   const changePhoto = (e) => {
-    setPhotoSrc(`/images/room-1/${e.target.id}.jpg`);
+    setPhotoSrc(`/images/${room.name.toLowerCase()}/${e.target.id}.jpg`);
   };
 
   const closeWithEsc = (e) => {

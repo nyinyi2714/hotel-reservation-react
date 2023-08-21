@@ -6,8 +6,17 @@ import { backendUrl } from "../../config";
 import "./EditReservation.css";
 
 function EditReservation(props) {
-  const { closeEditModal, reservation, fetchReservations } = props;
-  const { startDate, endDate, guestNum, accessToken, resetState } = useStateContext();
+  const { closeEditModal, reservation, fetchReservations, convertStringToDateObj } = props;
+  const { 
+    startDate, 
+    setStartDate,
+    endDate, 
+    setEndDate,
+    guestNum, 
+    setGuestNum,
+    accessToken, 
+    resetState 
+  } = useStateContext();
   // TODO: access reservation.roomType from props
   const [selectedRoomType, setSelectedRoomType] = useState("standard");
   const roomIds = {
@@ -72,6 +81,7 @@ function EditReservation(props) {
 
       if (response.ok) {
         // TODO: display successful modification message
+        console.log("modify successfully")
       } else {
         console.error("Reservation modification failed:", responseData.error);
       }
@@ -107,6 +117,7 @@ function EditReservation(props) {
 
       if (response.ok) {
         // TODO: display successful deleted reservtion message
+        console.log("deleted successfully")
       } else {
         console.error("Reservation Deletion failed:", responseData.error);
       }
@@ -121,14 +132,17 @@ function EditReservation(props) {
   };
 
   useEffect(() => {
-    // TODO: set dates and guestnums from reservation to statecontext
+    setStartDate(convertStringToDateObj(reservation.date_of_occupancy));
+    setEndDate(convertStringToDateObj(reservation.date_of_departure));
+    setGuestNum(reservation.number_of_guest);
+    setSelectedRoomType(reservation.room_details.name.toLowerCase());
   }, []);
 
   return (
     <div className="edit-reservation-wrapper">
       <div className="edit-reservation-modal">
         <h2>Modifying Your Reservation</h2>
-        <StayForm isModifying={true} reservation={reservation} />
+        <StayForm isModifying={true} reservation={reservation} convertStringToDateObj={convertStringToDateObj} />
         <div className="edit-reservation__flexbox">
           <label htmlFor="room-type">Room Type: </label>
           <select
@@ -151,16 +165,16 @@ function EditReservation(props) {
           <button
             type="button"
             className="btn edit-reservation__btn btn--red"
-            onClick={cancelChanges}
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            className="btn edit-reservation__btn btn--red"
             onClick={deleteReservation}
           >
             Delete
+          </button>
+          <button
+            type="button"
+            className="btn edit-reservation__btn btn--default"
+            onClick={cancelChanges}
+          >
+            Cancel
           </button>
         </div>
       </div>

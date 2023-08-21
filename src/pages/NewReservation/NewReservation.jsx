@@ -258,6 +258,8 @@ function NewReservation() {
   const computeAdditionalFee = () => {
     if(guestNum > 2) {
       setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
+    } else {
+      setAdditionalFee(0);
     }
   };
 
@@ -266,7 +268,7 @@ function NewReservation() {
     computeTaxes();
     computeAdditionalFee();
     setTotalPrice((taxes + roomPrice + additionalFee));
-  }, [startDate, endDate, roomType, guestNum, roomPrice, taxes]);
+  }, [startDate, endDate, roomType, guestNum, roomPrice, taxes, additionalFee]);
 
   return (
     <React.Fragment>

@@ -15,6 +15,7 @@ import { StateProvider } from "./StateContext";
 import "./App.css";
 
 export default function App() {
+
   return (
     <div className="app">
       <StateProvider>

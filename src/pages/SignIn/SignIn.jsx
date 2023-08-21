@@ -13,8 +13,9 @@ import "./SignIn.css";
  * @returns {JSX.Element} component that displays the user sign in form.
  */
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // TODO delete users
+  const [email, setEmail] = useState("noah.smith@example.com");
+  const [password, setPassword] = useState("password");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   // State for toggling password visibility
@@ -25,7 +26,7 @@ function SignIn() {
   const navigate = useNavigate();
 
   // Retrieve functions stored in central react state
-  const { setAccessToken } = useStateContext();
+  const { setUser, setAccessToken } = useStateContext();
 
   // Update email state on input change
   const handleEmail = (e) => {
@@ -115,8 +116,8 @@ function SignIn() {
       const responseData = await response.json();
   
       if (response.ok) {
-        console.log("Sign-in successful:", responseData.user);
         // Store the access token 
+        setUser(responseData.user);
         setAccessToken(responseData.user.access);
         // Navigate back to the previous route after successful registration
         navigate(-1);

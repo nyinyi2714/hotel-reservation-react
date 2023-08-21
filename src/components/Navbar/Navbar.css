@@ -30,7 +30,7 @@ nav {
   align-items: center;
 }
 
-.nav__btn {
+.nav__btn, .nav__name {
   margin: 5px 15px;
   border: none;
   font-size: 15px;
