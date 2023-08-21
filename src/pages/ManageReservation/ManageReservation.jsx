@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
 import EditReservation from "../../components/EditReservation/EditReservation";
+import { useStateContext } from "../../StateContext";
+import { backendUrl } from "../../config";
 import "./ManageReservation.css";
 
 /**
@@ -17,6 +19,7 @@ function ManageReservation() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
 
+  const { accessToken } = useStateContext();
   /**
    * Opens the room modal for viewing room details.
    * @returns {void}
@@ -50,8 +53,30 @@ function ManageReservation() {
     setIsEditModalOpen(false);
   };
 
-  const fetchReservations = () => {
+  const fetchReservations = async () => {
     // TODO
+    try {
+      const response = await fetch(`${backendUrl}/show/userReservations`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const reservationsData = await response.json();
+      console.log(reservationData)
+      setReservations(reservationsData);
+
+      if (response.ok) {
+        // TODO: display successful modification message
+        console.log("Modified successfully")
+      } else {
+        console.error("Reservation modification failed:", reservationsData.message);
+      }
+    } catch(err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -67,8 +92,7 @@ function ManageReservation() {
               openRoomModal={openRoomModal} 
               openEditModal={openEditModal}
               reservation={reservation}
-              // TODO: check if reservation.id is correctly accessed
-              key={reservation.id}
+              key={reservation.reservation_id}
             />
           })}
         </div>

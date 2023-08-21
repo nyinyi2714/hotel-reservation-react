@@ -26,7 +26,6 @@ function NewReservation() {
     roomType, 
     guestNum, 
     accessToken,
-    isModifying 
   } = useStateContext();
 
   // State variables for reciept
@@ -320,7 +319,7 @@ function NewReservation() {
             </div>
           </div>
         </div>
-        <div className={`new-reservation__payment ${isModifying && "hide"}`}>
+        <div className={"new-reservation__payment"}>
           <h3>Payment</h3>
           <form>
             <div className="new-reservation__payment-input">
@@ -388,7 +387,7 @@ function NewReservation() {
           type="button"
           onClick={bookReservation}
         >
-          {isModifying ? "Modify" : "Book"} Reservation
+          Book Reservation
         </button>
       </div>
     </React.Fragment>

@@ -45,7 +45,6 @@ function RoomContainer(props) {
     const roomId = e.target.id;
     const roomType = rooms.find((room) => room.id == roomId);
     setRoomType(roomType);
-    console.log(roomType);
     navigate("/reservation/new");
   };
 

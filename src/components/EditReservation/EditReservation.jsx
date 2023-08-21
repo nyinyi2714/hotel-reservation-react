@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import StayForm from "../StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import { backendUrl } from "../../config";
@@ -9,6 +10,11 @@ function EditReservation(props) {
   const { startDate, endDate, guestNum, accessToken, resetState } = useStateContext();
   // TODO: access reservation.roomType from props
   const [selectedRoomType, setSelectedRoomType] = useState("standard");
+  const roomIds = {
+    "standard": 1,
+    "deluxe": 2,
+    "suite": 3,
+  };
 
   const handleRoomTypeChange = (event) => {
     setSelectedRoomType(event.target.value);
@@ -32,9 +38,9 @@ function EditReservation(props) {
  */
   const convertDateToObj = (date) => {
     return {
-      date: startDate.getDate(), 
-      month: startDate.getMonth(), 
-      year: startDate.getFullYear()
+      date: date.getDate(), 
+      month: date.getMonth(), 
+      year: date.getFullYear()
     };
   };
 
@@ -42,7 +48,6 @@ function EditReservation(props) {
  * Saves the changes made to the reservation.
  * Updates the reservation details via an API call.
  * Also handles resetting states and fetching updated reservations.
- *
  * @returns {void}
  */
   const saveChanges = async () => {
@@ -50,12 +55,11 @@ function EditReservation(props) {
       date_of_occupancy: convertDateToObj(startDate),
       date_of_departure: convertDateToObj(endDate),
       num_guests: guestNum,
-      room_id: selectedRoomType,
+      room_id: roomIds[selectedRoomType],
     };
 
     try {
-      // TODO: change the reservation.id
-      const response = await fetch(`${backendUrl}/update/userReservation/${reservation.id}`, {
+      const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -89,15 +93,14 @@ function EditReservation(props) {
  */
   const deleteReservation = async () => {
     try {
-      // TODO: change the reservation.id
-      const response = await fetch(`${backendUrl}/update/userReservation/${reservation.id}`, {
+      const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
         // TODO: set is _available set to false
-        body: JSON.stringify({  }),
+        body: JSON.stringify({ is_active: "false" }),
       });
 
       const responseData = await response.json();
@@ -117,13 +120,17 @@ function EditReservation(props) {
     fetchReservations();
   };
 
+  useEffect(() => {
+    // TODO: set dates and guestnums from reservation to statecontext
+  }, []);
+
   return (
     <div className="edit-reservation-wrapper">
       <div className="edit-reservation-modal">
         <h2>Modifying Your Reservation</h2>
         <StayForm isModifying={true} reservation={reservation} />
         <div className="edit-reservation__flexbox">
-          <label for="room-type">Room Type: </label>
+          <label htmlFor="room-type">Room Type: </label>
           <select
             id="room-type"
             name="room-type"
