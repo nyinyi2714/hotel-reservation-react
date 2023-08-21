@@ -66,8 +66,6 @@ function EditReservation(props) {
       room_id: roomIds[selectedRoomType],
     };
 
-    console.log(requestData)
-
     try {
       const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
         method: "PUT",
