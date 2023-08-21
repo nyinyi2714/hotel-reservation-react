@@ -23,6 +23,12 @@ nav {
   height: 68px;
 }
 
+.nav__logo {
+  display: block;
+  width: 100px;
+  border-radius: 5px;
+}
+
 .nav__links {
   display: flex;
   gap: 5px;

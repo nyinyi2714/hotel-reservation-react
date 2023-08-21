@@ -281,7 +281,6 @@ const navigate = useNavigate();
           </Link>
         </div>
         <form className="signup__form" onSubmit={handleSubmit}>
-          <div className="signup__hotel-logo">HOTEL LOGO</div>
           <h2>CREATE AN ACCOUNT</h2>
           <div className="relative-position">
             <input 

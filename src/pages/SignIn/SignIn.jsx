@@ -147,7 +147,6 @@ function SignIn() {
           </Link>
         </div>
         <form className="signin__form" onSubmit={handleSubmit}>
-          <div className="signin__hotel-logo">HOTEL LOGO</div>
           <h1>Welcome Back</h1>
           <h2>Sign in to your account</h2>
           <div>

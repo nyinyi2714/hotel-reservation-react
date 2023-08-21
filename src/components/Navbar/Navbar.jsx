@@ -20,7 +20,7 @@ function Navbar() {
   
   return (
     <nav className="nav">
-      <Link to="/">LOGO</Link>
+      <Link to="/"><img className="nav__logo" src="/images/logo.jpg" alt="logo" /></Link>
       <div className="nav__links">
         {user && <span className="nav__name">Hello, {user.role === "manager" ? "Admin" : user.first_name}</span>}
         <Link className="nav__btn" to="/rooms">Rooms</Link>
