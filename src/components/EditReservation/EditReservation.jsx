@@ -69,7 +69,7 @@ function EditReservation(props) {
 
     try {
       const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -104,7 +104,7 @@ function EditReservation(props) {
   const deleteReservation = async () => {
     try {
       const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,

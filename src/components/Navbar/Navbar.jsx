@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useStateContext } from '../../StateContext';
 import "./Navbar.css";
 
@@ -13,9 +13,12 @@ import "./Navbar.css";
 function Navbar() {
   const { user, setUser, setAccessToken } = useStateContext(); 
 
+  const navigate = useNavigate();
+
   const handleSignOut = () => {
     setUser(null);
-    setAccessToken("");
+    setAccessToken(""); 
+    navigate("/");
   };
   
   return (

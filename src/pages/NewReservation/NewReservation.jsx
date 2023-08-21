@@ -193,7 +193,7 @@ function NewReservation() {
     try {
       // Send reservation data via API request
       // TODO: new reservation route
-      const response = await fetch(`${backendUrl}/`, {
+      const response = await fetch(`${backendUrl}/makeReservation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
