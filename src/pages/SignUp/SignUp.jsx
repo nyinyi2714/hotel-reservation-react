@@ -256,7 +256,8 @@ const { setUser, setAccessToken } = useStateContext();
       if (response.ok) {
         console.log("User registered successfully:", responseData.message);
         // Navigate back to homepage after successful registration
-        setUser(responseData.user);
+        console.log(responseData)
+        setUser({first_name: responseData.first_name});
         setAccessToken(responseData.access_token);
         navigate("/");
       } else {

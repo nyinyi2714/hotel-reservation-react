@@ -44,13 +44,33 @@ function EditReservation(props) {
  * @param {Date} date - The input date object.
  * @returns {Object} An object containing the date's components: date, month, and year.
  */
-  const convertDateToObj = (date) => {
-    return {
-      date: date.getDate(), 
-      month: date.getMonth(), 
-      year: date.getFullYear()
-    };
+// TODO: documentation
+function convertDateToObject(date) {
+  if (!(date instanceof Date)) {
+      throw new Error('Input is not a valid Date object');
+  }
+
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // Months are zero-based, add 1
+  const day = date.getDate();
+
+  return { year, month, day };
+}
+
+const computeTotalPrice = (roomType) => {
+  const roomPrice = {
+    standard: 150,
+    deluxe: 250,
+    suite: 350,
   };
+  const taxes = 0.13;
+  const additionalFee = 25;
+  const numOfNight = endDate.getDate() - startDate.getDate();
+  let totalPrice = roomPrice[roomType] * numOfNight;
+  if(guestNum > 2) totalPrice += (4 - guestNum ) * additionalFee;
+  totalPrice += totalPrice * taxes;
+  return totalPrice;
+}
 
   /**
  * Saves the changes made to the reservation.
@@ -60,10 +80,11 @@ function EditReservation(props) {
  */
   const saveChanges = async () => {
     const requestData = {
-      date_of_occupancy: convertDateToObj(startDate),
-      date_of_departure: convertDateToObj(endDate),
-      num_of_guest: guestNum,
+      date_of_occupancy: convertDateToObject(startDate),
+      date_of_departure: convertDateToObject(endDate),
+      number_of_guest: guestNum,
       room_id: roomIds[selectedRoomType],
+      total_price: computeTotalPrice(selectedRoomType)
     };
 
     try {
