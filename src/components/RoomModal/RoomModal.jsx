@@ -7,8 +7,6 @@ import "./RoomModal.css";
  * @author Nyi Nyi Moe Htet
  * @since July 29th 2023
  * @param {Object} props - The props passed to the RoomModal component.
- * @param {Function} props.closeRoomModal - A function to close the room modal.
- * @param {Function} props.initiateBooking - A function to initiate the booking process.
  * @returns {JSX.Element} The rendered RoomModal component.
  */
 function RoomModal(props) {

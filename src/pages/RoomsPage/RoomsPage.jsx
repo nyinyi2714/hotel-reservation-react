@@ -28,7 +28,6 @@ export const filterRooms = (rooms, roomQuery) => {
  * @returns {JSX.Element} component that displays rooms page.
  */
 function RoomsPage() {
-  // TODO change the roomType, as it's coming from backend
   const [rooms, setRooms] = useState([]);
   const [roomQuery, setRoomQuery] = useState("");
 

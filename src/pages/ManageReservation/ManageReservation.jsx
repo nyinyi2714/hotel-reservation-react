@@ -14,7 +14,6 @@ import "./ManageReservation.css";
  * @returns {JSX.Element} The rendered ManageReservation component.
  */
 function ManageReservation() {
-  // TODO: delete the {}
   const [reservations, setReservations] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
@@ -22,7 +21,11 @@ function ManageReservation() {
 
   const { accessToken } = useStateContext();
 
-  // TODO: doc
+  /**
+  * Retrieves a reservation by its unique identifier from the reservations array.
+  * @param {number} id - The unique identifier of the reservation to retrieve.
+  * @returns {Object|null} The reservation object if found, or null if not found.
+  */
   const getReservationById = (id) => {
     return reservations.find(reservation => reservation.reservation_id == id);
   };
@@ -61,7 +64,11 @@ function ManageReservation() {
     setIsEditModalOpen(false);
   };
 
-  // TODO: doc
+  /**
+ * Converts a date string to a JavaScript Date object.
+ * @param {string} string - The input date string in the format "Day Month Year".
+ * @returns {Date} The JavaScript Date object representing the converted date.
+ */
   const convertStringToDateObj = (string) => {
     const months = {
       Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
@@ -76,7 +83,10 @@ function ManageReservation() {
     return new Date(year, month, day);
   };
 
-  // TODO
+  /**
+ * Fetches reservations from the backend API and updates the state with active reservations.
+ * @returns {void}
+ */
   const fetchReservations = async () => {
     try {
       const response = await fetch(`${backendUrl}/show/userReservations`, {

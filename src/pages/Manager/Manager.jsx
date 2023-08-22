@@ -3,7 +3,13 @@ import { useStateContext } from "../../StateContext";
 import { backendUrl } from "../../config";
 import "./Manager.css";
 
-// TODO: doc
+/**
+ * Manager component for generating and displaying monthly reports.
+ * @component
+ * @author Nyi Nyi Moe Htet
+ * @since August 18th 2023
+ * @returns {JSX.Element} The JSX element for generating and displaying reports.
+ */
 function Manager() {
   const [report, setReport] = useState(null);
   const [isGeneratingReport, setIsGeneratingReport] = useState(false); 

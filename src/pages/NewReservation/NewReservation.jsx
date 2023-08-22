@@ -20,11 +20,11 @@ function NewReservation() {
   const [isCardNumberValid, setIsCardNumberValid] = useState(true);
   const [isYearValid, setIsYearValid] = useState(true);
 
-  const { 
+  const {
     startDate,
     endDate,
-    roomType, 
-    guestNum, 
+    roomType,
+    guestNum,
     accessToken,
   } = useStateContext();
 
@@ -153,18 +153,23 @@ function NewReservation() {
       return;
     }
 
-    // TODO: documentation
+    /**
+   * Converts a JavaScript Date object to an object containing its components.
+   * @param {Date} date - The input date object.
+   * @throws {Error} Throws an error if the input is not a valid Date object.
+   * @returns {Object} An object containing the date's components: year, month, and day.
+   */
     function convertDateToObject(date) {
       if (!(date instanceof Date)) {
-          throw new Error('Input is not a valid Date object');
+        throw new Error('Input is not a valid Date object');
       }
-  
+
       const year = date.getFullYear();
       const month = date.getMonth() + 1; // Months are zero-based, add 1
       const day = date.getDate();
-  
+
       return { year, month, day };
-  }
+    }
 
     // Prepare reservation data
     const reservationData = {
@@ -178,7 +183,6 @@ function NewReservation() {
 
     try {
       // Send reservation data via API request
-      // TODO: new reservation route
       const response = await fetch(`${backendUrl}/makeReservation`, {
         method: "POST",
         headers: {
@@ -198,7 +202,7 @@ function NewReservation() {
       console.error("An error occurred:", error);
     }
   };
-  
+
   /**
  * Get the day date as a string with leading zero if less than 10.
  * @param {Date} d - The date object to extract the day from.
@@ -243,7 +247,7 @@ function NewReservation() {
  * @returns {void}
  */
   const computeAdditionalFee = () => {
-    if(guestNum > 2) {
+    if (guestNum > 2) {
       setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
     } else {
       setAdditionalFee(0);

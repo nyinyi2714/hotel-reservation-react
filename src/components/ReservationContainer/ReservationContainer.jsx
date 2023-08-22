@@ -7,8 +7,6 @@ import "./ReservationContainer.css";
  * @author Nyi Nyi Moe Htet
  * @since July 24th 2023
  * @param {Object} props - The component props.
- * @param {Function} props.openRoomModal - Function to open the room modal.
- * @param {Function} props.openEditModal - Function to open the edit modal.
  * @returns {JSX.Element} The rendered ReservationContainer component.
  */
 function ReservationContainer(props) {

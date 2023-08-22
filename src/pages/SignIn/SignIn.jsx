@@ -13,7 +13,6 @@ import "./SignIn.css";
  * @returns {JSX.Element} component that displays the user sign in form.
  */
 function SignIn() {
-  // TODO delete users
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);

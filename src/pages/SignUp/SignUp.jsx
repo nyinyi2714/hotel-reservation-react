@@ -8,6 +8,7 @@ import "./SignUp.css";
 /**
   * Password is valid if it"s b/w 8 and 32 characters, and
   * has 1 lowercase letter, 1 uppercase letter, and 1 number
+  * @component
   * @param {string} password The password to get validated.
   * @returns {boolean} if all the tests passed return true, else false. 
   */
@@ -252,11 +253,9 @@ const { setUser, setAccessToken } = useStateContext();
       });
 
       const responseData = await response.json();
-      console.log(response)
+
       if (response.ok) {
         console.log("User registered successfully:", responseData.message);
-        // Navigate back to homepage after successful registration
-        console.log(responseData)
         setUser({first_name: responseData.first_name});
         setAccessToken(responseData.access_token);
         navigate("/");

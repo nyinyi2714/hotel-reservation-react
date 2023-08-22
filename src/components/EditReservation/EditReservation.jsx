@@ -4,19 +4,26 @@ import { useStateContext } from "../../StateContext";
 import { backendUrl } from "../../config";
 import "./EditReservation.css";
 
+/**
+ * EditReservation component for modifying and updating reservations.
+ * @component
+ * @author Nyi Nyi Moe Htet
+ * @since August 18th 2023
+ * @param {Object} props - The props containing necessary functions and data.
+ * @returns {JSX.Element} The JSX element for editing reservations.
+ */
 function EditReservation(props) {
   const { closeEditModal, reservation, fetchReservations, convertStringToDateObj } = props;
-  const { 
-    startDate, 
+  const {
+    startDate,
     setStartDate,
-    endDate, 
+    endDate,
     setEndDate,
-    guestNum, 
+    guestNum,
     setGuestNum,
-    accessToken, 
-    resetState 
+    accessToken,
+    resetState
   } = useStateContext();
-  // TODO: access reservation.roomType from props
   const [selectedRoomType, setSelectedRoomType] = useState("standard");
   const roomIds = {
     "standard": 1,
@@ -44,38 +51,41 @@ function EditReservation(props) {
  * @param {Date} date - The input date object.
  * @returns {Object} An object containing the date's components: date, month, and year.
  */
-// TODO: documentation
-function convertDateToObject(date) {
-  if (!(date instanceof Date)) {
+  function convertDateToObject(date) {
+    if (!(date instanceof Date)) {
       throw new Error('Input is not a valid Date object');
+    }
+
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1; // Months are zero-based, add 1
+    const day = date.getDate();
+
+    return { year, month, day };
   }
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1; // Months are zero-based, add 1
-  const day = date.getDate();
-
-  return { year, month, day };
-}
-
-const computeTotalPrice = (roomType) => {
-  const roomPrice = {
-    standard: 150,
-    deluxe: 250,
-    suite: 350,
-  };
-  const taxes = 0.13;
-  const additionalFee = 25;
-  const numOfNight = endDate.getDate() - startDate.getDate();
-  let totalPrice = roomPrice[roomType] * numOfNight;
-  if(guestNum > 2) totalPrice += (4 - guestNum ) * additionalFee;
-  totalPrice += totalPrice * taxes;
-  return totalPrice;
-}
+  /**
+ * Computes the total price of a reservation based on room type, number of nights, and guest count.
+ * @param {string} roomType - The selected room type (e.g., "standard", "deluxe", "suite").
+ * @returns {number} The calculated total price for the reservation.
+ */
+  const computeTotalPrice = (roomType) => {
+    const roomPrice = {
+      standard: 150,
+      deluxe: 250,
+      suite: 350,
+    };
+    const taxes = 0.13;
+    const additionalFee = 25;
+    const numOfNight = endDate.getDate() - startDate.getDate();
+    let totalPrice = roomPrice[roomType] * numOfNight;
+    if (guestNum > 2) totalPrice += (4 - guestNum) * additionalFee;
+    totalPrice += totalPrice * taxes;
+    return totalPrice;
+  }
 
   /**
  * Saves the changes made to the reservation.
  * Updates the reservation details via an API call.
- * Also handles resetting states and fetching updated reservations.
  * @returns {void}
  */
   const saveChanges = async () => {
@@ -119,8 +129,6 @@ const computeTotalPrice = (roomType) => {
 
   /**
  * Deletes the reservation by updating its status.
- * Also handles resetting states and fetching updated reservations.
- *
  * @returns {void}
  */
   const deleteReservation = async () => {
