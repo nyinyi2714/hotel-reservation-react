@@ -44,7 +44,7 @@ function Manager() {
     setMessage(messages.generatingReport);
     try {
       const response = await fetch(`${backendUrl}/show/report`, {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,

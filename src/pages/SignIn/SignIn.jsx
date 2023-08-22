@@ -14,8 +14,8 @@ import "./SignIn.css";
  */
 function SignIn() {
   // TODO delete users
-  const [email, setEmail] = useState("noah.smith@example.com");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isEmailValid, setIsEmailValid] = useState(true);
   // State for toggling password visibility
@@ -120,14 +120,14 @@ function SignIn() {
         setUser(responseData.user);
         setAccessToken(responseData.user.access);
         // Navigate back to the previous route after successful registration
-        navigate(-1);
+        navigate("/");
       } else {
         console.error("Sign-in failed:", responseData.error);
-        // Handle sign-in failure, display an error message, etc.
+        alert(responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle fetch or other errors.
+      alert(error);
     }
 
     setIsSigningIn(false);

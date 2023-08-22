@@ -89,16 +89,14 @@ function RoomModal(props) {
         <div className="room-modal__description">
           <h3>Description</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Nemo itaque tenetur quidem vitae facere, dicta omnis aperiam 
-            quod praesentium ducimus, blanditiis porro ratione? Accusamus
-            dolorum cum, consequatur sed beatae nam?
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Nemo itaque tenetur quidem vitae facere, dicta omnis aperiam 
-            quod praesentium ducimus, blanditiis porro ratione? Accusamus
-            dolorum cum, consequatur sed beatae nam?
+          Discover comfort and style in our {room.name} King Room. Unwind
+           in a spacious room featuring a plush king-sized bed with 
+           premium linens, ensuring a restful night's sleep. Enjoy 
+           modern amenities including a flat-screen TV, high-speed 
+           Wi-Fi, and a well-appointed work area. The room boasts 
+           elegant decor and large windows offering abundant natural 
+           light. Indulge in the luxurious bathroom equipped with a 
+           rainfall shower and complimentary toiletries.
           </p>
         </div>
         {initiateBooking && <button 

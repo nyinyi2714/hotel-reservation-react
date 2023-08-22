@@ -138,20 +138,6 @@ function NewReservation() {
   }, [year]);
 
   /**
- * Converts a given date to an object containing its components.
- *
- * @param {Date} date - The input date object.
- * @returns {Object} An object containing the date's components: date, month, and year.
- */
-  const convertDateToObj = (date) => {
-    return {
-      date: startDate.getDate(), 
-      month: startDate.getMonth(), 
-      year: startDate.getFullYear()
-    };
-  };
-
-  /**
  * Handles the booking of the reservation.
  * Run all validation tests and if all pass, then it
  * sends an API request to book the reservation.
@@ -208,6 +194,7 @@ function NewReservation() {
         setDisplayMessage(failedReservationMessage);
       }
     } catch (error) {
+      alert(error);
       console.error("An error occurred:", error);
     }
   };

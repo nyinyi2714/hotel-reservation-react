@@ -84,7 +84,7 @@ function ReservationContainer(props) {
       </button>
       <span>#{reservation.reservation_id}</span>
       <span>{reservation.room_details.name}</span>
-      <span>${reservation.total_price}</span>
+      <span>${reservation.total_price.toFixed(2)}</span>
       <span>{reservation.number_of_guest} Person{reservation.number_of_guest > 1 && "s"}</span>
       <span>
         {reservation && generateDate(
