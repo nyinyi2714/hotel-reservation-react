@@ -7,13 +7,11 @@ import "./RoomModal.css";
  * @author Nyi Nyi Moe Htet
  * @since July 29th 2023
  * @param {Object} props - The props passed to the RoomModal component.
- * @param {Function} props.closeRoomModal - A function to close the room modal.
- * @param {Function} props.initiateBooking - A function to initiate the booking process.
  * @returns {JSX.Element} The rendered RoomModal component.
  */
 function RoomModal(props) {
-  const {closeRoomModal, initiateBooking } = props;
-  const [photoSrc, setPhotoSrc] = useState("/images/room-1/photo-1.jpg");
+  const {closeRoomModal, initiateBooking, room } = props;
+  const [photoSrc, setPhotoSrc] = useState(`/images/${room.name.toLowerCase()}/photo-1.jpg`);
 
   /**
    * Changes the displayed photo in the modal.
@@ -21,7 +19,7 @@ function RoomModal(props) {
    * @returns {void}
    */
   const changePhoto = (e) => {
-    setPhotoSrc(`/images/room-1/${e.target.id}.jpg`);
+    setPhotoSrc(`/images/${room.name.toLowerCase()}/${e.target.id}.jpg`);
   };
 
   const closeWithEsc = (e) => {
@@ -56,32 +54,32 @@ function RoomModal(props) {
         >
           <i className='bx bx-x' />
         </button>
-        <h2>Hotel Room Title</h2>
+        <h2>{room.name}</h2>
         <div className="room-modal__photo-container">
           <img src={photoSrc} alt="room-preview--zoom" />
         </div>
         <div className="room-modal__gallery">
           <img 
             id="photo-1"
-            src="/images/room-1/photo-1.jpg" 
+            src={`/images/${room.name.toLowerCase()}/photo-1.jpg`}
             alt="room-preview-1" 
             onClick={changePhoto}
           />
           <img
             id="photo-2"
-           src="/images/room-1/photo-2.jpg" 
+           src={`/images/${room.name.toLowerCase()}/photo-2.jpg`}
            alt="room-preview-2" 
             onClick={changePhoto}
           />
           <img
             id="photo-3"
-            src="/images/room-1/photo-3.jpg" 
+            src={`/images/${room.name.toLowerCase()}/photo-3.jpg`} 
             alt="room-preview-3" 
             onClick={changePhoto}
           />
           <img 
             id="photo-4"
-            src="/images/room-1/photo-4.jpg" 
+            src={`/images/${room.name.toLowerCase()}/photo-4.jpg`} 
             alt="room-preview-4" 
             onClick={changePhoto}
           />
@@ -89,25 +87,23 @@ function RoomModal(props) {
         <div className="room-modal__description">
           <h3>Description</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Nemo itaque tenetur quidem vitae facere, dicta omnis aperiam 
-            quod praesentium ducimus, blanditiis porro ratione? Accusamus
-            dolorum cum, consequatur sed beatae nam?
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-            Nemo itaque tenetur quidem vitae facere, dicta omnis aperiam 
-            quod praesentium ducimus, blanditiis porro ratione? Accusamus
-            dolorum cum, consequatur sed beatae nam?
+          Discover comfort and style in our {room.name} King Room. Unwind
+           in a spacious room featuring a plush king-sized bed with 
+           premium linens, ensuring a restful night's sleep. Enjoy 
+           modern amenities including a flat-screen TV, high-speed 
+           Wi-Fi, and a well-appointed work area. The room boasts 
+           elegant decor and large windows offering abundant natural 
+           light. Indulge in the luxurious bathroom equipped with a 
+           rainfall shower and complimentary toiletries.
           </p>
         </div>
         {initiateBooking && <button 
           className="btn room-modal__btn" 
           type="button"
           onClick={initiateBooking}
-          id={"room.room_number"}
+          id={room.id}
         >
-          Book for $137
+          Book for ${room.price}
         </button>}
       </div>
     </div>

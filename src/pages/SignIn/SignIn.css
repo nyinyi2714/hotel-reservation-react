@@ -21,13 +21,6 @@
   place-items: center;
 }
 
-.signin__hotel-logo {
-  font-style: italic;
-  text-align: center;
-  font-size: var(--font-xl);
-  margin-bottom: 16px;
-}
-
 .signin__signup-invite {
   position: relative;
   width: 100%;

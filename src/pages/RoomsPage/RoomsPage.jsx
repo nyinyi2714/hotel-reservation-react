@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
+import { backendUrl } from "../../config";
 import "./RoomsPage.css";
 
 /**
@@ -12,7 +13,7 @@ import "./RoomsPage.css";
 export const filterRooms = (rooms, roomQuery) => {
   const filteredRooms = [];
     for (const room of rooms) {
-      if (room.roomType.includes(roomQuery.toLowerCase())) {
+      if (room.name.toLowerCase().includes(roomQuery.toLowerCase())) {
         filteredRooms.push(room);
       }
     }
@@ -27,8 +28,7 @@ export const filterRooms = (rooms, roomQuery) => {
  * @returns {JSX.Element} component that displays rooms page.
  */
 function RoomsPage() {
-  // TODO change the roomType, as it's coming from backend
-  const [rooms, setRooms] = useState([{roomType: "standard"}, {roomType: "deluxe"}, {roomType: "suite"}]);
+  const [rooms, setRooms] = useState([]);
   const [roomQuery, setRoomQuery] = useState("");
 
   // Handles changes in the room search query input.
@@ -65,8 +65,14 @@ function RoomsPage() {
    * Fetches rooms data from the backend and updates state.
    * @returns {void}
    */
-  const updateRooms = () => {
-    // TODO
+  const updateRooms = async () => {
+    try {
+      const data = await fetch(`${backendUrl}/show/allRooms`);
+      const roomsData = await data.json();
+      setRooms(roomsData.rooms);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
@@ -95,7 +101,7 @@ function RoomsPage() {
       </button>
       <div>{displayMessage()}</div>
       <div className="rooms-page__gallery">
-        {filteredRooms.map(room => <RoomContainer room={room} />)}
+        {filteredRooms.map(room => <RoomContainer room={room} key={room.id} rooms={rooms} />)}
       </div>
       {filteredRooms.length === 0 && 
         <div className="rooms-page__err">

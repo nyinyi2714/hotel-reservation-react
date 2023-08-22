@@ -9,12 +9,12 @@ import RoomsPage from "./pages/RoomsPage/RoomsPage";
 import NewReservation from "./pages/NewReservation/NewReservation";
 import ManageReservation from "./pages/ManageReservation/ManageReservation";
 import Manager from "./pages/Manager/Manager";
-import Popup from "./components/Popup/Popup";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import { StateProvider } from "./StateContext";
 import "./App.css";
 
 export default function App() {
+
   return (
     <div className="app">
       <StateProvider>
@@ -28,7 +28,6 @@ export default function App() {
             <Route path="/reservation/new" element={<NewReservation />} />
             <Route path="/reservations" element={<ManageReservation />} />
             <Route path="/manager" element={<Manager />} />
-            <Route path="/popup" element={<Popup />} />
           </Routes>
           <Footer/>
         </>

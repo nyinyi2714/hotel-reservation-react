@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 import { backendUrl } from "../../config";
+import { useStateContext } from "../../StateContext";
 import "./SignUp.css";
 
 /**
   * Password is valid if it"s b/w 8 and 32 characters, and
   * has 1 lowercase letter, 1 uppercase letter, and 1 number
+  * @component
   * @param {string} password The password to get validated.
   * @returns {boolean} if all the tests passed return true, else false. 
   */
@@ -77,6 +79,8 @@ const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 const [isSigningUp, setIsSigningUp] = useState(false);
 
 const navigate = useNavigate();
+
+const { setUser, setAccessToken } = useStateContext();
 
 // Update first name state on input change
   const handleFirstName = (e) => {
@@ -252,16 +256,16 @@ const navigate = useNavigate();
 
       if (response.ok) {
         console.log("User registered successfully:", responseData.message);
-        // Navigate back to the previous route after successful registration
-        // TODO: Implement sign in after signing up
-        navigate(-1);
+        setUser({first_name: responseData.first_name});
+        setAccessToken(responseData.access_token);
+        navigate("/");
       } else {
         console.error("Registration failed:", responseData.error);
-        // Handle registration failure, display an error message, etc.
+        alert(responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle fetch or other errors.
+      alert(error);
     }
 
     setIsSigningUp(false);
@@ -281,7 +285,6 @@ const navigate = useNavigate();
           </Link>
         </div>
         <form className="signup__form" onSubmit={handleSubmit}>
-          <div className="signup__hotel-logo">HOTEL LOGO</div>
           <h2>CREATE AN ACCOUNT</h2>
           <div className="relative-position">
             <input 

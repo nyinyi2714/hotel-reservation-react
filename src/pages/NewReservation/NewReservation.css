@@ -54,6 +54,10 @@
   border-bottom: 1px solid var(--light-grey);
 }
 
+.new-reservation__payment.hide {
+  display: none;
+}
+
 .new-reservation__payment > h3 {
   font-size: var(--font-xl);
   padding-bottom: 10px;

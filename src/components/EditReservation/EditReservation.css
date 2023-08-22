@@ -61,3 +61,8 @@
   color: #ff0000;
   border-color: #ff0000;
 }
+
+.edit-reservation-modal .btn--default {
+  color: #000000;
+  border-color: #000000;
+}

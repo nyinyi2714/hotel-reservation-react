@@ -25,7 +25,7 @@ function SignIn() {
   const navigate = useNavigate();
 
   // Retrieve functions stored in central react state
-  const { setAccessToken } = useStateContext();
+  const { setUser, setAccessToken } = useStateContext();
 
   // Update email state on input change
   const handleEmail = (e) => {
@@ -101,7 +101,7 @@ function SignIn() {
     setIsSigningIn(true);
     // Sending sign in credentials to backend API
     try {
-      const response = await fetch(`${backendUrl}/auth/signin`, {
+      const response = await fetch(`${backendUrl}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,18 +115,18 @@ function SignIn() {
       const responseData = await response.json();
   
       if (response.ok) {
-        console.log("Sign-in successful:", responseData.user);
         // Store the access token 
+        setUser(responseData.user);
         setAccessToken(responseData.user.access);
         // Navigate back to the previous route after successful registration
-        navigate(-1);
+        navigate("/");
       } else {
         console.error("Sign-in failed:", responseData.error);
-        // Handle sign-in failure, display an error message, etc.
+        alert(responseData.error);
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      // Handle fetch or other errors.
+      alert(error);
     }
 
     setIsSigningIn(false);
@@ -146,7 +146,6 @@ function SignIn() {
           </Link>
         </div>
         <form className="signin__form" onSubmit={handleSubmit}>
-          <div className="signin__hotel-logo">HOTEL LOGO</div>
           <h1>Welcome Back</h1>
           <h2>Sign in to your account</h2>
           <div>

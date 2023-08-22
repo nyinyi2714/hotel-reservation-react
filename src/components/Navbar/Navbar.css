@@ -23,6 +23,12 @@ nav {
   height: 68px;
 }
 
+.nav__logo {
+  display: block;
+  width: 100px;
+  border-radius: 5px;
+}
+
 .nav__links {
   display: flex;
   gap: 5px;
@@ -30,7 +36,7 @@ nav {
   align-items: center;
 }
 
-.nav__btn {
+.nav__btn, .nav__name {
   margin: 5px 15px;
   border: none;
   font-size: 15px;

@@ -20,16 +20,22 @@ function NewReservation() {
   const [isCardNumberValid, setIsCardNumberValid] = useState(true);
   const [isYearValid, setIsYearValid] = useState(true);
 
+  const {
+    startDate,
+    endDate,
+    roomType,
+    guestNum,
+    accessToken,
+  } = useStateContext();
+
   // State variables for reciept
   const [totalPrice, setTotalPrice] = useState(0);
   const [taxes, setTaxes] = useState(0);
-  const [roomPrice, setRoomPrice] = useState(0);
+  const [roomPrice, setRoomPrice] = useState(roomType.price);
   const taxRatePercent = 0.13;
   // Additional fee for guests after 2 people
   const additionalFeePerGuest = 25;
   const [additionalFee, setAdditionalFee] = useState(0);
-
-  const { startDate, endDate, roomType, guestNum, user, accessToken } = useStateContext();
 
   const successfulReservationMessage = "Your new reservation has been successfully created. Thank you!";
   const failedReservationMessage = "We are unable to process your request at the moment. Please try again later.";
@@ -132,20 +138,6 @@ function NewReservation() {
   }, [year]);
 
   /**
- * Converts a given date to an object containing its components.
- *
- * @param {Date} date - The input date object.
- * @returns {Object} An object containing the date's components: date, month, and year.
- */
-  const convertDateToObj = (date) => {
-    return {
-      date: startDate.getDate(), 
-      month: startDate.getMonth(), 
-      year: startDate.getFullYear()
-    };
-  };
-
-  /**
  * Handles the booking of the reservation.
  * Run all validation tests and if all pass, then it
  * sends an API request to book the reservation.
@@ -161,21 +153,37 @@ function NewReservation() {
       return;
     }
 
+    /**
+   * Converts a JavaScript Date object to an object containing its components.
+   * @param {Date} date - The input date object.
+   * @throws {Error} Throws an error if the input is not a valid Date object.
+   * @returns {Object} An object containing the date's components: year, month, and day.
+   */
+    function convertDateToObject(date) {
+      if (!(date instanceof Date)) {
+        throw new Error('Input is not a valid Date object');
+      }
+
+      const year = date.getFullYear();
+      const month = date.getMonth() + 1; // Months are zero-based, add 1
+      const day = date.getDate();
+
+      return { year, month, day };
+    }
+
     // Prepare reservation data
-    // TODO: convert date to obj and rename keys
     const reservationData = {
-      startDate,
-      endDate,
-      roomType,
-      guestNum,
-      user,
-      cardNumber,
+      date_of_occupancy: convertDateToObject(startDate),
+      date_of_departure: convertDateToObject(endDate),
+      room_id: roomType.id,
+      number_of_guest: guestNum,
+      card_number: cardNumber,
+      total_price: totalPrice,
     };
 
     try {
       // Send reservation data via API request
-      // TODO: new reservation route
-      const response = await fetch(`${backendUrl}/`, {
+      const response = await fetch(`${backendUrl}/makeReservation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -190,6 +198,7 @@ function NewReservation() {
         setDisplayMessage(failedReservationMessage);
       }
     } catch (error) {
+      alert(error);
       console.error("An error occurred:", error);
     }
   };
@@ -219,7 +228,7 @@ function NewReservation() {
  * @returns {void}
  */
   const computeRoomPrice = () => {
-    const pricePerNight = 85.00;
+    const pricePerNight = roomType.price;
     let roomPrice = (pricePerNight * getNumOfNight(endDate, startDate));
     setRoomPrice(roomPrice);
   };
@@ -238,7 +247,11 @@ function NewReservation() {
  * @returns {void}
  */
   const computeAdditionalFee = () => {
-    setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
+    if (guestNum > 2) {
+      setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
+    } else {
+      setAdditionalFee(0);
+    }
   };
 
   useMemo(() => {
@@ -246,7 +259,7 @@ function NewReservation() {
     computeTaxes();
     computeAdditionalFee();
     setTotalPrice((taxes + roomPrice + additionalFee));
-  }, [startDate, endDate, roomType, guestNum, roomPrice, taxes]);
+  }, [startDate, endDate, roomType, guestNum, roomPrice, taxes, additionalFee]);
 
   return (
     <React.Fragment>
@@ -276,7 +289,7 @@ function NewReservation() {
               </h3>
             </div>
             <div className="new-reservation__row">
-              <span>1 King Bed Stardard</span>
+              <span>{`1 King Bed ${roomType.name}`}</span>
               <span>${roomPrice.toFixed(2)}</span>
             </div>
             {guestNum > 2 && <div className="new-reservation__row">
@@ -299,7 +312,7 @@ function NewReservation() {
             </div>
           </div>
         </div>
-        <div className="new-reservation__payment">
+        <div className={"new-reservation__payment"}>
           <h3>Payment</h3>
           <form>
             <div className="new-reservation__payment-input">

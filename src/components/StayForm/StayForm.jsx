@@ -12,7 +12,7 @@ import { useStateContext } from "../../StateContext";
  * @returns {JSX.Element} The rendered StayForm component.
  */
 function StayForm(props) {
-  const { isModifying, reservation } = props;
+  const { isModifying, reservation, convertStringToDateObj } = props;
   let {
     startDate, 
     endDate, 
@@ -22,12 +22,11 @@ function StayForm(props) {
     setGuestNum, 
   } = useStateContext();
 
-  // TODO: remove comment after backend returns reservation
-  // if(isModifying) {
-  //   startDate = reservation.date_of_occupancy;
-  //   endDate = reservation.date_of_departure;
-  //   guestNum = reservation.num_guests;
-  // }
+  if(isModifying) {
+    startDate = convertStringToDateObj(reservation.date_of_occupancy);
+    endDate = convertStringToDateObj(reservation.date_of_departure) ;
+    guestNum = reservation.number_of_guest;
+  }
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);
   const [currGuestNum, setCurrGuestNum] = useState(guestNum);

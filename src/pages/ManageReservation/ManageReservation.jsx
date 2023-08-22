@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
 import EditReservation from "../../components/EditReservation/EditReservation";
+import { useStateContext } from "../../StateContext";
+import { backendUrl } from "../../config";
 import "./ManageReservation.css";
 
 /**
@@ -12,18 +14,29 @@ import "./ManageReservation.css";
  * @returns {JSX.Element} The rendered ManageReservation component.
  */
 function ManageReservation() {
-  // TODO: delete the {}
-  const [reservations, setReservations] = useState([{}]);
+  const [reservations, setReservations] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
+  const [currReservation, setCurrReservation] = useState(null);
+
+  const { accessToken } = useStateContext();
+
+  /**
+  * Retrieves a reservation by its unique identifier from the reservations array.
+  * @param {number} id - The unique identifier of the reservation to retrieve.
+  * @returns {Object|null} The reservation object if found, or null if not found.
+  */
+  const getReservationById = (id) => {
+    return reservations.find(reservation => reservation.reservation_id == id);
+  };
 
   /**
    * Opens the room modal for viewing room details.
    * @returns {void}
    */
-  const openRoomModal = () => {
-    // TODO: Pass room obj as props to roomModal
+  const openRoomModal = (e) => {
     setIsRoomOpen(true);
+    setCurrReservation(getReservationById(e.target.id));
   };
 
   /**
@@ -38,8 +51,9 @@ function ManageReservation() {
    * Opens the edit reservation modal.
    * @returns {void}
    */
-  const openEditModal = () => {
+  const openEditModal = (e) => {
     setIsEditModalOpen(true);
+    setCurrReservation(getReservationById(e.target.id));
   };
 
   /**
@@ -50,8 +64,51 @@ function ManageReservation() {
     setIsEditModalOpen(false);
   };
 
-  const fetchReservations = () => {
-    // TODO
+  /**
+ * Converts a date string to a JavaScript Date object.
+ * @param {string} string - The input date string in the format "Day Month Year".
+ * @returns {Date} The JavaScript Date object representing the converted date.
+ */
+  const convertStringToDateObj = (string) => {
+    const months = {
+      Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
+      Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
+    };
+  
+    const parts = string.split(" ");
+    const day = parseInt(parts[1], 10);
+    const month = months[parts[2]];
+    const year = parseInt(parts[3], 10);
+  
+    return new Date(year, month, day);
+  };
+
+  /**
+ * Fetches reservations from the backend API and updates the state with active reservations.
+ * @returns {void}
+ */
+  const fetchReservations = async () => {
+    try {
+      const response = await fetch(`${backendUrl}/show/userReservations`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+
+      const reservationsData = await response.json();
+      const activeReservations = reservationsData.reservations.filter(reservation => reservation.is_active);
+      setReservations(activeReservations);
+
+      if (response.ok) {
+        console.log("fetch successfully")
+      } else {
+        console.error("Reservation fetch failed:", reservationsData.message);
+      }
+    } catch(err) {
+      console.error(err);
+    }
   };
 
   useEffect(() => {
@@ -62,28 +119,33 @@ function ManageReservation() {
     <div className="manage-reservation">
       <h2>Your Reservations</h2>
         <div className="manage-reservation__display">
-          {reservations.map(reservation => {
+          {reservations && reservations.map((reservation, index) => {
             return <ReservationContainer 
               openRoomModal={openRoomModal} 
               openEditModal={openEditModal}
+              convertStringToDateObj={convertStringToDateObj}
               reservation={reservation}
-              // TODO: check if reservation.id is correctly accessed
-              key={reservation.id}
+              key={index}
             />
           })}
         </div>
-        {reservations.length <= 0 && 
+        {reservations && reservations.length <= 0 && 
           <div className="manage-reservation__err">
             You Don't Have Any Reservation.
           </div>
         }
-      {isRoomModalOpen && <RoomModal closeRoomModal={closeRoomModal} />}
-      {/* TODO: pass reservation (has to be the one user clicks) as props */}
+      {isRoomModalOpen && 
+      <RoomModal 
+        closeRoomModal={closeRoomModal}
+        room={currReservation.room_details} 
+      />
+      }
       {isEditModalOpen && 
         <EditReservation 
           closeEditModal={closeEditModal} 
-          reservation={{}} 
+          reservation={currReservation} 
           fetchReservations={fetchReservations}
+          convertStringToDateObj={convertStringToDateObj}
         />
       }
     </div>

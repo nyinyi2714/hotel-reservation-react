@@ -11,9 +11,10 @@ import "./RoomContainer.css";
  * @since July 29th 2023
  * @returns {JSX.Element} The rendered RoomContainer component.
  */
-function RoomContainer() {
+function RoomContainer(props) {
+  const { room, rooms } = props;
   // Accessing state and navigation
-  const { setRoomType } = useStateContext(); 
+  const { setRoomType, user } = useStateContext(); 
   const navigate = useNavigate();
 
   // State variable for room modal
@@ -41,28 +42,29 @@ function RoomContainer() {
    * @returns {void}
    */
   const initiateBooking = (e) => {
-    let roomType = e.target.id;
+    const roomId = e.target.id;
+    const roomType = rooms.find((room) => room.id == roomId);
     setRoomType(roomType);
-    navigate("/reservation/new");
+    if(user) navigate("/reservation/new");
+    else navigate("/signin");
   };
 
   return (
     <div className="room-container box-shadow">
-      {/* /images/{room-type}/photo-1.jpg */}
       <img 
-        src="/images/room-1/photo-1.jpg" 
+        src={`/images/${room.name.toLowerCase()}/photo-1.jpg` }
         className="room-container__img" 
         alt="room-preview" 
       />
       <div className="room-container__content">
-        <h3>Hotel Room Title</h3>
+        <h3>{room.name}</h3>
         <button 
           className="btn"
           type="button"
           onClick={initiateBooking}
-          id={"room.room_number"}
+          id={room.id}
         >
-          Book for $137
+          Book for ${room.price}
         </button>
         <button 
           className="btn" 
@@ -75,6 +77,7 @@ function RoomContainer() {
         <RoomModal 
           closeRoomModal={closeRoomModal} 
           initiateBooking={initiateBooking}
+          room={room}
         />
       }
     </div>
