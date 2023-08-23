@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Class: ManageReservation</title>
+    <title>JSDoc: Class: EditReservation</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Class: ManageReservation</h1>
+    <h1 class="page-title">Class: EditReservation</h1>
 
     
 
@@ -28,7 +28,7 @@
 
 <header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>ManageReservation<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
+        <h2><span class="attribs"><span class="type-signature"></span></span>EditReservation<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h2>
         
     
 </header>
@@ -41,7 +41,7 @@
     
 
     
-    <h4 class="name" id="ManageReservation"><span class="type-signature"></span>new ManageReservation<span class="signature">()</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+    <h4 class="name" id="EditReservation"><span class="type-signature"></span>new EditReservation<span class="signature">(props)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
     
 
     
@@ -49,7 +49,7 @@
 
 
 <div class="description">
-    <p>This component displays a list of reservations and provides options to open modals for rooms and editing.</p>
+    <p>EditReservation component for modifying and updating reservations.</p>
 </div>
 
 
@@ -58,6 +58,55 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The props containing necessary functions and data.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -70,7 +119,7 @@
 
     
     <dt class="tag-since">Since:</dt>
-    <dd class="tag-since"><ul class="dummy"><li>July 28th 2023</li></ul></dd>
+    <dd class="tag-since"><ul class="dummy"><li>August 18th 2023</li></ul></dd>
     
 
     
@@ -103,7 +152,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line16">line 16</a>
+        <a href="components_EditReservation_EditReservation.jsx.html">components/EditReservation/EditReservation.jsx</a>, <a href="components_EditReservation_EditReservation.jsx.html#line15">line 15</a>
     </li></ul></dd>
     
 
@@ -132,7 +181,7 @@
 
         
 <div class="param-desc">
-    <p>The rendered ManageReservation component.</p>
+    <p>The JSX element for editing reservations.</p>
 </div>
 
 
@@ -181,7 +230,7 @@
     
 
     
-    <h4 class="name" id="~closeEditModal"><span class="type-signature">(inner) </span>closeEditModal<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="~cancelChanges"><span class="type-signature">(inner) </span>cancelChanges<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -189,7 +238,8 @@
 
 
 <div class="description">
-    <p>Closes the edit reservation modal.</p>
+    <p>Cancels the changes made and resets the state to its initial values.
+Also closes the edit modal.</p>
 </div>
 
 
@@ -233,7 +283,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line63">line 63</a>
+        <a href="components_EditReservation_EditReservation.jsx.html">components/EditReservation/EditReservation.jsx</a>, <a href="components_EditReservation_EditReservation.jsx.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -287,7 +337,7 @@
     
 
     
-    <h4 class="name" id="~closeRoomModal"><span class="type-signature">(inner) </span>closeRoomModal<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="~computeTotalPrice"><span class="type-signature">(inner) </span>computeTotalPrice<span class="signature">(roomType)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -295,113 +345,7 @@
 
 
 <div class="description">
-    <p>Closes the room modal.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line46">line 46</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~convertStringToDateObj"><span class="type-signature">(inner) </span>convertStringToDateObj<span class="signature">(string)</span><span class="type-signature"> &rarr; {Date}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Converts a date string to a JavaScript Date object.</p>
+    <p>Computes the total price of a reservation based on room type, number of nights, and guest count.</p>
 </div>
 
 
@@ -437,7 +381,7 @@
 
         <tr>
             
-                <td class="name"><code>string</code></td>
+                <td class="name"><code>roomType</code></td>
             
 
             <td class="type">
@@ -453,7 +397,7 @@
 
             
 
-            <td class="description last"><p>The input date string in the format &quot;Day Month Year&quot;.</p></td>
+            <td class="description last"><p>The selected room type (e.g., &quot;standard&quot;, &quot;deluxe&quot;, &quot;suite&quot;).</p></td>
         </tr>
 
     
@@ -494,7 +438,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line72">line 72</a>
+        <a href="components_EditReservation_EditReservation.jsx.html">components/EditReservation/EditReservation.jsx</a>, <a href="components_EditReservation_EditReservation.jsx.html#line71">line 71</a>
     </li></ul></dd>
     
 
@@ -523,7 +467,7 @@
 
         
 <div class="param-desc">
-    <p>The JavaScript Date object representing the converted date.</p>
+    <p>The calculated total price for the reservation.</p>
 </div>
 
 
@@ -534,7 +478,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Date</span>
+<span class="param-type">number</span>
 
 
     </dd>
@@ -552,7 +496,7 @@
     
 
     
-    <h4 class="name" id="~fetchReservations"><span class="type-signature">(async, inner) </span>fetchReservations<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="~convertDateToObject"><span class="type-signature">(inner) </span>convertDateToObject<span class="signature">(date)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -560,113 +504,7 @@
 
 
 <div class="description">
-    <p>Fetches reservations from the backend API and updates the state with active reservations.</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line90">line 90</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-
-
-<dl>
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">void</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="~getReservationById"><span class="type-signature">(inner) </span>getReservationById<span class="signature">(id)</span><span class="type-signature"> &rarr; {Object|null}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Retrieves a reservation by its unique identifier from the reservations array.</p>
+    <p>Converts a given date to an object containing its components.</p>
 </div>
 
 
@@ -702,13 +540,13 @@
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>date</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">number</span>
+<span class="param-type">Date</span>
 
 
             
@@ -718,7 +556,7 @@
 
             
 
-            <td class="description last"><p>The unique identifier of the reservation to retrieve.</p></td>
+            <td class="description last"><p>The input date object.</p></td>
         </tr>
 
     
@@ -759,7 +597,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line29">line 29</a>
+        <a href="components_EditReservation_EditReservation.jsx.html">components/EditReservation/EditReservation.jsx</a>, <a href="components_EditReservation_EditReservation.jsx.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -788,7 +626,7 @@
 
         
 <div class="param-desc">
-    <p>The reservation object if found, or null if not found.</p>
+    <p>An object containing the date's components: date, month, and year.</p>
 </div>
 
 
@@ -800,9 +638,6 @@
     <dd>
         
 <span class="param-type">Object</span>
-|
-
-<span class="param-type">null</span>
 
 
     </dd>
@@ -820,7 +655,7 @@
     
 
     
-    <h4 class="name" id="~openEditModal"><span class="type-signature">(inner) </span>openEditModal<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="~deleteReservation"><span class="type-signature">(async, inner) </span>deleteReservation<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -828,7 +663,7 @@
 
 
 <div class="description">
-    <p>Opens the edit reservation modal.</p>
+    <p>Deletes the reservation by updating its status.</p>
 </div>
 
 
@@ -872,7 +707,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line54">line 54</a>
+        <a href="components_EditReservation_EditReservation.jsx.html">components/EditReservation/EditReservation.jsx</a>, <a href="components_EditReservation_EditReservation.jsx.html#line134">line 134</a>
     </li></ul></dd>
     
 
@@ -926,7 +761,7 @@
     
 
     
-    <h4 class="name" id="~openRoomModal"><span class="type-signature">(inner) </span>openRoomModal<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
+    <h4 class="name" id="~saveChanges"><span class="type-signature">(async, inner) </span>saveChanges<span class="signature">()</span><span class="type-signature"> &rarr; {void}</span></h4>
     
 
     
@@ -934,7 +769,8 @@
 
 
 <div class="description">
-    <p>Opens the room modal for viewing room details.</p>
+    <p>Saves the changes made to the reservation.
+Updates the reservation details via an API call.</p>
 </div>
 
 
@@ -978,7 +814,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="pages_ManageReservation_ManageReservation.jsx.html">pages/ManageReservation/ManageReservation.jsx</a>, <a href="pages_ManageReservation_ManageReservation.jsx.html#line37">line 37</a>
+        <a href="components_EditReservation_EditReservation.jsx.html">components/EditReservation/EditReservation.jsx</a>, <a href="components_EditReservation_EditReservation.jsx.html#line91">line 91</a>
     </li></ul></dd>
     
 
