@@ -8,7 +8,6 @@ import "./SignUp.css";
 /**
   * Password is valid if it"s b/w 8 and 32 characters, and
   * has 1 lowercase letter, 1 uppercase letter, and 1 number
-  * @component
   * @param {string} password The password to get validated.
   * @returns {boolean} if all the tests passed return true, else false. 
   */

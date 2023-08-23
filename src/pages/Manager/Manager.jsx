@@ -57,7 +57,7 @@ function Manager() {
         },
         body: JSON.stringify({
           year: year,
-          month: month+1,
+          month: parseInt(month, 10) + 1,
         }),
       });
   
