@@ -3,15 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
 import { backendUrl } from "../../config";
 import { useStateContext } from "../../StateContext";
+import useAuth from "../../hooks/useAuth";
 import "./SignIn.css";
 
-/**
- * Using this form, can sign in to an account that has already been created.
- * @component
- * @author Nyi Nyi Moe Htet
- * @since July 17 2023
- * @returns {JSX.Element} component that displays the user sign in form.
- */
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,8 +18,7 @@ function SignIn() {
 
   const navigate = useNavigate();
 
-  // Retrieve functions stored in central react state
-  const { setUser, setAccessToken } = useStateContext();
+  const { login } = useAuth();
 
   // Update email state on input change
   const handleEmail = (e) => {
@@ -42,11 +35,6 @@ function SignIn() {
     setShowPassword(!showPassword); 
   };
 
-  /**
-   * Validates the password.
-   * Password is invalid if it's empty.
-   * @returns {boolean} if the input is not empty return true, else false.
-   */
   const validatePassword = () => {
     if (password.length < 1) {
       setIsPasswordValid(false);
@@ -57,10 +45,6 @@ function SignIn() {
     }
   };
 
-  /**
-   * access email state and validate the input email.
-   * @returns {boolean} if the email input is valid then true, else false.
-   */
   const validateEmail = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValid = emailRegex.test(email);
@@ -83,11 +67,6 @@ function SignIn() {
     if (!isEmailValid) validateEmail(); 
   }, [email]);
 
-  /**
-   * This handle submission, validation and sign in.
-   * @param {React.SyntheticEvent} e - The click event object.
-   * @returns {void}
-   */
   const handleSubmit = async (e) => {
     // Prevent default form submission action
     e.preventDefault(); 
@@ -99,35 +78,9 @@ function SignIn() {
     if (!validateEmail() || !validatePassword()) return;
     
     setIsSigningIn(true);
-    // Sending sign in credentials to backend API
-    try {
-      const response = await fetch(`${backendUrl}/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-  
-      const responseData = await response.json();
-  
-      if (response.ok) {
-        // Store the access token 
-        setUser(responseData.user);
-        setAccessToken(responseData.user.access);
-        // Navigate back to the previous route after successful registration
-        navigate("/");
-      } else {
-        console.error("Sign-in failed:", responseData.error);
-        alert(responseData.error);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-      alert(error);
-    }
+    // sign in using firebase
+    login(email, password);
+    
 
     setIsSigningIn(false);
   };
