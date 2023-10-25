@@ -4,6 +4,7 @@
   overflow: auto;
   margin-top: var(--header-height);
   padding: 30px 0;
+  min-height: calc(100vh - 160px - var(--header-height));
 }
 
 .signup {
@@ -13,7 +14,7 @@
   --signup-error-message: red;
 
   width: 100%;
-  max-width: 900px;
+  max-width: 700px;
   height: min-content;
   display: grid;
   background-color: white;
@@ -195,4 +196,24 @@
 
 .signup__link:visited {
   color: initial;
+}
+
+/* Hide the sign up invite side */
+@media (max-width: 770px) {
+  .signup {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+  .signup__signin-invite {
+    display: none;
+  }
+  .signup__form {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 450px) {
+  .signup {
+    box-shadow: none !important;
+  }
 }

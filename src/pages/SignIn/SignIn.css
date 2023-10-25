@@ -4,6 +4,7 @@
   place-items: center;
   overflow: auto;
   padding: 30px 0;
+  min-height: calc(100vh - 160px - var(--header-height));
 }
 
 .signin {
@@ -13,7 +14,7 @@
   --signin-error-message: red;
 
   width: 100%;
-  max-width: 900px;
+  max-width: 700px;
   height: min-content;
   background-color: white;
   display: grid;
@@ -35,6 +36,8 @@
   align-items: center;
   text-align: center;
 }
+
+
 
 .signin__signup-invite::before {
   content: "";
@@ -197,4 +200,24 @@
 
 .signin__link:visited {
   color: initial;
+}
+
+/* Hide the sign up invite side */
+@media (max-width: 770px) {
+  .signin {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+  .signin__signup-invite {
+    display: none;
+  }
+  .signin__form {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 450px) {
+  .signin {
+    box-shadow: none !important;
+  }
 }

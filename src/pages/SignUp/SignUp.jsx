@@ -7,10 +7,8 @@ import useAuth from "../../hooks/useAuth";
 import "./SignUp.css";
 
 function SignUp() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [isFirstNameValid, setIsFirstNameValid] = useState(true);
-  const [isLastNameValid, setIsLastNameValid] = useState(true);
+  const [name, setName] = useState("");
+  const [isNameValid, setIsNameValid] = useState(true);
 
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
@@ -34,27 +32,15 @@ function SignUp() {
   const navigate = useNavigate();
   const { register } = useAuth();
 
-  // Update first name state on input change
-  const handleFirstName = (e) => {
-    setFirstName(e.target.value);
-    validateFirstName(e.target.value);
+  // Update name state on input change
+  const handleName = (e) => {
+    setName(e.target.value);
+    validateName(e.target.value);
   };
 
-  const validateFirstName = (name) => {
+  const validateName = (name) => {
     const result = name.length > 0;
-    setIsFirstNameValid(result);
-    return result;
-  };
-
-  // Update last name state on input change
-  const handleLastName = (e) => {
-    setLastName(e.target.value);
-    validateLastName(e.target.value);
-  };
-
-  const validateLastName = (name) => {
-    const result = name.length > 0;
-    setIsLastNameValid(result);
+    setIsNameValid(result);
     return result;
   };
 
@@ -151,8 +137,7 @@ function SignUp() {
 
   const runAllValidationTests = () => {
     return (
-      validateFirstName(firstName)
-      && validateLastName(lastName)
+      validateName(name)
       && validateEmail()
       && validatePassword(password)
       && validatePasswordMatch(confirmPassword)
@@ -170,7 +155,7 @@ function SignUp() {
     if (!runAllValidationTests()) return;
 
     setIsSigningUp(true);
-    register(email, password, firstName, lastName, phoneNumber);
+    register(email, password, name, phoneNumber);
 
     setIsSigningUp(false);
   };
@@ -193,36 +178,18 @@ function SignUp() {
           <div className="relative-position">
             <input
               type="text"
-              placeholder="First Name"
-              value={firstName}
-              onChange={handleFirstName}
+              placeholder="Name"
+              value={name}
+              onChange={handleName}
             />
             <span
               className={
-                isFirstNameValid
+                isNameValid
                   ? "signup__invalid-field"
                   : "signup__invalid-field show"
               }
             >
-              Please enter your First Name
-              <i className="bx bx-error-circle signup__err" />
-            </span>
-          </div>
-          <div className="relative-position">
-            <input
-              type="text"
-              placeholder="Last Name"
-              value={lastName}
-              onChange={handleLastName}
-            />
-            <span
-              className={
-                isLastNameValid
-                  ? "signup__invalid-field"
-                  : "signup__invalid-field show"
-              }
-            >
-              Please enter your Last Name
+              Please enter your Name
               <i className="bx bx-error-circle signup__err" />
             </span>
           </div>
