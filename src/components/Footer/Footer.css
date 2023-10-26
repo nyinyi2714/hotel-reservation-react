@@ -1,10 +1,11 @@
 footer {
   position: relative;
   color: white;
+  font-size: var(--font-sm);
 }
 
 .footer__content {
-  padding: 30px 0;
+  padding: 20px 0;
   background-color: var(--dark-navy);
 }
 
@@ -22,7 +23,6 @@ footer {
 }
 
 .footer_low_headings {
-  width: max-content;
   margin: 0 auto;
   text-align: left;
 }
@@ -33,6 +33,12 @@ footer {
   cursor: pointer;
   text-decoration: none;
   margin: 5px 20px 5px 0;
+}
+
+.footer_low_headings .top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .footer_low_headings .top > * {

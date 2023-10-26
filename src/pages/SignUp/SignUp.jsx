@@ -277,7 +277,14 @@ function SignUp() {
             type="submit"
             value={isSigningUp ? "Signing Up" : "Sign Up"}
           />
+          <div className="dark-btn-container">
+            <span>Already have an account?</span>
+            <Link to="/signin" className="signin__signup-btn dark-btn">
+              Sign In
+            </Link>
+          </div>
         </form>
+        
       </div>
     </div>
   );

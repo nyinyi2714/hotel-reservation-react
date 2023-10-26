@@ -23,7 +23,7 @@ function Navbar() {
 
   return (
     <nav className="nav">
-      <Link to="/"><img className="nav__logo" src="/images/logo.jpg" alt="logo" /></Link>
+      <Link to="/"><img className="nav__logo" src="/images/logo.png" alt="logo" /></Link>
       <div className="nav__links">
         {user && <span className="nav__name">
           Hello, {" "} 

@@ -1,14 +1,7 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
 
-/**
- * Renders the homepage of the Hotel Del Luna website.
- * @component
- * @author Raneen Kakar
- * @since August 1st 2023
- * @returns {JSX.Element} The rendered HomePage component.
- */
 function HomePage() {
   // tracks the position or index of the photo in the slide
   const [photoInt, setPhotoInt] = useState(0); 
@@ -17,33 +10,36 @@ function HomePage() {
   // maximum index for photos (7 photos in total)
   const maxPhotoInt = 6; 
   //reference to the DOM element containing the photos
-  const photoHolder = useRef(); 
+  const photoHolder = useRef();
+  const imageOffset = useRef(10); 
 
-  /**
-   * Handles the next photo button click event.
-   * Moves to the next photo in the gallery.
-   * @returns {void}
-   */
   const handleNextPhoto = () => {
     if (photoInt >= maxPhotoInt) return; 
     setIsNextBtnDisabled(true); 
     setPhotoInt(state => state + 1);  
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt + 1})`; 
+    photoHolder.current.style.right = `calc(100% * ${photoInt + 1} + ${(photoInt+1)*imageOffset.current}px)`; 
     setTimeout(() => { setIsNextBtnDisabled(false) }, 500); 
   };
   
-  /**
-   * Handles the prev photo button click event.
-   * Moves to the prev photo in the gallery.
-   * @returns {void}
-   */
   const handlePrevPhoto = () => { 
     if (photoInt <= 0) return; 
     setIsPrevBtnDisabled(true);  
     setPhotoInt(state => state - 1); 
-    photoHolder.current.style.right = `calc((100vw - 100px) * ${photoInt - 1})`; 
+    photoHolder.current.style.right = `calc(100% * ${photoInt - 1} + ${(photoInt-1)*imageOffset.current}px)`; 
     setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); 
   };
+
+  useEffect(() => {
+    const updateImageOffset = () => {
+      if(window.innerWidth < 650) imageOffset.current = 0;
+      else imageOffset.current = 10;
+    };
+
+    window.addEventListener("resize", updateImageOffset);
+    return () => {
+      window.removeEventListener("resize", updateImageOffset);
+    };
+  }, []);
 
   return (
     <div className="homepage">
@@ -115,11 +111,6 @@ function HomePage() {
 
       <section className="homepage__about-us">
         <div className="homepage__grid">
-          <div className="homepage__map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.6817626158345!2d104.86458007491994!3d11.574656188626848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095143e840bff3%3A0xae074d814c758c11!2shotel%20del%20luna!5e0!3m2!1sen!2sus!4v1690593395480!5m2!1sen!2sus"
-            />
-          </div>
           <div className="homepage__paragraph">
             <h3>Elegance of Past and Present</h3>
             <p>Incorporating ancient Eastern aesthetics with modern grandeur,
@@ -130,6 +121,11 @@ function HomePage() {
               welcomes guests as they enter the hotel, complete with ornate chandeliers,
               intricate artwork, and a nostalgic ambiance that is sure to evoke memories.
             </p>
+          </div>
+          <div className="homepage__map">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3908.6817626158345!2d104.86458007491994!3d11.574656188626848!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31095143e840bff3%3A0xae074d814c758c11!2shotel%20del%20luna!5e0!3m2!1sen!2sus!4v1690593395480!5m2!1sen!2sus"
+            />
           </div>
         </div>
       </section>

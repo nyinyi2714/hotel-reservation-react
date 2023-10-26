@@ -20,7 +20,7 @@ function Footer() {
             <span>Contact</span>
           </div>
           <div className="bottom">
-            Created by Emerald
+            Created by Nyi Nyi Moe Htet
           </div>
         </div>
       </div>

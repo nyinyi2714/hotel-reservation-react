@@ -76,6 +76,19 @@
   transition: 150ms ease-in-out;
 }
 
+.dark-btn-container {
+  display: none;
+  margin-top: 25px;
+  font-size: .8rem;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.dark-btn {
+  color: inherit;
+  border: 1px solid;
+}
+
 .signin__signup-btn:hover {
   color: var(--dark-navy);
   border: 2px solid #fff;
@@ -213,6 +226,9 @@
   }
   .signin__form {
     padding: 25px;
+  }
+  .dark-btn-container {
+    display: flex;
   }
 }
 

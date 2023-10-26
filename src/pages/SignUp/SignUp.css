@@ -83,6 +83,21 @@
   border-radius: 30px;
   padding: 5px 20px;
   transition: 150ms ease-in-out;
+  white-space: nowrap;
+}
+
+.dark-btn-container {
+  display: none;
+  margin-top: 25px;
+  font-size: .8rem;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.dark-btn {
+  color: inherit;
+  border: 1px solid;
 }
 
 .signup__signin-btn:hover {
@@ -209,6 +224,9 @@
   }
   .signup__form {
     padding: 25px;
+  }
+  .dark-btn-container {
+    display: flex;
   }
 }
 
