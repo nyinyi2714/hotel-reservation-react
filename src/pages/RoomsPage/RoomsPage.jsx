@@ -1,24 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
 import StayForm from "../../components/StayForm/StayForm";
 import RoomContainer from "../../components/RoomContainer/RoomContainer";
-import { backendUrl } from "../../config";
+import { BACKEND_API } from "../../config";
 import "./RoomsPage.css";
-
-/**
- * Filters an array of rooms based on a room type query.
- * @param {Array} rooms - An array of room objects to be filtered.
- * @param {string} roomQuery - The room type query to filter the rooms.
- * @returns {Array} An array of room objects matching the room type query.
- */
-export const filterRooms = (rooms, roomQuery) => {
-  const filteredRooms = [];
-    for (const room of rooms) {
-      if (room.name.toLowerCase().includes(roomQuery.toLowerCase())) {
-        filteredRooms.push(room);
-      }
-    }
-  return filteredRooms;
-};
 
 /**
  * Represents the Rooms page where users can search and select available rooms.
@@ -28,7 +12,7 @@ export const filterRooms = (rooms, roomQuery) => {
  * @returns {JSX.Element} component that displays rooms page.
  */
 function RoomsPage() {
-  const [rooms, setRooms] = useState([]);
+  const [rooms, setRooms] = useState(null);
   const [roomQuery, setRoomQuery] = useState("");
 
   // Handles changes in the room search query input.
@@ -36,10 +20,21 @@ function RoomsPage() {
     setRoomQuery(e.target.value);
   };
 
+  const filterRooms = () => {
+    const filteredRooms = [];
+      for (const room of rooms) {
+        if (room.type.toLowerCase().includes(roomQuery.toLowerCase())) {
+          filteredRooms.push(room);
+        }
+      }
+    return filteredRooms;
+  };
+
   
   const filteredRooms = useMemo(() => {
+    if(!rooms) return [];
     // Filter Room Type
-    return filterRooms(rooms, roomQuery);
+    return filterRooms();
   }, [rooms, roomQuery]);
 
   /**
@@ -56,29 +51,23 @@ function RoomsPage() {
    * @returns {string} - The message to display.
    */
   const displayMessage = () => {
+    if(!rooms) return "Loading...";
+
     let numOfRoomAvailable = (roomQuery.length > 0) ? filteredRooms.length: rooms.length;
     let message = (roomQuery.length > 0) ? "search query" : "stay";
     return `We found ${numOfRoomAvailable} available room type${numOfRoomAvailable > 1 ? "s" : ""} for your current ${message}.`;
   };
 
-  /**
-   * Fetches rooms data from the backend and updates state.
-   * @returns {void}
-   */
-  const updateRooms = async () => {
-    try {
-      const data = await fetch(`${backendUrl}/show/allRooms`);
-      const roomsData = await data.json();
-      setRooms(roomsData.rooms);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  // Update rooms data from backend
   useEffect(() => {
-    // Fetch rooms data from backend
-    updateRooms();
-  }, []);
+    const updateRooms = () => {
+      fetch(`${BACKEND_API}/rooms/json`)
+       .then(res => res.json())
+       .then(roomData => setRooms(roomData))
+       .catch(error => console.error("Error fetching data:", error));
+    }
+    updateRooms()
+  }, [])
 
   return(
     <div className="rooms-page">
@@ -103,9 +92,15 @@ function RoomsPage() {
       <div className="rooms-page__gallery">
         {filteredRooms.map(room => <RoomContainer room={room} key={room.id} rooms={rooms} />)}
       </div>
-      {filteredRooms.length === 0 && 
+      {rooms && filteredRooms.length === 0 && 
         <div className="rooms-page__err">
           No room found for current search query
+        </div>
+      }
+      {!rooms && 
+        <div className="rooms-page__err">
+          {/* TODO: Add Spinner */}
+          Loading...
         </div>
       }
     </div>

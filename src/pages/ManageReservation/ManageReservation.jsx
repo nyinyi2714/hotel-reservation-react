@@ -3,7 +3,7 @@ import ReservationContainer from "../../components/ReservationContainer/Reservat
 import RoomModal from "../../components/RoomModal/RoomModal";
 import EditReservation from "../../components/EditReservation/EditReservation";
 import { useStateContext } from "../../StateContext";
-import { backendUrl } from "../../config";
+import { BACKEND_API } from "../../config";
 import "./ManageReservation.css";
 
 /**
@@ -89,7 +89,7 @@ function ManageReservation() {
  */
   const fetchReservations = async () => {
     try {
-      const response = await fetch(`${backendUrl}/show/userReservations`, {
+      const response = await fetch(`${BACKEND_API}/show/userReservations`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

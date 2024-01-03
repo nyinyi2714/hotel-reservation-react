@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import StayForm from "../StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
-import { backendUrl } from "../../config";
+import { BACKEND_API } from "../../config";
 import "./EditReservation.css";
 
 /**
@@ -98,7 +98,7 @@ function EditReservation(props) {
     };
 
     try {
-      const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
+      const response = await fetch(`${BACKEND_API}/update/userReservation/${reservation.reservation_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +133,7 @@ function EditReservation(props) {
  */
   const deleteReservation = async () => {
     try {
-      const response = await fetch(`${backendUrl}/update/userReservation/${reservation.reservation_id}`, {
+      const response = await fetch(`${BACKEND_API}/update/userReservation/${reservation.reservation_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

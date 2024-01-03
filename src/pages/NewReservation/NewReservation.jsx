@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
-import { backendUrl } from "../../config";
+import { BACKEND_API } from "../../config";
 import "./NewReservation.css";
 
 /**
@@ -183,7 +183,7 @@ function NewReservation() {
 
     try {
       // Send reservation data via API request
-      const response = await fetch(`${backendUrl}/makeReservation`, {
+      const response = await fetch(`${BACKEND_API}/makeReservation`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

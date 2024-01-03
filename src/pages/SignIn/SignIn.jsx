@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
-import { backendUrl } from "../../config";
-import { useStateContext } from "../../StateContext";
 import useAuth from "../../hooks/useAuth";
 import "./SignIn.css";
 
@@ -18,7 +16,7 @@ function SignIn() {
 
   const navigate = useNavigate();
 
-  const { login } = useAuth();
+  const { login, getUser } = useAuth();
 
   // Update email state on input change
   const handleEmail = (e) => {
@@ -80,8 +78,6 @@ function SignIn() {
     setIsSigningIn(true);
     // sign in using firebase
     login(email, password);
-    
-
     setIsSigningIn(false);
   };
 
@@ -154,6 +150,7 @@ function SignIn() {
             type="submit"
             value={isSigningIn ? "Signing In" : "Sign In"}
           />
+          <button onClick={async () => console.log(await getUser())}>Get user</button>
           <div className="dark-btn-container">
             <span>Don't have an account?</span>
             <Link to="/signup" className="signup__signin-btn dark-btn">

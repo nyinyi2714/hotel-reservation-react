@@ -65,6 +65,11 @@
   cursor: pointer;
 }
 
+.room-modal__description {
+  padding-bottom: .5rem;
+  border-bottom: 1px solid var(--light-grey);
+}
+
 .room-modal__description > h3 {
   font-size: var(--font-md);
   color: var(--light-text);
@@ -76,6 +81,15 @@
   line-height: 25px;
   max-width: 500px;
   margin: 10px 0;
+}
+
+.room-modal__amenities {
+  margin-left: 1rem;
+  
+}
+
+.room-modal__amenities > li {
+  margin: .5rem 0;
 }
 
 .room-modal .room-modal__btn {

@@ -52,12 +52,12 @@ function RoomContainer(props) {
   return (
     <div className="room-container box-shadow">
       <img 
-        src={`/images/${room.name.toLowerCase()}/photo-1.jpg` }
+        src={`/images/${room.type.toLowerCase()}/photo-1.jpg` }
         className="room-container__img" 
         alt="room-preview" 
       />
       <div className="room-container__content">
-        <h3>{room.name}</h3>
+        <h3>{room.type}</h3>
         <button 
           className="btn"
           type="button"

@@ -1,49 +1,79 @@
-import { auth } from '../firebase/firebase';
-import { 
-  signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword, 
-  updateProfile 
-} from 'firebase/auth'; 
+import { BACKEND_API } from "../config";
 
-function useAuth() {
-  const login = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-          console.log(userCredential.user);
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  };
-
-  const register = (email, password, firstName, lastName, phoneNumber) => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // User registered successfully
-        const user = userCredential.user;
-
-        // Set the display name and phone number
-        updateProfile(user, { displayName: firstName })
-          .then(() => {
-            console.log('Display name set:', user.displayName);
-          })
-          .catch((error) => {
-            console.error('Error setting display name:', error);
-          });
-      })
-      .then(() => {
-        // Additional actions after successful registration
-      })
-      .catch((error) => {
-        // Handle registration errors
+export default function useAuth() {
+  const login = async (email, password) => {
+    try {
+      const response = await fetch(`${BACKEND_API}/login`, {
+        method: 'POST',
+        credentials: 'include', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
+
+      if (response.ok) {
+        // Login successful
+        const loginData = await response.json();
+        console.log(loginData);
+      } else {
+        // Handle login failure
+        console.error('Login failed');
+        const loginData = await response.json();
+        console.log(loginData);
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
-  return({
+  const register = async (firstname, lastname, email, password) => {
+    try {
+      const response = await fetch(`${BACKEND_API}/register`, {
+        method: 'POST',
+        credentials: 'include', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ firstname, lastname, email, password }),
+      });
+
+      if (response.ok) {
+        // Registration successful, you might redirect or perform other actions here
+        console.log('Registration successful');
+      } else {
+        // Handle registration failure, display an error message, etc.
+        console.error('Registration failed');
+      }
+    } catch (error) {
+      console.error('Error during registration:', error);
+    }
+  };
+
+  const getUser = async () => {
+    try {
+      const response = await fetch(`${BACKEND_API}/checkAuth`, 
+      { 
+        method: 'GET',
+        credentials: 'include' 
+      });
+      if (response.ok) {
+        const userData = await response.json();
+        console.log(userData)
+        return userData;
+      }
+      else {
+        console.error('Retrival of current user failed')
+      }
+    } catch (error) {
+      console.error('Error during Retrival of current user:', error);
+    }
+
+  };
+
+  return {
     login,
-    register
-  });
-
+    register,
+    getUser,
+  }
 }
-
-export default useAuth;

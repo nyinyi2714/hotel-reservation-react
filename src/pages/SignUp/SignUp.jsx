@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
-import { backendUrl } from "../../config";
-import { useStateContext } from "../../StateContext";
 import useAuth from "../../hooks/useAuth";
 import "./SignUp.css";
 
 function SignUp() {
-  const [name, setName] = useState("");
-  const [isNameValid, setIsNameValid] = useState(true);
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
+  const [isFirstNameValid, setIsFirstNameValid] = useState(true);
+  const [isLastNameValid, setIsLastNameValid] = useState(true);
 
   const [email, setEmail] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isPhoneNumberValid, setIsPhoneNumberValid] = useState(true);
 
   const [password, setPassword] = useState("");
   const [passLengthTest, setPassLengthTest] = useState(false);
@@ -28,19 +26,29 @@ function SignUp() {
   // State for indicating if signupg in is in progress
   const [isSigningUp, setIsSigningUp] = useState(false);
 
-  const { setUser } = useStateContext();
   const navigate = useNavigate();
-  const { register } = useAuth();
+  const { register, getUser } = useAuth();
 
   // Update name state on input change
-  const handleName = (e) => {
-    setName(e.target.value);
-    validateName(e.target.value);
+  const handleFirstName = (e) => {
+    setFirstName(e.target.value);
+    validateFirstName(e.target.value);
   };
 
-  const validateName = (name) => {
-    const result = name.length > 0;
-    setIsNameValid(result);
+  const handleLastName = (e) => {
+    setLastName(e.target.value);
+    validateLastName(e.target.value);
+  };
+
+  const validateFirstName = (firstname) => {
+    const result = firstname.length > 0;
+    setIsFirstNameValid(result);
+    return result;
+  };
+
+  const validateLastName = (lastname) => {
+    const result = lastname.length > 0;
+    setIsLastNameValid(result);
     return result;
   };
 
@@ -60,6 +68,11 @@ function SignUp() {
       return true;
     }
   };
+
+  // Run email validation on email change
+  useEffect(() => {
+    if (!isEmailValid) validateEmail();
+  }, [email]);
 
   const validatePassword = (password) => {
     const passwordRegex = {
@@ -90,33 +103,6 @@ function SignUp() {
     return allTestsPassed;
   };
 
-  // Run email validation on email change
-  useEffect(() => {
-    if (!isEmailValid) validateEmail();
-  }, [email]);
-
-
-  const handlePhoneNumber = (e) => {
-    if (e.target.value.length > 10) return;
-    const isIntegerOnly = /^\d*$/.test(e.target.value);
-    if (isIntegerOnly) {
-      setPhoneNumber(e.target.value);
-    } else {
-      return;
-    }
-  };
-
-  const validatePhoneNumber = () => {
-    const result = phoneNumber.length === 10;
-    if (result) {
-      setIsPhoneNumberValid(true);
-      return true;
-    } else {
-      setIsPhoneNumberValid(false);
-      return false;
-    }
-  };
-
   // Update password state on input change
   const handlePassword = (e) => {
     setPassword(e.target.value);
@@ -137,7 +123,8 @@ function SignUp() {
 
   const runAllValidationTests = () => {
     return (
-      validateName(name)
+      validateFirstName(firstname)
+      && validateLastName(lastname)
       && validateEmail()
       && validatePassword(password)
       && validatePasswordMatch(confirmPassword)
@@ -155,7 +142,7 @@ function SignUp() {
     if (!runAllValidationTests()) return;
 
     setIsSigningUp(true);
-    register(email, password, name, phoneNumber);
+    register(firstname, lastname, email, password);
 
     setIsSigningUp(false);
   };
@@ -178,18 +165,36 @@ function SignUp() {
           <div className="relative-position">
             <input
               type="text"
-              placeholder="Name"
-              value={name}
-              onChange={handleName}
+              placeholder="First Name"
+              value={firstname}
+              onChange={handleFirstName}
             />
             <span
               className={
-                isNameValid
+                isFirstNameValid
                   ? "signup__invalid-field"
                   : "signup__invalid-field show"
               }
             >
-              Please enter your Name
+              Please enter your First Name
+              <i className="bx bx-error-circle signup__err" />
+            </span>
+          </div>
+          <div className="relative-position">
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastname}
+              onChange={handleLastName}
+            />
+            <span
+              className={
+                isLastNameValid
+                  ? "signup__invalid-field"
+                  : "signup__invalid-field show"
+              }
+            >
+              Please enter your Last Name
               <i className="bx bx-error-circle signup__err" />
             </span>
           </div>
@@ -209,25 +214,6 @@ function SignUp() {
               }
             >
               Please enter a valid email address
-              <i className="bx bx-error-circle signup__err" />
-            </span>
-          </div>
-          <div className="relative-position">
-            <input
-              type="text"
-              placeholder="Phone Number"
-              value={phoneNumber}
-              onChange={handlePhoneNumber}
-              onBlur={validatePhoneNumber}
-            />
-            <span
-              className={
-                isPhoneNumberValid
-                  ? "signup__invalid-field"
-                  : "signup__invalid-field show"
-              }
-            >
-              Please enter a valid US Phone Number
               <i className="bx bx-error-circle signup__err" />
             </span>
           </div>
@@ -277,6 +263,7 @@ function SignUp() {
             type="submit"
             value={isSigningUp ? "Signing Up" : "Sign Up"}
           />
+          <button onClick={async () => console.log(await getUser())}>Get user</button>
           <div className="dark-btn-container">
             <span>Already have an account?</span>
             <Link to="/signin" className="signin__signup-btn dark-btn">
