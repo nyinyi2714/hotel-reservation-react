@@ -16,7 +16,7 @@ export function StateProvider({ children }) {
   });
   const [guestNum, setGuestNum] = useState(1);
   const [roomType, setRoomType] = useState();
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
 
   const resetState = () => {
     setStartDate(new Date());
@@ -39,8 +39,8 @@ export function StateProvider({ children }) {
     setGuestNum,
     roomType, 
     setRoomType,
-    user, 
-    setUser,
+    userData, 
+    setUserData,
     resetState,
   };
 

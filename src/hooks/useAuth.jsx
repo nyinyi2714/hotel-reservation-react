@@ -1,6 +1,11 @@
 import { BACKEND_API } from "../config";
+import { useNavigate } from "react-router-dom";
+import { useStateContext } from "../StateContext";
 
 export default function useAuth() {
+  const { setUserData } = useStateContext();
+  const navigate = useNavigate();
+
   const login = async (email, password) => {
     try {
       const response = await fetch(`${BACKEND_API}/login`, {
@@ -14,13 +19,13 @@ export default function useAuth() {
 
       if (response.ok) {
         // Login successful
-        const loginData = await response.json();
-        console.log(loginData);
+        return true;
       } else {
         // Handle login failure
         console.error('Login failed');
         const loginData = await response.json();
-        console.log(loginData);
+        alert(loginData.message);
+        return false;
       }
     } catch (error) {
       console.error('Error during login:', error);
@@ -39,11 +44,13 @@ export default function useAuth() {
       });
 
       if (response.ok) {
-        // Registration successful, you might redirect or perform other actions here
-        console.log('Registration successful');
+        // Registration successful
+        return true;
       } else {
-        // Handle registration failure, display an error message, etc.
-        console.error('Registration failed');
+        // Handle registration failure
+        const registerData = response.json();
+        alert(registerData.message);
+        return false;
       }
     } catch (error) {
       console.error('Error during registration:', error);
@@ -55,6 +62,9 @@ export default function useAuth() {
       const response = await fetch(`${BACKEND_API}/checkAuth`, 
       { 
         method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         credentials: 'include' 
       });
       if (response.ok) {
@@ -71,9 +81,35 @@ export default function useAuth() {
 
   };
 
+  const logout = async () => {
+    // Delete the token cookie and data on client-side
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    setUserData(null);
+    navigate("/");
+
+    // send logout request to backend
+    try {
+      const response = await fetch(`${BACKEND_API}/logout`, 
+      { 
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include' 
+      });
+
+      if (response.ok) console.error('logout successful');
+
+    } catch (error) {
+      console.error('Error during logout:', error);
+    }
+
+  };
+
   return {
     login,
     register,
     getUser,
+    logout,
   }
 }

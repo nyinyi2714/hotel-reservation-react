@@ -14,7 +14,7 @@ import "./RoomContainer.css";
 function RoomContainer(props) {
   const { room, rooms } = props;
   // Accessing state and navigation
-  const { setRoomType, user } = useStateContext(); 
+  const { setRoomType, userData } = useStateContext(); 
   const navigate = useNavigate();
 
   // State variable for room modal
@@ -45,7 +45,7 @@ function RoomContainer(props) {
     const roomId = e.target.id;
     const roomType = rooms.find((room) => room.id == roomId);
     setRoomType(roomType);
-    if(user) navigate("/reservation/new");
+    if(userData?.authenticated) navigate("/reservation/new");
     else navigate("/signin");
   };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "boxicons/css/boxicons.min.css";
 import useAuth from "../../hooks/useAuth";
+import "boxicons/css/boxicons.min.css";
 import "./SignIn.css";
 
 function SignIn() {
@@ -76,8 +76,12 @@ function SignIn() {
     if (!validateEmail() || !validatePassword()) return;
     
     setIsSigningIn(true);
-    // sign in using firebase
-    login(email, password);
+    // sign in using Node.js Backend
+    const isLoginSuccessful = await login(email, password);
+    // if successful, redirect to previous page
+    if(isLoginSuccessful) {
+      navigate(-1);
+    }
     setIsSigningIn(false);
   };
 
@@ -100,7 +104,9 @@ function SignIn() {
           <div>
             <input
               type="text"
+              name="email"
               placeholder="Email"
+              autoComplete="email"
               value={email}
               onChange={handleEmail}
               onBlur={validateEmail}
@@ -121,6 +127,7 @@ function SignIn() {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="password"
+              name="password"
               value={password}
               onChange={handlePassword}
               onBlur={validatePassword}
