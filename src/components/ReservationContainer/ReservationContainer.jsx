@@ -10,7 +10,7 @@ import "./ReservationContainer.css";
  * @returns {JSX.Element} The rendered ReservationContainer component.
  */
 function ReservationContainer(props) {
-  const { openRoomModal, openEditModal, reservation, convertStringToDateObj } = props;
+  const { openRoomModal, openEditModal, reservation, convertDateObjectToDate } = props;
 
   const daysOfWeek = useRef([
     "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"
@@ -67,34 +67,32 @@ function ReservationContainer(props) {
 
   return (
     <div className="reservation-container">
-      <span>Booking ID</span>
-      <span>Room Type</span>
-      <span>Cost</span>
-      <span>Guest Count</span>
-      <span>Booking Date</span>
+      <span className="table-title">Room Type</span>
+      <span className="table-title">Cost</span>
+      <span className="table-title">Guest Count</span>
+      <span className="table-title">Dates</span>
       <button 
         type="button" 
-        className="btn reservation-container__btn"
-        id={reservation.reservation_id}
+        className="btn reservation-container__btn btn1"
+        id={reservation._id}
         onClick={openEditModal}
       >
         Edit
       </button>
-      <span>#{reservation.reservation_id}</span>
-      <span>{reservation.room_details.name}</span>
-      <span>${reservation.total_price.toFixed(2)}</span>
-      <span>{reservation.number_of_guest} Person{reservation.number_of_guest > 1 && "s"}</span>
-      <span>
+      <span className="item1" data-title="Room Type">{reservation.roomType}</span>
+      <span className="item2" data-title="Price">${reservation.price.toFixed(2)}</span>
+      <span className="item3" data-title="Guests">{reservation.numOfGuests} Person{reservation.numOfGuests > 1 && "s"}</span>
+      <span className="item4" data-title="Dates">
         {reservation && generateDate(
-          convertStringToDateObj(reservation.date_of_occupancy),
-          convertStringToDateObj(reservation.date_of_departure)
+          convertDateObjectToDate(reservation.checkinDate),
+          convertDateObjectToDate(reservation.checkoutDate)
         )}
       </span>
       <button
         type="button"
-        className="btn reservation-container__btn"
+        className="btn reservation-container__btn btn2"
         onClick={openRoomModal}
-        id={reservation.reservation_id}
+        id={reservation._id}
       >
         View Room
       </button>

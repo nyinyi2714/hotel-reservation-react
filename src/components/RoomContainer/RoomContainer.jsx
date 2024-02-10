@@ -42,8 +42,7 @@ function RoomContainer(props) {
    * @returns {void}
    */
   const initiateBooking = (e) => {
-    const roomId = e.target.id;
-    const roomType = rooms.find((room) => room.id == roomId);
+    const roomType = rooms.find((room) => room.roomType === e.target.id);
     setRoomType(roomType);
     if(userData?.authenticated) navigate("/reservation/new");
     else navigate("/signin");
@@ -52,17 +51,17 @@ function RoomContainer(props) {
   return (
     <div className="room-container box-shadow">
       <img 
-        src={`/images/${room.type.toLowerCase()}/photo-1.jpg` }
+        src={`/images/${room.roomType.toLowerCase()}/photo-1.jpg` }
         className="room-container__img" 
         alt="room-preview" 
       />
       <div className="room-container__content">
-        <h3>{room.type}</h3>
+        <h3>{room.roomType}</h3>
         <button 
           className="btn"
           type="button"
           onClick={initiateBooking}
-          id={room.id}
+          id={room.roomType}
         >
           Book for ${room.price}
         </button>

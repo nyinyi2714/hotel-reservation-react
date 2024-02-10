@@ -13,7 +13,7 @@ import "./EditReservation.css";
  * @returns {JSX.Element} The JSX element for editing reservations.
  */
 function EditReservation(props) {
-  const { closeEditModal, reservation, fetchReservations, convertStringToDateObj } = props;
+  const { closeEditModal, reservation, fetchReservations, convertDateObjectToDate } = props;
   const {
     startDate,
     setStartDate,
@@ -90,19 +90,19 @@ function EditReservation(props) {
  */
   const saveChanges = async () => {
     const requestData = {
-      date_of_occupancy: convertDateToObject(startDate),
-      date_of_departure: convertDateToObject(endDate),
-      number_of_guest: guestNum,
-      room_id: roomIds[selectedRoomType],
-      total_price: computeTotalPrice(selectedRoomType)
+      reservationId: reservation._id,
+      checkinDate: convertDateToObject(startDate),
+      checkoutDate: convertDateToObject(endDate),
+      numOfGuests: guestNum,
+      roomType: selectedRoomType,
     };
 
     try {
-      const response = await fetch(`${BACKEND_API}/update/userReservation/${reservation.reservation_id}`, {
-        method: "PUT",
+      const response = await fetch(`${BACKEND_API}/reservation/update`, {
+        method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(requestData),
       });
@@ -133,13 +133,13 @@ function EditReservation(props) {
  */
   const deleteReservation = async () => {
     try {
-      const response = await fetch(`${BACKEND_API}/update/userReservation/${reservation.reservation_id}`, {
-        method: "PUT",
+      const response = await fetch(`${BACKEND_API}/reservation/delete`, {
+        method: "DELETE",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
-        body: JSON.stringify({ is_active: "false" }),
+        body: JSON.stringify({ reservationId: reservation._id })
       });
 
       const responseData = await response.json();
@@ -163,17 +163,17 @@ function EditReservation(props) {
   };
 
   useEffect(() => {
-    setStartDate(convertStringToDateObj(reservation.date_of_occupancy));
-    setEndDate(convertStringToDateObj(reservation.date_of_departure));
-    setGuestNum(reservation.number_of_guest);
-    setSelectedRoomType(reservation.room_details.name.toLowerCase());
+    setStartDate(convertDateObjectToDate(reservation.checkinDate));
+    setEndDate(convertDateObjectToDate(reservation.checkoutDate));
+    setGuestNum(reservation.numOfGuests);
+    setSelectedRoomType(reservation.roomType);
   }, []);
 
   return (
     <div className="edit-reservation-wrapper">
       <div className="edit-reservation-modal">
         <h2>Modifying Your Reservation</h2>
-        <StayForm isModifying={true} reservation={reservation} convertStringToDateObj={convertStringToDateObj} />
+        <StayForm isModifying={true} reservation={reservation} convertDateObjectToDate={convertDateObjectToDate} />
         <div className="edit-reservation__flexbox">
           <label htmlFor="room-type">Room Type: </label>
           <select
@@ -182,9 +182,9 @@ function EditReservation(props) {
             onChange={handleRoomTypeChange}
             value={selectedRoomType}
           >
-            <option value="standard">Standard</option>
-            <option value="deluxe">Deluxe</option>
-            <option value="suite">Suite</option>
+            <option value="Standard">Standard</option>
+            <option value="Deluxe">Deluxe</option>
+            <option value="Suite">Suite</option>
           </select>
           <button
             type="button"

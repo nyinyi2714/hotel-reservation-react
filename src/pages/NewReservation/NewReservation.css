@@ -1,6 +1,6 @@
 .new-reservation {
   margin-top: var(--header-height);
-  padding: 20px 50px;
+  padding: 20px var(--page-padding-left-right);
   color: var(--dark-navy);
 }
 
@@ -26,15 +26,13 @@
 
 .new-reservation__table {
   padding: 0 15px;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
 
-.new-reservation__row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.right-aligned {
+  text-align: right;
 }
 
 .new-reservation__total {
@@ -153,4 +151,27 @@
 
 .new-reservation__message .margin-bottom {
   margin-bottom: 5px;
+}
+
+@media (max-width: 480px) {
+  .new-reservation__table {
+    grid-template-columns: 1fr;
+    text-align: left;
+    padding: 0;
+  }
+
+  .right-aligned {
+    text-align: left;
+  }
+
+  .new-reservation__payment > form {
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    column-gap: 0;
+  }
+
+  .new-reservation__payment-input:nth-child(1) {
+    grid-column: 1;
+  }
 }

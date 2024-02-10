@@ -80,7 +80,7 @@ function SignIn() {
     const isLoginSuccessful = await login(email, password);
     // if successful, redirect to previous page
     if(isLoginSuccessful) {
-      navigate(-1);
+      navigate('/')
     }
     setIsSigningIn(false);
   };
@@ -157,7 +157,6 @@ function SignIn() {
             type="submit"
             value={isSigningIn ? "Signing In" : "Sign In"}
           />
-          <button onClick={async () => console.log(await getUser())}>Get user</button>
           <div className="dark-btn-container">
             <span>Don't have an account?</span>
             <Link to="/signup" className="signup__signin-btn dark-btn">

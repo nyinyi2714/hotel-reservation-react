@@ -16,12 +16,29 @@
   --navy: #141E61;
   --dark-navy: #0F044C;
   --blue: #0f5dbd;
+
+  --page-padding-left-right: 50px;
+}
+
+@media (max-width: 650px) {
+  :root {
+    --page-padding-left-right: 20px;
+    --font-xxs: 8px;
+    --font-xs: 10px;
+    --font-sm: 12px;
+    --font-md: 14px;
+    --font-lg: 16px;
+    --font-xl: 20px;
+    --font-xxl: 28px;
+  }
 }
   
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: transparent;
 }
 
 button, .clickable {

@@ -1,6 +1,6 @@
 .rooms-page {
   margin-top: var(--header-height);
-  padding: 30px 50px;
+  padding: 30px var(--page-padding-left-right);
   color: var(--dark-navy);
 }
 
@@ -18,20 +18,20 @@
 
 .rooms-page__search {
   padding: 7px 5px;
-  width: 30%;
-  margin-bottom: 15px;
+  width: clamp(200px, 30%, 300px);
   border: 1px solid var(--dark-navy);
   border-radius: 5px;
   font-size: var(--font-md);
+  margin-right: 10px;
 }
 
 .rooms-page .rooms-page__btn {
   display: inline-block;
   width: max-content;
   padding: 8.5px;
-  margin-left: 10px;
   color: red;
   border: 1px solid red;
+  margin-bottom: 15px;
 }
 
 .rooms-page__search:focus-visible {
@@ -42,7 +42,8 @@
   margin-top: 15px;
   padding-top: 15px;
   border-top: 1px solid var(--light-grey);
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
   justify-content: center;
   align-items: center;

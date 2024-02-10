@@ -12,7 +12,7 @@ import { useStateContext } from "../../StateContext";
  * @returns {JSX.Element} The rendered StayForm component.
  */
 function StayForm(props) {
-  const { isModifying, reservation, convertStringToDateObj } = props;
+  const { isModifying, reservation, convertDateObjectToDate } = props;
   let {
     startDate, 
     endDate, 
@@ -23,9 +23,9 @@ function StayForm(props) {
   } = useStateContext();
 
   if(isModifying) {
-    startDate = convertStringToDateObj(reservation.date_of_occupancy);
-    endDate = convertStringToDateObj(reservation.date_of_departure) ;
-    guestNum = reservation.number_of_guest;
+    startDate = convertDateObjectToDate(reservation.checkinDate);
+    endDate = convertDateObjectToDate(reservation.checkoutDate);
+    guestNum = reservation.numOfGuests;
   }
   const [currStartDate, setCurrStartDate] = useState(startDate);
   const [currEndDate, setCurrEndDate] = useState(endDate);
@@ -168,7 +168,9 @@ function StayForm(props) {
  * @returns {number} The number of nights.
  */
   const getNumOfNight = () => {
-    return getDate(endDate) - getDate(startDate);
+    const timeDifference =  endDate.getTime() - startDate.getTime();
+    // Convert the time difference to days
+    return timeDifference / (1000 * 60 * 60 * 24);
   };
 
   /**

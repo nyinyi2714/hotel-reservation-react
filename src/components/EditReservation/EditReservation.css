@@ -12,9 +12,9 @@
 
 .edit-reservation-modal {
   position: relative;
-  width: max-content;
+  width: fit-content;
   background-color: #fff;
-  padding: 40px;
+  padding: 40px var(--page-padding-left-right);
   border-radius: 5px;
 }
 
@@ -43,6 +43,8 @@
 
 .edit-reservation__flexbox {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
   justify-content: center;
 }
@@ -50,7 +52,6 @@
 .edit-reservation-modal .edit-reservation__btn {
   padding: 6.5px 7px;
   margin: 0;
-  margin-left: 10px;
   display: inline-block;
   width: max-content;
   color: var(--blue);

@@ -47,6 +47,16 @@
   height: 337.2px;
 }
 
+@media (max-width: 620px) {
+  .room-modal__photo-container {
+    height: auto;
+  }
+
+  .room-modal {
+    margin: 10px;
+  }
+}
+
 .room-modal__photo-container > img {
   width: 100%;
   max-width: 500px;

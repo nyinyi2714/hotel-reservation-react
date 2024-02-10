@@ -23,7 +23,7 @@ function RoomsPage() {
   const filterRooms = () => {
     const filteredRooms = [];
       for (const room of rooms) {
-        if (room.type.toLowerCase().includes(roomQuery.toLowerCase())) {
+        if (room.roomType.toLowerCase().includes(roomQuery.toLowerCase())) {
           filteredRooms.push(room);
         }
       }
@@ -33,7 +33,7 @@ function RoomsPage() {
   
   const filteredRooms = useMemo(() => {
     if(!rooms) return [];
-    // Filter Room Type
+    // Filter Room roomType
     return filterRooms();
   }, [rooms, roomQuery]);
 

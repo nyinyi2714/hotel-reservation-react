@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../StateContext";
 
 export default function useAuth() {
-  const { setUserData } = useStateContext();
   const navigate = useNavigate();
 
   const login = async (email, password) => {
@@ -74,6 +73,7 @@ export default function useAuth() {
       }
       else {
         console.error('Retrival of current user failed')
+        return { authenticated: false }
       }
     } catch (error) {
       console.error('Error during Retrival of current user:', error);
@@ -84,8 +84,6 @@ export default function useAuth() {
   const logout = async () => {
     // Delete the token cookie and data on client-side
     document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-    setUserData(null);
-    navigate("/");
 
     // send logout request to backend
     try {
@@ -98,10 +96,14 @@ export default function useAuth() {
         credentials: 'include' 
       });
 
-      if (response.ok) console.error('logout successful');
+      if (response.ok) {
+        console.log('logout successful');
+        return true;
+      }
 
     } catch (error) {
       console.error('Error during logout:', error);
+      return false;
     }
 
   };

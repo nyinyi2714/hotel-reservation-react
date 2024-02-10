@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
 import EditReservation from "../../components/EditReservation/EditReservation";
-import { useStateContext } from "../../StateContext";
 import { BACKEND_API } from "../../config";
 import "./ManageReservation.css";
 
@@ -19,15 +18,13 @@ function ManageReservation() {
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
   const [currReservation, setCurrReservation] = useState(null);
 
-  const { accessToken } = useStateContext();
-
   /**
   * Retrieves a reservation by its unique identifier from the reservations array.
   * @param {number} id - The unique identifier of the reservation to retrieve.
   * @returns {Object|null} The reservation object if found, or null if not found.
   */
   const getReservationById = (id) => {
-    return reservations.find(reservation => reservation.reservation_id == id);
+    return reservations.find(reservation => reservation._id === id);
   };
 
   /**
@@ -64,24 +61,11 @@ function ManageReservation() {
     setIsEditModalOpen(false);
   };
 
-  /**
- * Converts a date string to a JavaScript Date object.
- * @param {string} string - The input date string in the format "Day Month Year".
- * @returns {Date} The JavaScript Date object representing the converted date.
- */
-  const convertStringToDateObj = (string) => {
-    const months = {
-      Jan: 0, Feb: 1, Mar: 2, Apr: 3, May: 4, Jun: 5,
-      Jul: 6, Aug: 7, Sep: 8, Oct: 9, Nov: 10, Dec: 11
-    };
-  
-    const parts = string.split(" ");
-    const day = parseInt(parts[1], 10);
-    const month = months[parts[2]];
-    const year = parseInt(parts[3], 10);
-  
-    return new Date(year, month, day);
-  };
+  function convertDateObjectToDate(dateObject) {
+    const { year, month, day } = dateObject;
+    // Months in JavaScript Date object are 0-indexed, so subtract 1 from the month
+    return new Date(year, month - 1, day);
+  }
 
   /**
  * Fetches reservations from the backend API and updates the state with active reservations.
@@ -89,21 +73,20 @@ function ManageReservation() {
  */
   const fetchReservations = async () => {
     try {
-      const response = await fetch(`${BACKEND_API}/show/userReservations`, {
+      const response = await fetch(`${BACKEND_API}/reservations`, {
         method: "GET",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
       });
 
       const reservationsData = await response.json();
-      const activeReservations = reservationsData.reservations.filter(reservation => reservation.is_active);
-      setReservations(activeReservations);
+      setReservations(reservationsData);
 
       if (response.ok) {
         console.log("fetch successfully")
-      } else {
+      } else {      
         console.error("Reservation fetch failed:", reservationsData.message);
       }
     } catch(err) {
@@ -123,8 +106,8 @@ function ManageReservation() {
             return <ReservationContainer 
               openRoomModal={openRoomModal} 
               openEditModal={openEditModal}
-              convertStringToDateObj={convertStringToDateObj}
               reservation={reservation}
+              convertDateObjectToDate={convertDateObjectToDate}
               key={index}
             />
           })}
@@ -137,15 +120,15 @@ function ManageReservation() {
       {isRoomModalOpen && 
       <RoomModal 
         closeRoomModal={closeRoomModal}
-        room={currReservation.room_details} 
+        room={currReservation} 
       />
       }
       {isEditModalOpen && 
         <EditReservation 
           closeEditModal={closeEditModal} 
           reservation={currReservation} 
+          convertDateObjectToDate={convertDateObjectToDate}
           fetchReservations={fetchReservations}
-          convertStringToDateObj={convertStringToDateObj}
         />
       }
     </div>

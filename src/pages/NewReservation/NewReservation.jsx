@@ -25,17 +25,12 @@ function NewReservation() {
     endDate,
     roomType,
     guestNum,
-    accessToken,
+    resetState,
   } = useStateContext();
 
   // State variables for reciept
   const [totalPrice, setTotalPrice] = useState(0);
-  const [taxes, setTaxes] = useState(0);
   const [roomPrice, setRoomPrice] = useState(roomType.price);
-  const taxRatePercent = 0.13;
-  // Additional fee for guests after 2 people
-  const additionalFeePerGuest = 25;
-  const [additionalFee, setAdditionalFee] = useState(0);
 
   const successfulReservationMessage = "Your new reservation has been successfully created. Thank you!";
   const failedReservationMessage = "We are unable to process your request at the moment. Please try again later.";
@@ -43,9 +38,8 @@ function NewReservation() {
 
   const handleCardNumber = (e) => {
     const inputNum = e.target.value;
-    if (isNaN(inputNum)) return;
-    if (inputNum.length <= 20) setCardNumber(inputNum);
-    else setCardNumber(inputNum.slice(0, 20));
+    if (inputNum.length > 16) return
+    setCardNumber(inputNum)
   };
 
   const handleMonth = (e) => {
@@ -173,27 +167,26 @@ function NewReservation() {
 
     // Prepare reservation data
     const reservationData = {
-      date_of_occupancy: convertDateToObject(startDate),
-      date_of_departure: convertDateToObject(endDate),
-      room_id: roomType.id,
-      number_of_guest: guestNum,
-      card_number: cardNumber,
-      total_price: totalPrice,
+      checkinDate: convertDateToObject(startDate),
+      checkoutDate: convertDateToObject(endDate),
+      numOfGuests: guestNum,
+      roomType: roomType.roomType,
     };
 
     try {
       // Send reservation data via API request
-      const response = await fetch(`${BACKEND_API}/makeReservation`, {
+      const response = await fetch(`${BACKEND_API}/reservation/new`, {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify(reservationData),
       });
 
       if (response.ok) {
         setDisplayMessage(successfulReservationMessage);
+        resetState();
       } else {
         setDisplayMessage(failedReservationMessage);
       }
@@ -233,33 +226,10 @@ function NewReservation() {
     setRoomPrice(roomPrice);
   };
 
-  /**
- * Calculate the taxes based on the room price and tax rate percentage.
- * @returns {void}
- */
-  const computeTaxes = () => {
-    const taxes = (roomPrice * taxRatePercent);
-    setTaxes(taxes);
-  };
-
-  /**
- * Calculate additional fees based on the number of guests above the base count.
- * @returns {void}
- */
-  const computeAdditionalFee = () => {
-    if (guestNum > 2) {
-      setAdditionalFee((guestNum - 2) * additionalFeePerGuest);
-    } else {
-      setAdditionalFee(0);
-    }
-  };
-
   useMemo(() => {
     computeRoomPrice();
-    computeTaxes();
-    computeAdditionalFee();
-    setTotalPrice((taxes + roomPrice + additionalFee));
-  }, [startDate, endDate, roomType, guestNum, roomPrice, taxes, additionalFee]);
+    setTotalPrice((roomPrice));
+  }, [startDate, endDate, roomType, guestNum, roomPrice]);
 
   return (
     <React.Fragment>
@@ -281,36 +251,17 @@ function NewReservation() {
           <h2 className="new-reservation__heading">
             Reservation Details
           </h2>
+
           <div className="new-reservation__table">
-            <div className="new-reservation__row">
               <h3 className="new-reservation__total">Total for Stay</h3>
-              <h3 className="new-reservation__total">
+              <h3 className="new-reservation__total right-aligned">
                 ${totalPrice.toFixed(2)}
               </h3>
-            </div>
-            <div className="new-reservation__row">
-              <span>{`1 King Bed ${roomType.name}`}</span>
-              <span>${roomPrice.toFixed(2)}</span>
-            </div>
-            {guestNum > 2 && <div className="new-reservation__row">
-              <span>
-                <div className="new-reservation__tax-info">
-                  ($25.00 per person)
-                </div>
-                Additional Fee for guests after 2 people
-              </span>
-              <span>${additionalFee.toFixed(2)}</span>
-            </div>}
-            <div className="new-reservation__row">
-              <span>
-                <div className="new-reservation__tax-info">
-                  13.00 % per room, per night
-                </div>
-                Total Taxes
-              </span>
-              <span>${taxes.toFixed(2)}</span>
-            </div>
+
+              <span>{`1 King Bed ${roomType.roomType}`}</span>
+              <span className="right-aligned">${roomPrice.toFixed(2)}</span>
           </div>
+
         </div>
         <div className={"new-reservation__payment"}>
           <h3>Payment</h3>

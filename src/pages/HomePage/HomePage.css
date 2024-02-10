@@ -1,13 +1,7 @@
 .homepage {
   color: var(--dark-navy);
   margin-top: var(--header-height);
-  padding: 30px 50px;
-}
-
-@media (max-width: 650px) {
-  .homepage {
-    padding: 30px 25px;
-  }
+  padding: 30px var(--page-padding-left-right);
 }
 
 .homepage > h1 {

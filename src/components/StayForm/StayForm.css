@@ -113,5 +113,32 @@
 }
 
 .react-datepicker-popper {
-  transform: translate3d(14px, 42px, 0) !important;
+  transform: translate3d(-80px, 42px, 0) !important;
+}
+
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after,
+.react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before
+ {
+  left: 91px;
+}
+
+
+@media (max-width: 500px) {
+  .react-datepicker-popper {
+    transform: translate3d(-50px, 42px, 0) !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .react-datepicker-popper {
+    position: fixed !important;
+    top: 160px !important;
+    left: 50vw !important;
+    transform: translateX(-50%) !important;
+  }
+
+  .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::after,
+  .react-datepicker-popper[data-placement^=bottom] .react-datepicker__triangle::before {
+    display: none;
+  }
 }

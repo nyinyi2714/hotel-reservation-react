@@ -1,6 +1,6 @@
 .reservation-container {
   display: grid;
-  grid-template-columns: repeat(6, max-content);
+  grid-template-columns: repeat(5, max-content);
   align-items: center;
   justify-content: space-between;
   column-gap: min(5vw, 40px);
@@ -30,6 +30,56 @@
 .reservation-container__btn:hover {
   background-color: var(--blue);
   color: #fff;
+}
+
+@media (max-width: 880px) {
+  .reservation-container {
+    grid-template-columns: auto;
+    justify-content: left; 
+    column-gap: 5px;
+    grid-template-areas: 
+      "item1 item1"
+      "item2 item2"
+      "item3 item3"
+      "item4 item4"
+      "btn1 btn2";
+  }
+
+  .item1 {
+    grid-area: item1;
+  }
+  .item2 {
+    grid-area: item2;
+  }
+  .item3 {
+    grid-area: item3;
+  }
+  .item4 {
+    grid-area: item4;
+  }
+  .btn1 {
+    grid-area: btn1;
+  }
+  .btn2 {
+    grid-area: btn2;
+  }
+
+  .reservation-container > span {
+    margin-left: clamp(120px, 10vw, 188px);
+    margin-bottom: 10px;
+  }
+
+  .reservation-container > span::before {
+    content: attr(data-title);
+    display: block;
+    position: absolute;
+    left: 20px;
+    width: 100%;
+  }
+
+  .table-title {
+    display: none;
+  }
 }
 
 

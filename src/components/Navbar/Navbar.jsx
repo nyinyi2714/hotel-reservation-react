@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
-import { useStateContext } from '../../StateContext';
 import "./Navbar.css";
 
 /**
@@ -11,25 +10,45 @@ import "./Navbar.css";
  * @since July 10th 2023
  * @returns {JSX.Element} The rendered Navbar component.
  */
-function Navbar() {
-  const { userData, setUserData } = useStateContext(); 
-  const { getUser, logout } = useAuth();
+function Navbar({ userData, setUserData }) {
+  const { logout } = useAuth();
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    getUser().then(userData => setUserData(userData));
-  }, []);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+
+  const handleMobileNav = () => {
+    setIsMobileNavOpen(prev => !prev);
+  };
+
+  const closeMobileNav = () => {
+    setIsMobileNavOpen(false);
+  };
+
+  const handleLogout = async () => {
+    const isSuccessful = await logout();
+    if(isSuccessful) {
+      navigate('/signin');
+      setUserData({ authenticated: false })
+    }
+  };
 
   return (
     <nav className="nav">
       <Link to="/"><img className="nav__logo" src="/images/logo.png" alt="logo" /></Link>
-      <div className="nav__links">
-        {userData?.authenticated && <span className="nav__name">
-          Hello, {userData.user.firstname} 
-        </span>}
+      <div className="burger-menu" onClick={handleMobileNav}>
+        <span />
+        <span />
+        <span />
+      </div>
+      <div className={`nav__links ${isMobileNavOpen && "open"}`} onClick={closeMobileNav}>
+        {userData?.authenticated && 
+          <Link className="nav__name" to="/">
+            Hello, {userData.user.firstname} 
+          </Link>}
         <Link className="nav__btn" to="/rooms">Rooms</Link>
         {userData?.authenticated && <Link className="nav__btn" to="/reservations">Reservations</Link>}
         {userData?.authenticated ? 
-          <button className="nav__btn" onClick={logout}>Sign Out</button>
+          <button className="nav__btn" onClick={handleLogout}>Sign Out</button>
           :<Link className="nav__btn" to="/signin">Sign In</Link> 
         }
       </div>
