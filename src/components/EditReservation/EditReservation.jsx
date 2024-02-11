@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import StayForm from "../StayForm/StayForm";
 import useBackend from "../../hooks/useBackend";
 import { useStateContext } from "../../StateContext";
-import { BACKEND_API } from "../../config";
 import "./EditReservation.css";
 
 /**
@@ -23,7 +22,6 @@ function EditReservation(props) {
     setEndDate,
     guestNum,
     setGuestNum,
-    accessToken,
     resetState
   } = useStateContext();
 

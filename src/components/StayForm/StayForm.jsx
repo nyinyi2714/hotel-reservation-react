@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
@@ -68,10 +68,12 @@ function StayForm(props) {
     setGuestNum(currGuestNum);
   }; 
 
-  useMemo(() => {
-    if(!isModifying) return;
-    updateStayData();
-  }, [currStartDate, currEndDate, currGuestNum]);
+  useEffect(() => {
+    if (isModifying) {
+      updateStayData();
+    }
+  }, [isModifying, updateStayData]);
+  
 
   /**
    * Checks if there are unsaved changes in the form.
@@ -154,14 +156,12 @@ function StayForm(props) {
   }; 
 
   const decrementGuestNum = () => {
-    if(currGuestNum <= 1) return;
-    setCurrGuestNum(state => state - 1);
-  }; 
-
+    setCurrGuestNum(prevGuestNum => (prevGuestNum <= 1 ? 1 : prevGuestNum - 1));
+  };
+  
   const incrementGuestNum = () => {
-    if(currGuestNum >= 4) return;
-    setCurrGuestNum(state => state + 1);
-  }; 
+    setCurrGuestNum(prevGuestNum => (prevGuestNum >= 4 ? 4 : prevGuestNum + 1));
+  };
 
   /**
  * Calculates the number of nights between the start and end dates.

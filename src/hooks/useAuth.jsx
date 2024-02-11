@@ -2,7 +2,7 @@ import { BACKEND_API } from "../config";
 import { useStateContext } from "../StateContext";
 
 export default function useAuth() {
-  const { accessToken, setAccessToken } = useStateContext();
+  const { accessToken, setAccessToken, setUserData } = useStateContext();
 
   const login = async (email, password) => {
     try {
@@ -43,7 +43,7 @@ export default function useAuth() {
         body: JSON.stringify({ firstname, lastname, email, password }),
       });
 
-      const responseData = response.json();
+      const responseData = await response.json();
 
       if (response.ok) {
         // Registration successful
@@ -72,7 +72,7 @@ export default function useAuth() {
       });
       if (response.ok) {
         const userData = await response.json();
-        console.log(userData)
+        setUserData(userData);
         return userData;
       }
       else {

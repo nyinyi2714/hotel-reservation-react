@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "./Navbar.css";
+import { useStateContext } from "../../StateContext";
 
 /**
  * Renders the navigation bar with links to different sections and user authentication options.
@@ -10,9 +11,11 @@ import "./Navbar.css";
  * @since July 10th 2023
  * @returns {JSX.Element} The rendered Navbar component.
  */
-function Navbar({ userData, setUserData }) {
+function Navbar() {
   const { logout } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const { userData, setUserData, setAccessToken } = useStateContext();
 
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
@@ -28,7 +31,8 @@ function Navbar({ userData, setUserData }) {
     const isSuccessful = await logout();
     if(isSuccessful) {
       navigate('/signin');
-      setUserData({ authenticated: false })
+      setUserData({  authenticated: false });
+      setAccessToken('');
     }
   };
 

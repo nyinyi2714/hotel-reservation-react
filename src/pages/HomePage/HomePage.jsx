@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import "./HomePage.css";
 import { Link } from "react-router-dom";
 
-function HomePage({ refreshUserData }) {
+function HomePage() {
   // tracks the position or index of the photo in the slide
   const [photoInt, setPhotoInt] = useState(0); 
   const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false);
@@ -36,7 +36,6 @@ function HomePage({ refreshUserData }) {
     };
 
     window.addEventListener("resize", updateImageOffset);
-    refreshUserData();
     return () => {
       window.removeEventListener("resize", updateImageOffset);
     };

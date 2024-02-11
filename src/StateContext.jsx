@@ -6,6 +6,12 @@ export function useStateContext() {
   return useContext(StateContext);
 }
 
+const defaultRoomType = {
+  id: 1,
+  roomType: "Standard",
+  price: 100
+};
+
 export function StateProvider({ children }) {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(() => {
@@ -15,7 +21,8 @@ export function StateProvider({ children }) {
     return tomorrow;
   });
   const [guestNum, setGuestNum] = useState(1);
-  const [roomType, setRoomType] = useState();
+  const [roomType, setRoomType] = useState(defaultRoomType);
+  const [userData, setUserData] = useState();
   const [accessToken, setAccessToken] = useState(sessionStorage.getItem("accessToken") || '');
 
   const resetState = () => {
@@ -27,7 +34,7 @@ export function StateProvider({ children }) {
       return tomorrow;
     });
     setGuestNum(1);
-    setRoomType(null);
+    setRoomType(defaultRoomType);
   };
 
   const states = {
@@ -42,6 +49,8 @@ export function StateProvider({ children }) {
     resetState,
     accessToken, 
     setAccessToken,
+    userData,
+    setUserData,
   };
 
    // Update sessionStorage when accessToken changes

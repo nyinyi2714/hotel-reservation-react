@@ -1,5 +1,5 @@
 import { BACKEND_API } from "../config";
-import { useStateContext } from "../../StateContext";
+import { useStateContext } from "../StateContext";
 
 export default function useBackend() {
 
