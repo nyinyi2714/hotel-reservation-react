@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 const StateContext = createContext();
 
@@ -16,6 +16,7 @@ export function StateProvider({ children }) {
   });
   const [guestNum, setGuestNum] = useState(1);
   const [roomType, setRoomType] = useState();
+  const [accessToken, setAccessToken] = useState(sessionStorage.getItem("accessToken") || '');
 
   const resetState = () => {
     setStartDate(new Date());
@@ -39,7 +40,14 @@ export function StateProvider({ children }) {
     roomType, 
     setRoomType,
     resetState,
+    accessToken, 
+    setAccessToken,
   };
+
+   // Update sessionStorage when accessToken changes
+   useEffect(() => {
+    sessionStorage.setItem("accessToken", accessToken);
+  }, [accessToken]);
 
   return (
     <StateContext.Provider value={states}>

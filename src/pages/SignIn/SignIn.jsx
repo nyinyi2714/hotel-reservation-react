@@ -16,7 +16,7 @@ function SignIn() {
 
   const navigate = useNavigate();
 
-  const { login, getUser } = useAuth();
+  const { login } = useAuth();
 
   // Update email state on input change
   const handleEmail = (e) => {

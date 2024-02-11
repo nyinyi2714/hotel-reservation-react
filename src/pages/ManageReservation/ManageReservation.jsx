@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+
+import useBackend from "../../hooks/useBackend";
+
 import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
 import RoomModal from "../../components/RoomModal/RoomModal";
 import EditReservation from "../../components/EditReservation/EditReservation";
-import { BACKEND_API } from "../../config";
 import "./ManageReservation.css";
 
 /**
@@ -13,6 +15,9 @@ import "./ManageReservation.css";
  * @returns {JSX.Element} The rendered ManageReservation component.
  */
 function ManageReservation() {
+
+  const { fetchReservations } = useBackend();
+
   const [reservations, setReservations] = useState([]);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isRoomModalOpen, setIsRoomOpen] = useState(false);
@@ -71,31 +76,14 @@ function ManageReservation() {
  * Fetches reservations from the backend API and updates the state with active reservations.
  * @returns {void}
  */
-  const fetchReservations = async () => {
-    try {
-      const response = await fetch(`${BACKEND_API}/reservations`, {
-        method: "GET",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
 
-      const reservationsData = await response.json();
-      setReservations(reservationsData);
-
-      if (response.ok) {
-        console.log("fetch successfully")
-      } else {      
-        console.error("Reservation fetch failed:", reservationsData.message);
-      }
-    } catch(err) {
-      console.error(err);
-    }
+  const handleFetchReservations = async () => {
+    const reservationsData = await fetchReservations();
+    setReservations(reservationsData);
   };
 
   useEffect(() => {
-    fetchReservations();
+    handleFetchReservations();
   }, []);
 
   return (
@@ -128,7 +116,7 @@ function ManageReservation() {
           closeEditModal={closeEditModal} 
           reservation={currReservation} 
           convertDateObjectToDate={convertDateObjectToDate}
-          fetchReservations={fetchReservations}
+          handleFetchReservations={handleFetchReservations}
         />
       }
     </div>

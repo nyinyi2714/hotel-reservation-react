@@ -1,9 +1,8 @@
 import { BACKEND_API } from "../config";
-import { useNavigate } from "react-router-dom";
 import { useStateContext } from "../StateContext";
 
 export default function useAuth() {
-  const navigate = useNavigate();
+  const { accessToken, setAccessToken } = useStateContext();
 
   const login = async (email, password) => {
     try {
@@ -16,14 +15,16 @@ export default function useAuth() {
         body: JSON.stringify({ email, password }),
       });
 
+      const responseData = await response.json();
+
       if (response.ok) {
         // Login successful
+        setAccessToken(responseData.token);
         return true;
       } else {
         // Handle login failure
         console.error('Login failed');
-        const loginData = await response.json();
-        alert(loginData.message);
+        alert(responseData.error);
         return false;
       }
     } catch (error) {
@@ -42,13 +43,15 @@ export default function useAuth() {
         body: JSON.stringify({ firstname, lastname, email, password }),
       });
 
+      const responseData = response.json();
+
       if (response.ok) {
         // Registration successful
+        setAccessToken(responseData.token);
         return true;
       } else {
         // Handle registration failure
-        const registerData = response.json();
-        alert(registerData.message);
+        alert(responseData.error);
         return false;
       }
     } catch (error) {
@@ -63,6 +66,7 @@ export default function useAuth() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
         credentials: 'include' 
       });
@@ -82,9 +86,6 @@ export default function useAuth() {
   };
 
   const logout = async () => {
-    // Delete the token cookie and data on client-side
-    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-
     // send logout request to backend
     try {
       const response = await fetch(`${BACKEND_API}/logout`, 
@@ -92,6 +93,7 @@ export default function useAuth() {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
         },
         credentials: 'include' 
       });

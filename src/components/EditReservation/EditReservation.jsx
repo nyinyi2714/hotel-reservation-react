@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+
 import StayForm from "../StayForm/StayForm";
+import useBackend from "../../hooks/useBackend";
 import { useStateContext } from "../../StateContext";
 import { BACKEND_API } from "../../config";
 import "./EditReservation.css";
@@ -13,7 +15,7 @@ import "./EditReservation.css";
  * @returns {JSX.Element} The JSX element for editing reservations.
  */
 function EditReservation(props) {
-  const { closeEditModal, reservation, fetchReservations, convertDateObjectToDate } = props;
+  const { closeEditModal, reservation, handleFetchReservations, convertDateObjectToDate } = props;
   const {
     startDate,
     setStartDate,
@@ -24,6 +26,9 @@ function EditReservation(props) {
     accessToken,
     resetState
   } = useStateContext();
+
+  const { updateReservation, deleteReservation } = useBackend();
+
   const [selectedRoomType, setSelectedRoomType] = useState("standard");
   const roomIds = {
     "standard": 1,
@@ -64,32 +69,12 @@ function EditReservation(props) {
   }
 
   /**
- * Computes the total price of a reservation based on room type, number of nights, and guest count.
- * @param {string} roomType - The selected room type (e.g., "standard", "deluxe", "suite").
- * @returns {number} The calculated total price for the reservation.
- */
-  const computeTotalPrice = (roomType) => {
-    const roomPrice = {
-      standard: 150,
-      deluxe: 250,
-      suite: 350,
-    };
-    const taxes = 0.13;
-    const additionalFee = 25;
-    const numOfNight = endDate.getDate() - startDate.getDate();
-    let totalPrice = roomPrice[roomType] * numOfNight;
-    if (guestNum > 2) totalPrice += (4 - guestNum) * additionalFee;
-    totalPrice += totalPrice * taxes;
-    return totalPrice;
-  }
-
-  /**
  * Saves the changes made to the reservation.
  * Updates the reservation details via an API call.
  * @returns {void}
  */
   const saveChanges = async () => {
-    const requestData = {
+    const newReservationData = {
       reservationId: reservation._id,
       checkinDate: convertDateToObject(startDate),
       checkoutDate: convertDateToObject(endDate),
@@ -97,69 +82,32 @@ function EditReservation(props) {
       roomType: selectedRoomType,
     };
 
-    try {
-      const response = await fetch(`${BACKEND_API}/reservation/update`, {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestData),
-      });
-
-      const responseData = await response.json();
-
-      if (response.ok) {
-        console.log("modify successfully")
-        closeEditModal();
-      } else {
-        alert(responseData.error);
-        console.error("Reservation modification failed:", responseData.error);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-      alert(error);
+    const isReqSuccessful = await updateReservation(newReservationData);
+    if (isReqSuccessful) {
+      console.log("modify successfully")
+      closeEditModal();
+      // reset states in StateContext.jsx
+      resetState();
+      // update reversations list from backend
+      handleFetchReservations();
     }
-
-    // reset states in StateContext.jsx
-    resetState();
-    // update reversations list from backend
-    fetchReservations();
   };
 
   /**
  * Deletes the reservation by updating its status.
  * @returns {void}
  */
-  const deleteReservation = async () => {
-    try {
-      const response = await fetch(`${BACKEND_API}/reservation/delete`, {
-        method: "DELETE",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ reservationId: reservation._id })
-      });
+  const handleDeleteReservation = async () => {
+    const isReqSuccessful = await deleteReservation(reservation._id);
 
-      const responseData = await response.json();
-
-      if (response.ok) {
-        console.log("deleted successfully");
-        closeEditModal();
-      } else {
-        console.error("Reservation Deletion failed:", responseData.error);
-        alert(responseData.error);
-      }
-    } catch (error) {
-      console.error("An error occurred:", error);
-      alert(error);
+    if (isReqSuccessful) {
+      console.log("deleted successfully");
+      closeEditModal();
+      // reset states in StateContext.jsx
+      resetState();
+      // update reversations list from backend
+      handleFetchReservations();
     }
-
-    // reset states in StateContext.jsx
-    resetState();
-    // update reversations list from backend
-    fetchReservations();
   };
 
   useEffect(() => {
@@ -196,7 +144,7 @@ function EditReservation(props) {
           <button
             type="button"
             className="btn edit-reservation__btn btn--red"
-            onClick={deleteReservation}
+            onClick={handleDeleteReservation}
           >
             Delete
           </button>

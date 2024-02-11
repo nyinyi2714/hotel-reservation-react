@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
+
+import useBackend from "../../hooks/useBackend";
+
 import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
-import { BACKEND_API } from "../../config";
 import "./NewReservation.css";
 
 /**
@@ -13,6 +15,8 @@ import "./NewReservation.css";
  * @returns {JSX.Element} The rendered NewReservation component.
  */
 function NewReservation() {
+  const { createNewReservation } = useBackend();
+
   // State variables for payment
   const [cardNumber, setCardNumber] = useState("");
   const [month, setMonth] = useState();
@@ -172,29 +176,16 @@ function NewReservation() {
       numOfGuests: guestNum,
       roomType: roomType.roomType,
     };
+    
+    const isReqSuccessful = await createNewReservation(reservationData);
 
-    try {
-      // Send reservation data via API request
-      const response = await fetch(`${BACKEND_API}/reservation/new`, {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reservationData),
-      });
-
-      if (response.ok) {
-        setDisplayMessage(successfulReservationMessage);
-        resetState();
-      } else {
-        setDisplayMessage(failedReservationMessage);
-      }
-    } catch (error) {
-      alert(error);
-      console.error("An error occurred:", error);
+    if (isReqSuccessful) {
+      setDisplayMessage(successfulReservationMessage);
+      resetState();
+    } else {
+      setDisplayMessage(failedReservationMessage);
     }
-  };
+};
 
   /**
  * Get the day date as a string with leading zero if less than 10.
