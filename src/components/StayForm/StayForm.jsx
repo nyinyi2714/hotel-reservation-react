@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import DatePicker from "react-datepicker";
+import { useStateContext } from "../../StateContext";
 import "react-datepicker/dist/react-datepicker.css";
 import "./StayForm.css";
-import { useStateContext } from "../../StateContext";
 
 /**
  * This component allows users to select checkin / checkout dates and guest numbers.

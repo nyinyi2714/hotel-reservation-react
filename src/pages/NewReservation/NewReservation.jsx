@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 
-import useBackend from "../../hooks/useBackend";
+import { useBackend } from "../../hooks";
+import { StayForm } from "../../components";
 
-import StayForm from "../../components/StayForm/StayForm";
 import { useStateContext } from "../../StateContext";
 import "./NewReservation.css";
 

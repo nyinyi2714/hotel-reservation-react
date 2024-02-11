@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import StayForm from "../StayForm/StayForm";
-import useBackend from "../../hooks/useBackend";
+import { StayForm } from "../index";
+import { useBackend } from "../../hooks";
+
 import { useStateContext } from "../../StateContext";
 import "./EditReservation.css";
 

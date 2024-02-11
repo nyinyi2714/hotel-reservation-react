@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import RoomModal from "../RoomModal/RoomModal";
+
+import { RoomModal } from "../index";
+
 import { useStateContext } from '../../StateContext';
 import "./RoomContainer.css";
 

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import useBackend from "../../hooks/useBackend";
+import { useBackend } from "../../hooks";
+import { ReservationContainer, RoomModal, EditReservation } from "../../components";
 
-import ReservationContainer from "../../components/ReservationContainer/ReservationContainer";
-import RoomModal from "../../components/RoomModal/RoomModal";
-import EditReservation from "../../components/EditReservation/EditReservation";
 import "./ManageReservation.css";
 
 /**

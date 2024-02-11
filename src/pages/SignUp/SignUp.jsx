@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
+import { useAuth } from "../../hooks";
+
 import "boxicons/css/boxicons.min.css";
-import useAuth from "../../hooks/useAuth";
 import "./SignUp.css";
 
 function SignUp() {

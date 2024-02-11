@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo } from "react";
-import StayForm from "../../components/StayForm/StayForm";
-import RoomContainer from "../../components/RoomContainer/RoomContainer";
+
+import { StayForm, RoomContainer } from "../../components";
 import { BACKEND_API } from "../../config";
+
 import "./RoomsPage.css";
 
 /**

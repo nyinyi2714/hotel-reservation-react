@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "./pages/HomePage/HomePage";
-import SignIn from "./pages/SignIn/SignIn";
-import SignUp from "./pages/SignUp/SignUp";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
-import RoomsPage from "./pages/RoomsPage/RoomsPage";
-import NewReservation from "./pages/NewReservation/NewReservation";
-import ManageReservation from "./pages/ManageReservation/ManageReservation";
-import useAuth from "./hooks/useAuth";
+
+import { HomePage, ManageReservation, NewReservation, SignIn, SignUp, RoomsPage } from "./pages";
+import { Navbar, Footer } from "./components";
+import { useAuth } from "./hooks";
+
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 import "./App.css";
 

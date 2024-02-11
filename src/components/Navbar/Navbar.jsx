@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import "./Navbar.css";
+
+import { useAuth } from "../../hooks";
+
 import { useStateContext } from "../../StateContext";
+import "./Navbar.css";
 
 /**
  * Renders the navigation bar with links to different sections and user authentication options.
