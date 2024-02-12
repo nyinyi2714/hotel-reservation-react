@@ -67,10 +67,10 @@ function ReservationContainer(props) {
 
   return (
     <div className="reservation-container">
-      <span className="table-title">Room Type</span>
-      <span className="table-title">Cost</span>
-      <span className="table-title">Guest Count</span>
-      <span className="table-title">Dates</span>
+      <span className="table-title title1">Room Type</span>
+      <span className="table-title title2">Cost</span>
+      <span className="table-title title3">Guest Count</span>
+      <span className="table-title title4">Dates</span>
       <button 
         type="button" 
         className="btn reservation-container__btn btn1"

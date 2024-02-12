@@ -36,13 +36,27 @@
   .reservation-container {
     grid-template-columns: auto;
     justify-content: left; 
-    column-gap: 5px;
+    column-gap: 25px;
+    row-gap: 10px;
     grid-template-areas: 
-      "item1 item1"
-      "item2 item2"
-      "item3 item3"
-      "item4 item4"
+      "title1 item1"
+      "title2 item2"
+      "title3 item3"
+      "title4 item4"
       "btn1 btn2";
+  }
+
+  .title1 {
+    grid-area: title1;
+  }
+  .title2 {
+    grid-area: title2;
+  }
+  .title3 {
+    grid-area: title3;
+  }
+  .title4 {
+    grid-area: title4;
   }
 
   .item1 {
@@ -62,23 +76,6 @@
   }
   .btn2 {
     grid-area: btn2;
-  }
-
-  .reservation-container > span {
-    margin-left: clamp(120px, 10vw, 188px);
-    margin-bottom: 10px;
-  }
-
-  .reservation-container > span::before {
-    content: attr(data-title);
-    display: block;
-    position: absolute;
-    left: 20px;
-    width: 100%;
-  }
-
-  .table-title {
-    display: none;
   }
 }
 
