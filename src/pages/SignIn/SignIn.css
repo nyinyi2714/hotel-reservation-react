@@ -4,7 +4,7 @@
   place-items: center;
   overflow: auto;
   padding: 30px 0;
-  min-height: calc(100vh - 160px - var(--header-height));
+  min-height: calc(100vh - 146px - var(--header-height));
 }
 
 .signin {

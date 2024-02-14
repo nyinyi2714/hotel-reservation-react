@@ -29,7 +29,7 @@ function SignUp() {
   const [isSigningUp, setIsSigningUp] = useState(false);
 
   const navigate = useNavigate();
-  const { register, getUser } = useAuth();
+  const { register } = useAuth();
 
   // Update name state on input change
   const handleFirstName = (e) => {
@@ -144,7 +144,12 @@ function SignUp() {
     if (!runAllValidationTests()) return;
 
     setIsSigningUp(true);
-    register(firstname, lastname, email, password);
+    const isRegisterSuccessful = await register(firstname, lastname, email, password);
+
+    // if successful, redirect to previous page
+    if(isRegisterSuccessful) {
+      navigate('/');
+    }
 
     setIsSigningUp(false);
   };
@@ -265,7 +270,6 @@ function SignUp() {
             type="submit"
             value={isSigningUp ? "Signing Up" : "Sign Up"}
           />
-          <button onClick={async () => console.log(await getUser())}>Get user</button>
           <div className="dark-btn-container">
             <span>Already have an account?</span>
             <Link to="/signin" className="signin__signup-btn dark-btn">

@@ -81,7 +81,7 @@ function SignIn() {
     const isLoginSuccessful = await login(email, password);
     // if successful, redirect to previous page
     if(isLoginSuccessful) {
-      navigate('/')
+      navigate('/');
     }
     setIsSigningIn(false);
   };
