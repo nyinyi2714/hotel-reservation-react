@@ -10,35 +10,55 @@ function HomePage() {
   const { getUser } = useAuth();
 
   // tracks the position or index of the photo in the slide
-  const [photoInt, setPhotoInt] = useState(0); 
+  const [photoInt, setPhotoInt] = useState(0);
+  // maximum index for photos (14 photos in total) (2 images per slide in desktop) (1 image in mobile)
+  const [maxPhotoInt, setMaxPhotoInt] = useState(window.innerWidth < 650 ? 13 : 6);
   const [isPrevBtnDisabled, setIsPrevBtnDisabled] = useState(false);
   const [isNextBtnDisabled, setIsNextBtnDisabled] = useState(false);
-  // maximum index for photos (7 photos in total)
-  const maxPhotoInt = 6; 
+  const [isAllImagesLoaded, setIsAllImagesLoaded] = useState(false);
+
   //reference to the DOM element containing the photos
   const photoHolder = useRef();
-  const imageOffset = useRef(10); 
+  const imageOffset = useRef(window.innerWidth < 650 ? 0 : 10);
 
   const handleNextPhoto = () => {
-    if (photoInt >= maxPhotoInt) return; 
-    setIsNextBtnDisabled(true); 
-    setPhotoInt(state => state + 1);  
-    photoHolder.current.style.right = `calc(100% * ${photoInt + 1} + ${(photoInt+1)*imageOffset.current}px)`; 
-    setTimeout(() => { setIsNextBtnDisabled(false) }, 500); 
+    if (photoInt >= maxPhotoInt) return;
+    setIsNextBtnDisabled(true);
+    setPhotoInt(state => state + 1);
+    photoHolder.current.style.right = `calc(100% * ${photoInt + 1} + ${(photoInt + 1) * imageOffset.current}px)`;
+    setTimeout(() => { setIsNextBtnDisabled(false) }, 500);
   };
-  
-  const handlePrevPhoto = () => { 
-    if (photoInt <= 0) return; 
-    setIsPrevBtnDisabled(true);  
-    setPhotoInt(state => state - 1); 
-    photoHolder.current.style.right = `calc(100% * ${photoInt - 1} + ${(photoInt-1)*imageOffset.current}px)`; 
-    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500); 
+
+  const handlePrevPhoto = () => {
+    if (photoInt <= 0) return;
+    setIsPrevBtnDisabled(true);
+    setPhotoInt(state => state - 1);
+    photoHolder.current.style.right = `calc(100% * ${photoInt - 1} + ${(photoInt - 1) * imageOffset.current}px)`;
+    setTimeout(() => { setIsPrevBtnDisabled(false) }, 500);
+  };
+
+  const handleImageLoad = () => {
+    const images = photoHolder.current.querySelectorAll('img');
+    const allImagesLoaded = Array.from(images).every((img) => img.complete);
+
+    setIsAllImagesLoaded(allImagesLoaded);
   };
 
   useEffect(() => {
     const updateImageOffset = () => {
-      if(window.innerWidth < 650) imageOffset.current = 0;
-      else imageOffset.current = 10;
+      if (window.innerWidth < 650) {
+        imageOffset.current = 0;
+
+        // go back to first slide when resize
+        photoHolder.current.style.right = 0;
+        setPhotoInt(0);
+        setMaxPhotoInt(13); // 1 image per slide
+      }
+      else {
+        imageOffset.current = 10;
+        setMaxPhotoInt(6); 
+      }
+
     };
 
     window.addEventListener("resize", updateImageOffset);
@@ -56,7 +76,7 @@ function HomePage() {
           className="next"
           onClick={handleNextPhoto}
           type="button"
-          disabled={isNextBtnDisabled || photoInt >= maxPhotoInt}
+          disabled={isAllImagesLoaded && (isNextBtnDisabled || photoInt >= maxPhotoInt)}
         >
           <i className="bx bxs-chevron-right" />
         </button>
@@ -64,33 +84,39 @@ function HomePage() {
           className="prev"
           onClick={handlePrevPhoto}
           type="button"
-          disabled={isPrevBtnDisabled || photoInt <= 0}
+          disabled={isAllImagesLoaded && (isPrevBtnDisabled || photoInt <= 0)}
         >
           <i className="bx bxs-chevron-left" />
         </button>
-        <div className="homepage__image-holder" ref={photoHolder}>
-          <img src="images/HomePage/gallery-1.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-2.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-3.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-4.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-5.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-6.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-7.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-8.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-9.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-10.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-11.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-12.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-13.jpg" alt="Hotel image" />
-          <img src="images/HomePage/gallery-14.jpg" alt="Hotel image" />
+        <div className={`homepage__image-holder ${isAllImagesLoaded && "loaded"}`} ref={photoHolder}>
+          {!isAllImagesLoaded && 
+          <>
+            <div className="placeholder" />
+            <div className="placeholder" />
+          </>
+          }
+          <img className="hotel-images" src="images/HomePage/gallery-1.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-2.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-3.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-4.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-5.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-6.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-7.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-8.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-9.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-10.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-11.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-12.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-13.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-14.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
         </div>
       </div>
 
       <div className="homepage__heading">
         <p>
           Seeking a cozy retreat or a luxurious escape?
-          Let us find your ideal haven, setting the stage 
-          for unforgettable memories. Begin your journey now 
+          Let us find your ideal haven, setting the stage
+          for unforgettable memories. Begin your journey now
           – adventure awaits at your fingertips.
         </p>
         <Link className="homepage__btn" to="/rooms">

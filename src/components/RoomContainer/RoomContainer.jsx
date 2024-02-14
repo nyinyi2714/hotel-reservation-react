@@ -21,6 +21,7 @@ function RoomContainer(props) {
 
   // State variable for room modal
   const [isRoomModalOpen, setIsRoomModalOpen] = useState(false);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   /**
    * Opens the room modal for viewing room details.
@@ -38,6 +39,10 @@ function RoomContainer(props) {
     setIsRoomModalOpen(false);
   };
 
+  const handleImageLoad = () => {
+    setIsImageLoaded(true);
+  }
+
   /**
    * Initiates the booking process for the selected room.
    * @param {React.SyntheticEvent} e - The click event object.
@@ -52,10 +57,12 @@ function RoomContainer(props) {
 
   return (
     <div className="room-container box-shadow">
+      {!isImageLoaded && <div className="image-placeholder" />}
       <img 
         src={`/images/${room.roomType.toLowerCase()}/photo-1.jpg` }
         className="room-container__img" 
         alt="room-preview" 
+        onLoad={handleImageLoad}
       />
       <div className="room-container__content">
         <h3>{room.roomType}</h3>

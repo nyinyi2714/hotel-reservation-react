@@ -13,6 +13,31 @@
   color: var(--dark-navy)
 }
 
+.room-container .image-placeholder {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  background-color: #fbfbfb;
+
+  display: grid;
+  place-items: center;
+}
+
+.room-container .image-placeholder::after {
+  content: "";
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #ccc; 
+  border-top: 2px solid var(--blue);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .room-container__img {
   max-width: 100%;
 }
