@@ -95,20 +95,20 @@ function HomePage() {
             <div className="placeholder" />
           </>
           }
-          <img className="hotel-images" src="images/HomePage/gallery-1.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-2.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-3.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-4.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-5.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-6.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-7.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-8.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-9.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-10.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-11.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-12.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-13.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
-          <img className="hotel-images" src="images/HomePage/gallery-14.jpg" alt="Hotel image" loading="lazy" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-1.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-2.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-3.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-4.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-5.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-6.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-7.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-8.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-9.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-10.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-11.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-12.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-13.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
+          <img className="hotel-images" src="images/HomePage/gallery-14.jpg" alt="Hotel image" onLoad={handleImageLoad}/>
         </div>
       </div>
 
