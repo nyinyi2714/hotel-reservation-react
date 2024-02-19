@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks";
-
-import "boxicons/css/boxicons.min.css";
 import "./SignUp.css";
 
 function SignUp() {
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
+
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [isFirstNameValid, setIsFirstNameValid] = useState(true);
@@ -123,6 +123,10 @@ function SignUp() {
     return result;
   };
 
+  const handleImgLoad = () => {
+    setIsImgLoaded(true);
+  };
+
   const runAllValidationTests = () => {
     return (
       validateFirstName(firstname)
@@ -157,7 +161,13 @@ function SignUp() {
   return (
     <div className="signup-wrapper">
       <div className="signup box-shadow-equal">
-        <div className="signup__signin-invite">
+      <div className={`signup__signin-invite ${isImgLoaded && "loaded"}`}>
+          <img 
+            className="background-img" 
+            src="images/SignUp/hotel-room.jpg" 
+            alt="background" 
+            onLoad={handleImgLoad}
+          />
           <h3>Already a Member?</h3>
           <p>
             Sign in to access your reservations and

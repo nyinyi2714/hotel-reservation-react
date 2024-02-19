@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useAuth } from "../../hooks";
-import "boxicons/css/boxicons.min.css";
 import "./SignIn.css";
 
 function SignIn() {
@@ -14,6 +13,7 @@ function SignIn() {
   const [showPassword, setShowPassword] = useState(false);
   // State for indicating if signing in is in progress
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
 
   const navigate = useNavigate();
 
@@ -56,6 +56,10 @@ function SignIn() {
     }
   };
 
+  const handleImgLoad = () => {
+    setIsImgLoaded(true);
+  };
+
   // Run password validation on password change
   useEffect(() => {
     if (!isPasswordValid) validatePassword();
@@ -89,7 +93,13 @@ function SignIn() {
   return (
     <div className="signin-wrapper">
       <div className="signin box-shadow-equal">
-        <div className="signin__signup-invite">
+        <div className={`signin__signup-invite ${isImgLoaded && "loaded"}`}>
+          <img 
+          className="background-img" 
+          src="images/SignIn/hotel-room.jpg" 
+          alt="background" 
+          onLoad={handleImgLoad}
+          />
           <h3>New Here?</h3>
           <p>
             Sign up today to enjoy hassle-free booking and convenient

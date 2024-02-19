@@ -6,6 +6,7 @@ import { Navbar, Footer } from "./components";
 import { useAuth } from "./hooks";
 
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
+import "boxicons/css/boxicons.min.css";
 import "./App.css";
 
 export default function App() {
