@@ -170,7 +170,7 @@ function StayForm(props) {
   const getNumOfNight = () => {
     const timeDifference =  endDate.getTime() - startDate.getTime();
     // Convert the time difference to days
-    return timeDifference / (1000 * 60 * 60 * 24);
+    return Math.round(timeDifference / (1000 * 60 * 60 * 24));
   };
 
   /**

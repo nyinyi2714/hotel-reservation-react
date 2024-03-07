@@ -105,7 +105,7 @@ function RoomModal(props) {
           className="btn room-modal__btn" 
           type="button"
           onClick={initiateBooking}
-          id={room.id}
+          id={room.roomType}
         >
           Book for ${room.price}
         </button>}
